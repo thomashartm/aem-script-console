@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.0.0">
-    <scr:component name="net.thartm.aem.asconsole.groovy.impl.DefaultGroovyShellRunnerService">
-        <implementation class="net.thartm.aem.asconsole.groovy.impl.DefaultGroovyShellRunnerService"/>
-        <service servicefactory="false">
-            <provide interface="net.thartm.aem.asconsole.groovy.GroovyShellRunnerService"/>
-        </service>
-        <property name="service.pid" value="net.thartm.aem.asconsole.groovy.impl.DefaultGroovyShellRunnerService"/>
-    </scr:component>
-</components>
