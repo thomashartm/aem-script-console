@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.0.0">
+    <scr:component name="net.thartm.aem.asconsole.groovy.servlets.GroovyShellRunnerServlet">
+        <implementation class="net.thartm.aem.asconsole.groovy.servlets.GroovyShellRunnerServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths">
+            /bin/asconsole/groovy/post
+        </property>
+        <property name="sling.servlet.extensions">
+            json
+        </property>
+        <property name="sling.servlet.methods">
+            POST
+        </property>
+        <property name="service.pid" value="net.thartm.aem.asconsole.groovy.servlets.GroovyShellRunnerServlet"/>
+    </scr:component>
+</components>

@@ -1,0 +1,8 @@
+#base=js
+jquery-2.1.4.min.js
+bootstrap.min.js
+ace.js
+ext-modelist.js
+mode-groovy.js
+theme-twilight.js
+aemscriptconsole.js

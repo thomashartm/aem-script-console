@@ -1,0 +1,13 @@
+.panel {
+
+}
+.editorarea{
+    padding: 0px;
+    border:1px solid red;
+}
+
+#editor {
+    left: 0;
+    /** Setting height is also important, otherwise editor wont showup**/
+    height: 300px;
+}

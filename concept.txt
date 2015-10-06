@@ -1,0 +1,6 @@
+Implementation Agenda:
+- Standard groovy and js editor and runner (default)
+- Script library
+- Proper access control (only users with certain authorization level) / hide resourceResolverFactory and provide authenticated access to it
+- Read only executor service that triggers already existing, preconfigred
+scripts and evaluate input parameters (requets params) passed into the script
