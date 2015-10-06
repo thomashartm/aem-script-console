@@ -1,12 +1,11 @@
 # use glob syntax.
 syntax: glob
-
 *.DS_Store
 target
-.settings
-.project
-.classpath
-.idea
+*.settings
+*.project
+*.classpath
+*.idea
 *.iml
 *.orig
 .vlt
