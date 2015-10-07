@@ -21,11 +21,11 @@ public class DefaultGroovyShellRunnerService implements GroovyShellRunnerService
     public ScriptResponse runScript(final Script script, final ScriptContext context) {
         final GroovyShell groovyShell = new GroovyShell();
 
-        final groovy.lang.Script groovyScript = groovyShell.parse(script.getContent());
+        final groovy.lang.Script groovyScript = groovyShell.parse(script.getScript());
 
         final Object result = groovyScript.run();
 
-        final GroovyScriptResponse response = new GroovyScriptResponse(script.getContent(), result);
+        final GroovyScriptResponse response = new GroovyScriptResponse(script.getScript(), result);
 
         return response;
     }

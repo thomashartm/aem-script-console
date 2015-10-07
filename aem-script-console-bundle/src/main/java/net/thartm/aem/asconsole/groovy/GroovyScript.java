@@ -19,15 +19,15 @@ public class GroovyScript implements Script {
 
     private static final String FILE_EXT = "groovy";
 
-    private String content;
+    private String script;
 
-    public GroovyScript(final String scriptContent) {
-        this.content = scriptContent;
+    public GroovyScript(final String script) {
+        this.script = script;
     }
 
     @Override
-    public String getContent() {
-        return this.content;
+    public String getScript() {
+        return this.script;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class GroovyScript implements Script {
         final Map<String, Object> properties = new HashMap<>();
         properties.put("type", FILE_EXT);
         properties.put("name", nodeName);
-        properties.put("script", this.content);
+        properties.put("script", this.script);
         return properties;
     }
 
@@ -57,7 +57,9 @@ public class GroovyScript implements Script {
         return FILE_EXT;
     }
 
-    public void setContent(final String content) {
-        this.content = content;
+    public void setScript(final String script) {
+        this.script = script;
     }
+
+
 }

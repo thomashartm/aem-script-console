@@ -7,14 +7,14 @@
             Filename: xxx   &nbsp; JCR Path with Link: xxx
         </div>
         <div class="btn-group" role="group" aria-label="editor-actions">
-            <button type="button" class="btn btn-default" aria-label="Left Align">
+            <button id="execute-script" type="button" class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-ok" aria-hidden="true">&nbsp;Execute</span>
             </button>
-            <button type="button" class="btn btn-default" aria-label="Left Align">
+            <button id="save-script" type="button" class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-save" aria-hidden="true">&nbsp;Save</span>
             </button>
 
-            <button type="button" class="btn btn-default" aria-label="Left Align">
+            <button id="configure-console" type="button" class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true">&nbsp;Configure</span>
             </button>
         </div>

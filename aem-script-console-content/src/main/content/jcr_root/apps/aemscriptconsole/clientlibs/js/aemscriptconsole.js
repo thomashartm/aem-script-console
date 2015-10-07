@@ -18,10 +18,6 @@ var AemScriptConsole = function () {
                 //console.log(mode);
                 editor.session.setMode("ace/mode/groovy");
             }());
-
-            /*
-             editor.setTheme("ace/theme/monokai");
-            editor.getSession().setMode("ace/mode/javascript");*/
         },
 
         initTheme: function () {
@@ -29,10 +25,42 @@ var AemScriptConsole = function () {
         },
 
         initToolbarActions: function () {
+            $('#execute-script').click(function () {
+                if ($('#execute-script').hasClass('disabled')) {
+                    return;
+                }
+
+                AemScriptConsole.clear();
+
+                var script = editor.getSession().getValue();
+                if (script.length) {
+
+                    editor.setReadOnly(true);
+                    $.post(CQ.shared.HTTP.getContextPath() + '/bin/asconsole/groovy/post', {
+                        script: script
+                    }).done(function (response) {
+                        //show results
+                    }).fail(function (xhrMessage) {
+                        if (xhrMessage.status == 403) {
+                            //missing permissions
+                        } else {
+                            // unable to execute script
+                        }
+                    }).always(function () {
+                        editor.setReadOnly(false);
+
+                        //hideLoader
+                        //enable buttons
+                    });
+                }
+            });
+        },
+
+        setLanguageMode: function (mode) {
 
         },
 
-        setLanguageMode: function(mode){
+        clear: function () {
 
         }
     }
