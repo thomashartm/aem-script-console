@@ -8,5 +8,11 @@ public interface ScriptResponse {
 
     String getResult();
 
-    String getScript();
+    Script getScript();
+
+    String getOutput();
+
+    boolean containsError();
+
+    String getError();
 }

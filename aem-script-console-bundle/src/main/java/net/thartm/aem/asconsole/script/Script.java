@@ -16,7 +16,7 @@ public interface Script {
      * 
      * @return String script content
      */
-    String getScript();
+    String getScriptContent();
 
     /**
      * Saves this script at the given location.

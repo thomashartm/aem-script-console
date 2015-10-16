@@ -8,6 +8,6 @@ import net.thartm.aem.asconsole.script.ScriptResponse;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-public interface GroovyShellRunnerService {
+public interface ScriptService {
     ScriptResponse runScript(Script script, ScriptContext context);
 }

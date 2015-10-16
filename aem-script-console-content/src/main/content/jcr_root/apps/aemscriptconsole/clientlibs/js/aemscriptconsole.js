@@ -4,7 +4,7 @@ var AemScriptConsole = function () {
 
     return {
         initEditor: function () {
-            var editor = ace.edit("editor");
+            window.editor = ace.edit("editor");
             editor.setTheme("ace/theme/twilight");
             (function () {
                 editor.session.setMode("ace/mode/groovy");
@@ -16,7 +16,9 @@ var AemScriptConsole = function () {
         },
 
         initToolbarActions: function () {
+
             $('#execute-script').click(function () {
+                window.console.log("Execute clicked");
                 if ($('#execute-script').hasClass('disabled')) {
                     return;
                 }
@@ -27,10 +29,10 @@ var AemScriptConsole = function () {
                 if (script.length) {
 
                     editor.setReadOnly(true);
-                    $.post(CQ.shared.HTTP.getContextPath() + '/bin/asconsole/groovy/post', {
-                        script: script
+                    $.post(CQ.shared.HTTP.getContextPath() + '/bin/asconsole/groovy/post.json', {
+                            script: script
                     }).done(function (response) {
-                        //show results
+                        console.log(response.result);
                     }).fail(function (xhrMessage) {
                         if (xhrMessage.status == 403) {
                             //missing permissions

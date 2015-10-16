@@ -6,6 +6,7 @@ import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class GroovyScript implements Script {
     }
 
     @Override
-    public String getScript() {
+    public String getScriptContent() {
         return this.script;
     }
 

@@ -44,16 +44,6 @@ public abstract class AbstractJsonPostHandlerServlet extends SlingAllMethodsServ
             final ObjectMapper mapper)
             throws IOException, RepositoryException;
 
-    protected String getRequestBody(final SlingHttpServletRequest request) throws IOException {
-        final InputStream inputStream = request.getInputStream();
-        final String charset = getCharSet(request);
-
-        final String responseBodyStr = IOUtils.toString(inputStream, charset);
-        LOG.debug("Response Body: {}", responseBodyStr);
-
-        return responseBodyStr;
-    }
-
     private String getCharSet(final SlingHttpServletRequest request) {
         final String requestCharset = request.getCharacterEncoding();
         return StringUtils.isBlank(requestCharset) ? ENCODING_UTF8 : requestCharset;
@@ -63,12 +53,4 @@ public abstract class AbstractJsonPostHandlerServlet extends SlingAllMethodsServ
         response.setContentType(CONTENT_TYPE_JSON);
         response.setCharacterEncoding(ENCODING_UTF8);
     }
-
-    public <T> T mapBodyToModel(final SlingHttpServletRequest request, final ObjectMapper mapper, final Class<T> clazz)
-            throws IOException {
-
-        final String data = getRequestBody(request);
-        return mapper.readValue(data, clazz);
-    }
-
 }

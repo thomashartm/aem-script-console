@@ -1,17 +1,20 @@
 package net.thartm.aem.asconsole.groovy.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jdk.nashorn.internal.ir.annotations.Reference;
+
 import net.thartm.aem.asconsole.groovy.GroovyScript;
 import net.thartm.aem.asconsole.groovy.GroovyScriptContext;
-import net.thartm.aem.asconsole.groovy.GroovyShellRunnerService;
+import net.thartm.aem.asconsole.groovy.ScriptService;
 import net.thartm.aem.asconsole.script.ScriptContext;
+import net.thartm.aem.asconsole.script.ScriptResponse;
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 
 import javax.jcr.RepositoryException;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Shell runner servlet that executes the content property of an incoming JSON post request. <br />
@@ -21,18 +24,21 @@ import java.io.IOException;
  * @since 10/2015
  */
 @SlingServlet(paths = { "/bin/asconsole/groovy/post" }, methods = { "POST" }, extensions = { "json" })
-public class GroovyShellRunnerServlet extends AbstractJsonPostHandlerServlet {
+public class GroovyScriptServlet extends AbstractJsonPostHandlerServlet {
 
     @Reference
-    private GroovyShellRunnerService groovyShellRunnerService;
+    private ScriptService scriptService;
 
     @Override
     public void handleRequest(final SlingHttpServletRequest request, final SlingHttpServletResponse response,
             final ObjectMapper mapper) throws IOException, RepositoryException {
 
-        final GroovyScript groovyScript = mapBodyToModel(request, mapper, GroovyScript.class);
+        final String script = request.getParameter("script");
+        final GroovyScript groovyScript = new GroovyScript(script);
         final ScriptContext context = new GroovyScriptContext(request);
 
-        groovyShellRunnerService.runScript(groovyScript, context);
+        final ScriptResponse scriptResponse = scriptService.runScript(groovyScript, context);
+        PrintWriter out = response.getWriter();
+        mapper.writeValue(out, scriptResponse);
     }
 }
