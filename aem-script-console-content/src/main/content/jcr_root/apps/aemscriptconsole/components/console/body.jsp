@@ -19,17 +19,14 @@
             </button>
         </div>
         <div class="panel-body editorarea">
-            <div id="editor">function foo(items) {
-                var x = "All this is syntax highlighted";
-                return x;
-                }
+            <div id="editor">
             </div>
         </div>
         <div class="panel-body editormessage">
-            <div class="panel panel-success">Success</div>
             <div class="panel panel-info">Info</div>
+            <div class="panel panel-error">Error</div>
+            <div class="panel panel-output"></div>
             <div class="panel panel-warning">Warning</div>
-            <div class="panel panel-danger">Danger</div>
         </div>
         <div class="panel-footer">
             Footer

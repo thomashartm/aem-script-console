@@ -29,10 +29,44 @@ var AemScriptConsole = function () {
                 if (script.length) {
 
                     editor.setReadOnly(true);
-                    $.post(CQ.shared.HTTP.getContextPath() + '/bin/asconsole/groovy/post.json', {
+                    var posting = $.post(CQ.shared.HTTP.getContextPath() + '/bin/asconsole/groovy/post.json', {
                             script: script
-                    }).done(function (response) {
-                        console.log(response.result);
+                    });
+
+                    //.hide() and .show()
+                    posting.done(function (xhrMessage) {
+                        window.console.log("Done");
+                        window.console.log(xhrMessage);
+                        $(".panel-warning").hide();
+                        $(".panel-error").hide();
+
+                        $(".panel-output").show();
+                        $(".panel-output").append(xhrMessage.output);
+                    });
+
+                    posting.fail(function (xhrMessage) {
+                        window.console.log("Fail");
+                        window.console.log(xhrMessage);
+
+                        $(".panel-output").show();
+                        $(".panel-warning").show();
+                        $(".panel-error").show();
+                        if (xhrMessage.status == 403) {
+                            //missing permissions
+                        } else {
+                            // unable to execute script
+                        }
+                    });
+
+                    posting.always(function () {
+                        editor.setReadOnly(false);
+                        //hideLoader
+                        //enable buttons
+                    });
+
+                /*.done(function (response) {
+                        window.console.log(response);
+                        $(".panel-output").append(response.output);
                     }).fail(function (xhrMessage) {
                         if (xhrMessage.status == 403) {
                             //missing permissions
@@ -44,7 +78,7 @@ var AemScriptConsole = function () {
 
                         //hideLoader
                         //enable buttons
-                    });
+                    });*/
                 }
             });
         },

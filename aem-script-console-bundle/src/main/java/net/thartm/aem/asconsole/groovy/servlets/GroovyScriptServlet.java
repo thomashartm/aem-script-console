@@ -2,6 +2,7 @@ package net.thartm.aem.asconsole.groovy.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.fasterxml.jackson.databind.ObjectWriter;
 import net.thartm.aem.asconsole.groovy.GroovyScript;
 import net.thartm.aem.asconsole.groovy.GroovyScriptContext;
 import net.thartm.aem.asconsole.groovy.ScriptService;
@@ -11,6 +12,8 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.commons.json.JSONException;
+import org.apache.sling.commons.json.JSONObject;
 
 import javax.jcr.RepositoryException;
 import java.io.IOException;
@@ -38,7 +41,16 @@ public class GroovyScriptServlet extends AbstractJsonPostHandlerServlet {
         final ScriptContext context = new GroovyScriptContext(request);
 
         final ScriptResponse scriptResponse = scriptService.runScript(groovyScript, context);
-        PrintWriter out = response.getWriter();
-        mapper.writeValue(out, scriptResponse);
+        //PrintWriter out = response.getWriter();
+        //mapper.writeValue(out, scriptResponse);
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = ow.writeValueAsString(scriptResponse);
+        response.getWriter().append(json);
+        /*try {
+            final String json = new JSONObject().put("JSON", "Hello, World!").toString();
+            response.getWriter().append(json);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
     }
 }
