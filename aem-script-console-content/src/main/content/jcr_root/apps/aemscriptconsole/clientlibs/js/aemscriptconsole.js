@@ -42,21 +42,21 @@ var AemScriptConsole = function () {
                             script: script
                     });
 
-                    //.hide() and .show()
                     posting.done(function (xhrMessage) {
                         window.console.log("Done");
                         window.console.log(xhrMessage);
 
+                        AemScriptConsole.clear();
+
                         if(xhrMessage.failed){
-                            AemScriptConsole.setPanelVisibility(true, false, true);
-                            $(".info-error").empty();
+                            AemScriptConsole.setPanelVisibility(true, true);
                             $(".info-error").append(xhrMessage.error);
                         }else{
-                            AemScriptConsole.setPanelVisibility(true, false, false);
+                            AemScriptConsole.setPanelVisibility(true, false);
                         }
 
-                        $(".info-output").empty();
                         $(".info-output").append(xhrMessage.output);
+                        $(".info-meta").append(xhrMessage.executionTime + " ms");
                     });
 
                     posting.fail(function (xhrMessage) {
@@ -101,20 +101,16 @@ var AemScriptConsole = function () {
         },
 
         clear: function () {
-
+            $(".info-error").empty();
+            $(".info-output").empty();
+            $(".info-meta").empty();
         },
 
-        setPanelVisibility: function(output, warning, error){
+        setPanelVisibility: function(output, error){
             if(output){
                 $(".panel-output").show();
             }else{
                 $(".panel-output").hide();
-            }
-
-            if(warning){
-                $(".panel-warning").show();
-            }else{
-                $(".panel-warning").hide();
             }
 
             if(error){

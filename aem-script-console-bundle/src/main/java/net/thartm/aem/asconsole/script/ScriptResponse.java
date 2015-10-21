@@ -15,4 +15,6 @@ public interface ScriptResponse {
     boolean containsError();
 
     String getError();
+
+    long getExecutionTime();
 }

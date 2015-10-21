@@ -26,6 +26,8 @@ public class GroovyScriptExecution implements ScriptResponse {
 
     private boolean failed = false;
 
+    private long executionTime = 0;
+
     GroovyScriptExecution(final Script script) {
         this.script = script;
     }
@@ -73,10 +75,18 @@ public class GroovyScriptExecution implements ScriptResponse {
 
     public void setEndTime(final Date endTime) {
         this.endTime = endTime;
+        if (this.startTime != null && this.endTime != null) {
+            this.executionTime = this.endTime.getTime() - this.startTime.getTime();
+        }
     }
 
     public String getError() {
         return error;
+    }
+
+    @Override
+    public long getExecutionTime() {
+        return this.executionTime;
     }
 
     public void setError(final String error) {

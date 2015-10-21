@@ -33,10 +33,13 @@
                 <div class="panel-body info-output">
                 </div>
             </div>
-            <div class="panel panel-warning">Warning</div>
+            <div class="panel panel-default">
+                <div class="panel-body info-meta">
+                </div>
+            </div>
         </div>
         <div class="panel-footer">
-            Footer
+
 
         </div>
 
