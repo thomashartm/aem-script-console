@@ -18,6 +18,11 @@ var AemScriptConsole = function () {
                     editor.resize();
                 }
             });
+
+            var lastScript = Lockr.get('lastScript');
+            if(lastScript){
+                editor.setValue(lastScript, -1);
+            }
         },
 
         initTheme: function () {
@@ -32,7 +37,7 @@ var AemScriptConsole = function () {
                     return;
                 }
 
-                AemScriptConsole.clear();
+                AemScriptConsole.clearPanels();
 
                 var script = editor.getSession().getValue();
                 if (script.length) {
@@ -46,7 +51,7 @@ var AemScriptConsole = function () {
                         window.console.log("Done");
                         window.console.log(xhrMessage);
 
-                        AemScriptConsole.clear();
+                        AemScriptConsole.clearPanels();
 
                         if(xhrMessage.failed){
                             AemScriptConsole.setPanelVisibility(true, true);
@@ -56,7 +61,7 @@ var AemScriptConsole = function () {
                         }
 
                         $(".info-output").append(xhrMessage.output);
-                        $(".info-meta").append(xhrMessage.executionTime + " ms");
+                        AemScriptConsole.printToMeta(xhrMessage.executionTime + " ms");
                     });
 
                     posting.fail(function (xhrMessage) {
@@ -76,31 +81,39 @@ var AemScriptConsole = function () {
                         //hideLoader
                         //enable buttons
                     });
-
-                /*.done(function (response) {
-                        window.console.log(response);
-                        $(".info-output").append(response.output);
-                    }).fail(function (xhrMessage) {
-                        if (xhrMessage.status == 403) {
-                            //missing permissions
-                        } else {
-                            // unable to execute script
-                        }
-                    }).always(function () {
-                        editor.setReadOnly(false);
-
-                        //hideLoader
-                        //enable buttons
-                    });*/
                 }
             });
+
+
+            $('#save-script').click(function () {
+                AemScriptConsole.clearPanels();
+                var script = editor.getSession().getValue()
+                AemScriptConsole.saveScript(script);
+            });
+
+            $('#clear-editor').click(function () {
+                AemScriptConsole.clearPanels();
+                AemScriptConsole.clearEditor();
+                var message = "Editor and localStorage [lastScript] cleared";
+                AemScriptConsole.printToMeta(message);
+            });
+        },
+
+        saveScript: function(script){
+            Lockr.set('lastScript', script);
+            AemScriptConsole.printToMeta("Script saved.");
+        },
+
+        clearEditor: function(){
+            //Lockr.rm('lastScript');
+            //editor.destroy();
         },
 
         setLanguageMode: function (mode) {
 
         },
 
-        clear: function () {
+        clearPanels: function () {
             $(".info-error").empty();
             $(".info-output").empty();
             $(".info-meta").empty();
@@ -118,6 +131,17 @@ var AemScriptConsole = function () {
             }else{
                 $(".panel-danger").hide();
             }
+        },
+
+        printToMeta: function(message){
+            window.console.log(message);
+
+            $(".info-meta").fadeIn('fast');
+            $(".info-meta").text(message);
+            setTimeout(function () {
+                $(".info-meta").fadeOut('slow');
+                $(".panel-meta").hide();
+            }, 2500);
         }
     }
 }();

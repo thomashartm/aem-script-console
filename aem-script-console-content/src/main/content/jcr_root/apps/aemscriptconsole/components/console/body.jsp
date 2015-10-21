@@ -13,7 +13,9 @@
             <button id="save-script" type="button" class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-save" aria-hidden="true">&nbsp;Save</span>
             </button>
-
+            <button id="clear-editor" type="button" class="btn btn-default" aria-label="Left Align">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true">&nbsp;Clear</span>
+            </button>
             <button id="configure-console" type="button" class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true">&nbsp;Configure</span>
             </button>
@@ -33,7 +35,7 @@
                 <div class="panel-body info-output">
                 </div>
             </div>
-            <div class="panel panel-default">
+            <div class="panel panel-default panel-meta">
                 <div class="panel-body info-meta">
                 </div>
             </div>
