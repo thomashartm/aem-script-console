@@ -4,6 +4,7 @@ var AemScriptConsole = function () {
 
     return {
         initEditor: function () {
+            AemScriptConsole.setPanelVisibility(false, false, false);
             window.editor = ace.edit("editor");
             editor.setTheme("ace/theme/twilight");
             (function () {
@@ -37,20 +38,18 @@ var AemScriptConsole = function () {
                     posting.done(function (xhrMessage) {
                         window.console.log("Done");
                         window.console.log(xhrMessage);
-                        $(".panel-warning").hide();
-                        $(".panel-error").hide();
 
-                        $(".panel-output").show();
-                        $(".panel-output").append(xhrMessage.output);
+                        AemScriptConsole.setPanelVisibility(true, false, false);
+
+                        $(".info-output").empty();
+                        $(".info-output").append(xhrMessage.output);
                     });
 
                     posting.fail(function (xhrMessage) {
                         window.console.log("Fail");
                         window.console.log(xhrMessage);
 
-                        $(".panel-output").show();
-                        $(".panel-warning").show();
-                        $(".panel-error").show();
+                        AemScriptConsole.setPanelVisibility(true, true, true);
                         if (xhrMessage.status == 403) {
                             //missing permissions
                         } else {
@@ -66,7 +65,7 @@ var AemScriptConsole = function () {
 
                 /*.done(function (response) {
                         window.console.log(response);
-                        $(".panel-output").append(response.output);
+                        $(".info-output").append(response.output);
                     }).fail(function (xhrMessage) {
                         if (xhrMessage.status == 403) {
                             //missing permissions
@@ -89,6 +88,26 @@ var AemScriptConsole = function () {
 
         clear: function () {
 
+        },
+
+        setPanelVisibility: function(output, warning, error){
+            if(output){
+                $(".panel-output").show();
+            }else{
+                $(".panel-output").hide();
+            }
+
+            if(warning){
+                $(".panel-warning").show();
+            }else{
+                $(".panel-warning").hide();
+            }
+
+            if(error){
+                $(".panel-error").show();
+            }else{
+                $(".panel-error").hide();
+            }
         }
     }
 }();
