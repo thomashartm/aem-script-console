@@ -53,4 +53,8 @@ public abstract class AbstractJsonPostHandlerServlet extends SlingAllMethodsServ
         response.setContentType(CONTENT_TYPE_JSON);
         response.setCharacterEncoding(ENCODING_UTF8);
     }
+
+    protected void setStatusCode(final SlingHttpServletResponse response, final int statusCode){
+        response.setStatus(statusCode);
+    }
 }

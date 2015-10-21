@@ -16,6 +16,7 @@ import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
 
 import javax.jcr.RepositoryException;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -43,8 +44,9 @@ public class GroovyScriptServlet extends AbstractJsonPostHandlerServlet {
         final ScriptResponse scriptResponse = scriptService.runScript(groovyScript, context);
         //PrintWriter out = response.getWriter();
         //mapper.writeValue(out, scriptResponse);
-        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String json = ow.writeValueAsString(scriptResponse);
+
+        final ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        final String json = ow.writeValueAsString(scriptResponse);
         response.getWriter().append(json);
         /*try {
             final String json = new JSONObject().put("JSON", "Hello, World!").toString();

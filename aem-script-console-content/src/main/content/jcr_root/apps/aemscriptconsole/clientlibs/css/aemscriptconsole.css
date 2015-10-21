@@ -7,7 +7,7 @@
     border:1px solid darkgrey;
 }
 
-#resizable { width: 500px; height: 500px; padding: 5px; border: 2px solid grey}
+#resizable { width: 750px; height: 500px; padding: 5px; border: 2px solid grey}
 #resizable h3 { text-align: center; margin: 0; }
 #resizable{position: relative}
 /*#editor{position: absolute; top:0;left:0;right:0;bottom:0;}*/

@@ -24,6 +24,8 @@ public class GroovyScriptExecution implements ScriptResponse {
 
     private String error;
 
+    private boolean failed = false;
+
     GroovyScriptExecution(final Script script) {
         this.script = script;
     }
@@ -79,5 +81,14 @@ public class GroovyScriptExecution implements ScriptResponse {
 
     public void setError(final String error) {
         this.error = error;
+        this.failed = true;
+    }
+
+    public boolean isFailed() {
+        return failed;
+    }
+
+    public void setFailed(final boolean failed) {
+        this.failed = failed;
     }
 }

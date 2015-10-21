@@ -47,7 +47,13 @@ var AemScriptConsole = function () {
                         window.console.log("Done");
                         window.console.log(xhrMessage);
 
-                        AemScriptConsole.setPanelVisibility(true, false, false);
+                        if(xhrMessage.failed){
+                            AemScriptConsole.setPanelVisibility(true, false, true);
+                            $(".info-error").empty();
+                            $(".info-error").append(xhrMessage.error);
+                        }else{
+                            AemScriptConsole.setPanelVisibility(true, false, false);
+                        }
 
                         $(".info-output").empty();
                         $(".info-output").append(xhrMessage.output);
@@ -112,9 +118,9 @@ var AemScriptConsole = function () {
             }
 
             if(error){
-                $(".panel-error").show();
+                $(".panel-danger").show();
             }else{
-                $(".panel-error").hide();
+                $(".panel-danger").hide();
             }
         }
     }

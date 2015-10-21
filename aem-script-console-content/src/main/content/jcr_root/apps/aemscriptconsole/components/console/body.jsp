@@ -23,7 +23,11 @@
             </div>
         </div>
         <div class="panel-body editormessage">
-            <div class="panel panel-error">Error</div>
+            <div class="panel panel-danger">
+                <div class="panel-heading">Error</div>
+                <div class="panel-body info-error">
+                </div>
+            </div>
             <div class="panel panel-info">
                 <div class="panel-heading">Output</div>
                 <div class="panel-body info-output">
