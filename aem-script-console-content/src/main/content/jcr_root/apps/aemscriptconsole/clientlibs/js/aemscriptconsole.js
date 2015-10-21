@@ -4,12 +4,20 @@ var AemScriptConsole = function () {
 
     return {
         initEditor: function () {
+
             AemScriptConsole.setPanelVisibility(false, false, false);
             window.editor = ace.edit("editor");
             editor.setTheme("ace/theme/twilight");
             (function () {
                 editor.session.setMode("ace/mode/groovy");
             }());
+
+
+            $( "#resizable" ).resizable({
+                resize: function( event, ui ) {
+                    editor.resize();
+                }
+            });
         },
 
         initTheme: function () {
@@ -117,9 +125,13 @@ AemScriptConsole.localStorage = function () {
 }
 
 $(function () {
+
+
     AemScriptConsole.initEditor();
+
+
+
     AemScriptConsole.initTheme();
     AemScriptConsole.initToolbarActions();
-
 
 });

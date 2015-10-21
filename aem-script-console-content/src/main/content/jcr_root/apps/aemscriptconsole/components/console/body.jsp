@@ -18,7 +18,7 @@
                 <span class="glyphicon glyphicon-cog" aria-hidden="true">&nbsp;Configure</span>
             </button>
         </div>
-        <div class="panel-body editorarea">
+        <div id="resizable" class="panel-body editorarea">
             <div id="editor">
             </div>
         </div>
@@ -37,7 +37,9 @@
         </div>
 
     </div>
-    <div class="text-center">---End of editor---</div>
+    <div class="text-center">
+        End of editor text ...
+    </div>
 
 <script>
 
