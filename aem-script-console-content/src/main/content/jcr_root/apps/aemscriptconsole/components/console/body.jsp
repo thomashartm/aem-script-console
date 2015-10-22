@@ -10,6 +10,9 @@
             <button id="execute-script" type="button" class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-ok" aria-hidden="true">&nbsp;Execute</span>
             </button>
+            <button id="create-new" type="button" class="btn btn-default" aria-label="Left Align">
+                <span class="glyphicon glyphicon-file" aria-hidden="true">&nbsp;New</span>
+            </button>
             <button id="save-script" type="button" class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-save" aria-hidden="true">&nbsp;Save</span>
             </button>
@@ -30,7 +33,7 @@
                 <div class="panel-body info-error">
                 </div>
             </div>
-            <div class="panel panel-info">
+            <div class="panel panel-info panel-output">
                 <div class="panel-heading">Output</div>
                 <div class="panel-body info-output">
                 </div>

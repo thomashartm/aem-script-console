@@ -5,7 +5,8 @@ var AemScriptConsole = function () {
     return {
         initEditor: function () {
 
-            AemScriptConsole.setPanelVisibility(false, false, false);
+            AemScriptConsole.hidePanels();
+
             window.editor = ace.edit("editor");
             editor.setTheme("ace/theme/twilight");
             (function () {
@@ -31,9 +32,22 @@ var AemScriptConsole = function () {
 
         initToolbarActions: function () {
 
+            $('#create-new').click(function () {
+                if ($(this).hasClass('disabled')) {
+                    return;
+                }
+
+                // TODO clear localstorage for this document
+                // clear messages for this editor session
+                AemScriptConsole.resetAllMessages();
+
+                editor.getSession().setValue('');
+                AemScriptConsole.printToMeta("New document created.");
+            });
+
             $('#execute-script').click(function () {
                 window.console.log("Execute clicked");
-                if ($('#execute-script').hasClass('disabled')) {
+                if ($(this).hasClass('disabled')) {
                     return;
                 }
 
@@ -68,7 +82,7 @@ var AemScriptConsole = function () {
                         window.console.log("Fail");
                         window.console.log(xhrMessage);
 
-                        AemScriptConsole.setPanelVisibility(true, true, true);
+                        AemScriptConsole.setPanelVisibility(true, true);
                         if (xhrMessage.status == 403) {
                             //missing permissions
                         } else {
@@ -113,10 +127,18 @@ var AemScriptConsole = function () {
 
         },
 
+        resetAllMessages: function(){
+            this.clearPanels();
+            this.hidePanels();
+        },
+
         clearPanels: function () {
-            $(".info-error").empty();
-            $(".info-output").empty();
-            $(".info-meta").empty();
+            $(".info-error, .info-output, .info-meta").empty();
+        },
+
+        hidePanels: function () {
+            $(".panel-danger, .panel-output, .panel-meta").hide();
+            window.console.log("All panels hidden");
         },
 
         setPanelVisibility: function(output, error){

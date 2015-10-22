@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.thartm.aem.asconsole.groovy.ScriptService;
+import net.thartm.aem.asconsole.script.SaveResponse;
 import net.thartm.aem.asconsole.script.Script;
 import net.thartm.aem.asconsole.script.ScriptContext;
 import net.thartm.aem.asconsole.script.ScriptResponse;
@@ -54,6 +55,10 @@ public class DefaultGroovyScriptService implements ScriptService {
         scriptResponse.setEndTime(Calendar.getInstance().getTime());
         scriptResponse.setOutput(outputCollector.getOutput());
         return scriptResponse;
+    }
+
+    @Override public SaveResponse saveScript(final Script script, final ScriptContext context) {
+        return null;
     }
 
     private String evaluateScript(final Script script) {
