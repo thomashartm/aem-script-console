@@ -8,17 +8,14 @@ import net.thartm.aem.asconsole.groovy.GroovyScriptContext;
 import net.thartm.aem.asconsole.groovy.ScriptService;
 import net.thartm.aem.asconsole.script.ScriptContext;
 import net.thartm.aem.asconsole.script.ScriptResponse;
+import net.thartm.aem.asconsole.script.servlets.AbstractJsonPostHandlerServlet;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
-import org.apache.sling.commons.json.JSONException;
-import org.apache.sling.commons.json.JSONObject;
 
 import javax.jcr.RepositoryException;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Shell runner servlet that executes the content property of an incoming JSON post request. <br />

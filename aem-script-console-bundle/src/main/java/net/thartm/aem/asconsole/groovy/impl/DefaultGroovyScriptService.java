@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.thartm.aem.asconsole.extension.BindingExtensionsProviderService;
 import net.thartm.aem.asconsole.groovy.ScriptService;
 import net.thartm.aem.asconsole.script.SaveResponse;
 import net.thartm.aem.asconsole.script.Script;
@@ -11,6 +12,7 @@ import net.thartm.aem.asconsole.script.ScriptContext;
 import net.thartm.aem.asconsole.script.ScriptResponse;
 
 import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +32,9 @@ public class DefaultGroovyScriptService implements ScriptService {
 
     private final Logger LOG = LoggerFactory.getLogger(DefaultGroovyScriptService.class);
 
+    @Reference
+    private BindingExtensionsProviderService bindingProviderService;
+
     @Override
     public ScriptResponse runScript(final Script script, final ScriptContext context) {
 
@@ -40,11 +45,10 @@ public class DefaultGroovyScriptService implements ScriptService {
         final SystemOutputInterceptor outputInterceptor = new SystemOutputInterceptor(outputCollector);
 
         outputInterceptor.start();
-
         try {
-            final String result = evaluateScript(script);
+            final String result = evaluateScript(script, context);
             scriptResponse.setResult(result);
-            LOG.trace("eval() result: " + result);
+            LOG.trace("eval() script result: " + result);
         } catch (Throwable t) {
             LOG.error(t.getMessage() + t, t);
             scriptResponse.setError(t.getMessage());
@@ -57,20 +61,21 @@ public class DefaultGroovyScriptService implements ScriptService {
         return scriptResponse;
     }
 
-    @Override public SaveResponse saveScript(final Script script, final ScriptContext context) {
+    @Override
+    public SaveResponse saveScript(final Script script, final ScriptContext context) {
+        // TODO implement save operation
         return null;
     }
 
-    private String evaluateScript(final Script script) {
-        final Map bindingValues = new HashMap();
-        final GroovyShell shell = createShell(bindingValues);
+    private String evaluateScript(final Script script, final ScriptContext context) {
+        final GroovyShell shell = createShell(context);
         final Object result = shell.evaluate(script.getScriptContent());
 
         return result != null ? result.toString() : "null";
     }
 
-    private GroovyShell createShell(Map<String, Object> bindingValues) {
-        bindingValues.put("LOG", LOG);
-        return new GroovyShell(new Binding(bindingValues));
+    private GroovyShell createShell(final ScriptContext context) {
+        final Binding binding = bindingProviderService.getExtensionsBinding(context.getCurrentRequest());
+        return new GroovyShell(binding);
     }
 }

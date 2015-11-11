@@ -22,6 +22,10 @@ public class GroovyScript implements Script {
 
     private String script;
 
+    private String name;
+
+    private String path;
+
     public GroovyScript(final String script) {
         this.script = script;
     }
@@ -38,11 +42,15 @@ public class GroovyScript implements Script {
         final Resource resource = resolver.getResource(location);
         Assert.notNull(resource, String.format("Resource for path [%s] does not exist.", location));
 
+        this.name = name;
+
         final String nodeName = String.format(NAME_PATTERN, name, FILE_EXT);
         final Map<String, Object> properties = createPropertyMap(nodeName);
 
         final Resource newResource = resolver.create(resource, nodeName, properties);
-        return newResource.getPath();
+        this.path = newResource.getPath();
+
+        return this.path;
     }
 
     private Map<String, Object> createPropertyMap(final String nodeName) {
@@ -58,9 +66,18 @@ public class GroovyScript implements Script {
         return FILE_EXT;
     }
 
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public String getPath() {
+        return this.path;
+    }
+
     public void setScript(final String script) {
         this.script = script;
     }
-
 
 }

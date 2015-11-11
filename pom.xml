@@ -209,7 +209,12 @@
                 <scope>provided</scope>
             </dependency>
 
-
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>15.0</version>
+                <scope>provided</scope>
+            </dependency>
 
             <!--
             | json dependencies
@@ -251,6 +256,18 @@
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-library</artifactId>
                 <version>1.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>org.apache.sling.testing.sling-mock</artifactId>
+                <version>1.4.1.R1695088</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>org.apache.sling.testing.</artifactId>
+                <version>1.4.1.R1695088</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

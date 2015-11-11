@@ -157,13 +157,13 @@ var AemScriptConsole = function () {
 
         printToMeta: function(message){
             window.console.log(message);
-
-            $(".info-meta").fadeIn('fast');
+            $(".panel-meta").show();
+            $(".info-meta").fadeIn('slow');
             $(".info-meta").text(message);
             setTimeout(function () {
                 $(".info-meta").fadeOut('slow');
                 $(".panel-meta").hide();
-            }, 2500);
+            }, 3500);
         }
     }
 }();

@@ -1,8 +1,6 @@
-package net.thartm.aem.asconsole.groovy.servlets;
+package net.thartm.aem.asconsole.script.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import groovy.json.JsonBuilder;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
@@ -14,7 +12,6 @@ import javax.jcr.RepositoryException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * @author thomas.hartmann@netcentric.biz

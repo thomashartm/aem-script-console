@@ -34,4 +34,18 @@ public interface Script {
      * @return String file extension e.g. .groovy or .js
      */
     String getFileExtension();
+
+    /**
+     * Name of the script. Must be persistable in jcr.
+     * 
+     * @return String name of the script
+     */
+    String getName();
+
+    /**
+     * Path of the script.
+     * 
+     * @return String path of the script
+     */
+    String getPath();
 }
