@@ -2,7 +2,7 @@
 <body>
 
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" id="consolearea">
         <div class="panel-heading">
             Filename: xxx   &nbsp; JCR Path with Link: xxx
         </div>

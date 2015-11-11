@@ -2,10 +2,17 @@ var AemScriptConsole = function () {
 
     var resultDataTable;
 
+    var consoleToAreaWidthRatio = 0.9;
+    var consoleToAreaHeightRatio = 0.6;
+
     function initEditorSizing() {
 
-        $('#resizable').width(Lockr.get('editorWidth', 750));
-        $('#resizable').height(Lockr.get('editorHeight', 500))
+        var defaultWidth = $('#consolearea').width() * consoleToAreaWidthRatio;
+        $('#resizable').width(Lockr.get('editorWidth', defaultWidth));
+
+        var defaultHeight = $('#consolearea').height() * consoleToAreaHeightRatio;
+        $('#resizable').height(Lockr.get('editorHeight', defaultHeight))
+
         editor.resize();
 
         $("#resizable").resizable({
@@ -18,16 +25,20 @@ var AemScriptConsole = function () {
         });
     }
 
+    function styleEditor() {
+        window.editor = ace.edit("editor");
+        editor.setTheme("ace/theme/twilight");
+        (function () {
+            editor.session.setMode("ace/mode/groovy");
+        }());
+    }
+
     return {
         initEditor: function () {
 
             AemScriptConsole.hidePanels();
 
-            window.editor = ace.edit("editor");
-            editor.setTheme("ace/theme/twilight");
-            (function () {
-                editor.session.setMode("ace/mode/groovy");
-            }());
+            styleEditor();
             initEditorSizing();
             var lastScript = Lockr.get('lastScript');
             if (lastScript) {
