@@ -2,6 +2,22 @@ var AemScriptConsole = function () {
 
     var resultDataTable;
 
+    function initEditorSizing() {
+
+        $('#resizable').width(Lockr.get('editorWidth', 750));
+        $('#resizable').height(Lockr.get('editorHeight', 500))
+        editor.resize();
+
+        $("#resizable").resizable({
+            resize: function (event, ui) {
+                Lockr.set('editorWidth', $('#editor').width());
+                Lockr.set('editorHeight', $('#editor').height());
+
+                editor.resize();
+            }
+        });
+    }
+
     return {
         initEditor: function () {
 
@@ -12,16 +28,9 @@ var AemScriptConsole = function () {
             (function () {
                 editor.session.setMode("ace/mode/groovy");
             }());
-
-
-            $( "#resizable" ).resizable({
-                resize: function( event, ui ) {
-                    editor.resize();
-                }
-            });
-
+            initEditorSizing();
             var lastScript = Lockr.get('lastScript');
-            if(lastScript){
+            if (lastScript) {
                 editor.setValue(lastScript, -1);
             }
         },
@@ -58,7 +67,7 @@ var AemScriptConsole = function () {
 
                     editor.setReadOnly(true);
                     var posting = $.post(CQ.shared.HTTP.getContextPath() + '/bin/asconsole/groovy/post.json', {
-                            script: script
+                        script: script
                     });
 
                     posting.done(function (xhrMessage) {
@@ -67,10 +76,10 @@ var AemScriptConsole = function () {
 
                         AemScriptConsole.clearPanels();
 
-                        if(xhrMessage.failed){
+                        if (xhrMessage.failed) {
                             AemScriptConsole.setPanelVisibility(true, true);
                             $(".info-error").append(xhrMessage.error);
-                        }else{
+                        } else {
                             AemScriptConsole.setPanelVisibility(true, false);
                         }
 
@@ -113,12 +122,12 @@ var AemScriptConsole = function () {
             });
         },
 
-        saveScript: function(script){
+        saveScript: function (script) {
             Lockr.set('lastScript', script);
             AemScriptConsole.printToMeta("Script saved.");
         },
 
-        clearEditor: function(){
+        clearEditor: function () {
             //Lockr.rm('lastScript');
             //editor.destroy();
         },
@@ -127,7 +136,7 @@ var AemScriptConsole = function () {
 
         },
 
-        resetAllMessages: function(){
+        resetAllMessages: function () {
             this.clearPanels();
             this.hidePanels();
         },
@@ -141,21 +150,21 @@ var AemScriptConsole = function () {
             window.console.log("All panels hidden");
         },
 
-        setPanelVisibility: function(output, error){
-            if(output){
+        setPanelVisibility: function (output, error) {
+            if (output) {
                 $(".panel-output").show();
-            }else{
+            } else {
                 $(".panel-output").hide();
             }
 
-            if(error){
+            if (error) {
                 $(".panel-danger").show();
-            }else{
+            } else {
                 $(".panel-danger").hide();
             }
         },
 
-        printToMeta: function(message){
+        printToMeta: function (message) {
             window.console.log(message);
             $(".panel-meta").show();
             $(".info-meta").fadeIn('slow');
@@ -176,9 +185,6 @@ $(function () {
 
 
     AemScriptConsole.initEditor();
-
-
-
     AemScriptConsole.initTheme();
     AemScriptConsole.initToolbarActions();
 

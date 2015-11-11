@@ -9,9 +9,11 @@ import groovy.lang.Binding;
 import net.thartm.aem.asconsole.extension.binding.BindingExtension;
 import net.thartm.aem.asconsole.extension.BindingExtensionsProviderService;
 
+import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.ReferenceCardinality;
 import org.apache.felix.scr.annotations.ReferencePolicy;
+import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,8 @@ import org.slf4j.LoggerFactory;
  * @author thomas.hartmann@netcentric.biz
  * @since 11/2015
  */
+@Service(value = BindingExtensionsProviderService.class)
+@Component(immediate = true)
 public class BindingExtensionsProviderRegistry implements BindingExtensionsProviderService {
 
     private final Logger LOG = LoggerFactory.getLogger(BindingExtensionsProviderRegistry.class);
@@ -39,12 +43,12 @@ public class BindingExtensionsProviderRegistry implements BindingExtensionsProvi
     public synchronized void bindBindingExtension(BindingExtension extension) {
         bindingExtensions.add(extension);
 
-        LOG.info("Added binding extension = {}", extension.getClass().getName());
+        LOG.info("Added binding extension [{}]", extension.getClass().getName());
     }
 
     public synchronized void unbindBindingExtension(BindingExtension extension) {
         bindingExtensions.remove(extension);
 
-        LOG.info("Removed binding extension = {}", extension.getClass().getName());
+        LOG.info("Removed binding extension [{}]", extension.getClass().getName());
     }
 }
