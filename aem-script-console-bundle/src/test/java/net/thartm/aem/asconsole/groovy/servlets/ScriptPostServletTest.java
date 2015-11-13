@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-public class GroovyScriptServletTest {
+public class ScriptPostServletTest {
 
     @Before
     public void setUp() throws Exception {

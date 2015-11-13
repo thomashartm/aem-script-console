@@ -1,8 +1,15 @@
 var AemScriptConsole = function () {
 
-    var resultDataTable;
+    var formInputField =
+        '<div class="col-sm-10">' +
+        '<input type="text" class="form-control" id="inputParameter" placeholder="Input Parameter">' +
+        '<input class="form-control" type="text" placeholder="Text Parameter" readonly>' +
+        '</div>' +
+        '';
+
 
     var consoleToAreaWidthRatio = 0.9;
+
     var consoleToAreaHeightRatio = 0.6;
 
     function initEditorSizing() {
@@ -50,7 +57,7 @@ var AemScriptConsole = function () {
 
         },
 
-        initToolbarActions: function () {
+        initEditorToolbarActions: function () {
 
             $('#create-new').click(function () {
                 if ($(this).hasClass('disabled')) {
@@ -60,8 +67,7 @@ var AemScriptConsole = function () {
                 // TODO clear localstorage for this document
                 // clear messages for this editor session
                 AemScriptConsole.resetAllMessages();
-
-                editor.getSession().setValue('');
+                editor.getSession().setValue('def resource = resourceResolver.getResource("/content"); \nprintln resource.path');
                 AemScriptConsole.printToMeta("New document created.");
             });
 
@@ -75,6 +81,7 @@ var AemScriptConsole = function () {
 
                 var script = editor.getSession().getValue();
                 if (script.length) {
+                    AemScriptConsole.saveScriptToLocalStore(script);
 
                     editor.setReadOnly(true);
                     var posting = $.post(CQ.shared.HTTP.getContextPath() + '/bin/asconsole/groovy/post.json', {
@@ -122,7 +129,7 @@ var AemScriptConsole = function () {
             $('#save-script').click(function () {
                 AemScriptConsole.clearPanels();
                 var script = editor.getSession().getValue()
-                AemScriptConsole.saveScript(script);
+                AemScriptConsole.saveScriptToLocalStore(script);
             });
 
             $('#clear-editor').click(function () {
@@ -133,9 +140,21 @@ var AemScriptConsole = function () {
             });
         },
 
-        saveScript: function (script) {
+        saveScriptToLocalStore: function (script) {
             Lockr.set('lastScript', script);
-            AemScriptConsole.printToMeta("Script saved.");
+            AemScriptConsole.printToMeta("Script saved to localStorage var [lastScript]");
+        },
+
+        initFormToolbarActions: function () {
+            $('#add-text-field').click(function () {
+                window.console.log("Add input field clicked");
+                if ($(this).hasClass('disabled')) {
+                    return;
+                }
+
+
+                $(formInputField).appendTo('#form-builder');
+            });
         },
 
         clearEditor: function () {
@@ -197,6 +216,7 @@ $(function () {
 
     AemScriptConsole.initEditor();
     AemScriptConsole.initTheme();
-    AemScriptConsole.initToolbarActions();
+    AemScriptConsole.initEditorToolbarActions();
+    AemScriptConsole.initFormToolbarActions();
 
 });

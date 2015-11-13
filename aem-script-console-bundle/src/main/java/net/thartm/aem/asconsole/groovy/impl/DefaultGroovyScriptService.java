@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.thartm.aem.asconsole.extension.BindingExtensionsProviderService;
+import net.thartm.aem.asconsole.extension.customizer.ImportCustomizationProvider;
 import net.thartm.aem.asconsole.groovy.ScriptService;
 import net.thartm.aem.asconsole.script.SaveResponse;
 import net.thartm.aem.asconsole.script.Script;
@@ -14,6 +15,7 @@ import net.thartm.aem.asconsole.script.ScriptResponse;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
+import org.codehaus.groovy.control.CompilerConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +36,9 @@ public class DefaultGroovyScriptService implements ScriptService {
 
     @Reference
     private BindingExtensionsProviderService bindingProviderService;
+
+    @Reference
+    private ImportCustomizationProvider importCustomizationProvider;
 
     @Override
     public ScriptResponse runScript(final Script script, final ScriptContext context) {
@@ -69,13 +74,17 @@ public class DefaultGroovyScriptService implements ScriptService {
 
     private String evaluateScript(final Script script, final ScriptContext context) {
         final GroovyShell shell = createShell(context);
+
         final Object result = shell.evaluate(script.getScriptContent());
 
         return result != null ? result.toString() : "null";
     }
 
     private GroovyShell createShell(final ScriptContext context) {
+        final CompilerConfiguration configuration = new CompilerConfiguration();
+        configuration.addCompilationCustomizers(importCustomizationProvider.createImportCustomizer());
+
         final Binding binding = bindingProviderService.getExtensionsBinding(context.getCurrentRequest());
-        return new GroovyShell(binding);
+        return new GroovyShell(binding, configuration);
     }
 }

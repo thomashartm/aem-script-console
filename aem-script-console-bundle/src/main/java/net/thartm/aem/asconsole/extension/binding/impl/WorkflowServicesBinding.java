@@ -1,18 +1,17 @@
 package net.thartm.aem.asconsole.extension.binding.impl;
 
-import com.day.cq.workflow.WorkflowService;
-import com.day.cq.workflow.WorkflowSession;
-import com.google.common.collect.Maps;
-import groovy.lang.Binding;
+import java.util.Map;
+
+import javax.jcr.Session;
+
 import net.thartm.aem.asconsole.extension.binding.BindingExtension;
+
 import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ResourceResolver;
 
-import javax.jcr.Session;
-import java.util.Map;
+import com.google.common.collect.Maps;
 
 /**
  * Provides binding to workflow related objects: <br />
@@ -22,11 +21,10 @@ import java.util.Map;
  * @since 11/2015
  */
 @Service
-@Component(immediate = true)
+@Component
 public class WorkflowServicesBinding implements BindingExtension {
 
-    @Reference
-    private WorkflowService workflowService;
+
 
     @Override
     public Map<String, Object> provideVariableMapping(final SlingHttpServletRequest request) {
@@ -35,9 +33,7 @@ public class WorkflowServicesBinding implements BindingExtension {
         final ResourceResolver resourceResolver = request.getResourceResolver();
         final Session session = resourceResolver.adaptTo(Session.class);
 
-        final WorkflowSession workflowSession = workflowService.getWorkflowSession(session);
-        registerObject(bindingMap, workflowService, "workflowService");
-        registerObject(bindingMap, workflowSession, "workflowSession");
+
 
         return bindingMap;
     }

@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  * @since 11/2015
  */
 @Service(value = BindingExtensionsProviderService.class)
-@Component(immediate = true)
+@Component(immediate = true, metatype = false)
 public class BindingExtensionsProviderRegistry implements BindingExtensionsProviderService {
 
     private final Logger LOG = LoggerFactory.getLogger(BindingExtensionsProviderRegistry.class);
@@ -39,6 +39,7 @@ public class BindingExtensionsProviderRegistry implements BindingExtensionsProvi
 
         return new Binding(allMappings);
     }
+
 
     public synchronized void bindBindingExtension(BindingExtension extension) {
         bindingExtensions.add(extension);

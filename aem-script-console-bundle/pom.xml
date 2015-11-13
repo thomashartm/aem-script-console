@@ -45,7 +45,7 @@
                     <instructions>
                         <Bundle-SymbolicName>net.thartm.aem.asconsole</Bundle-SymbolicName>
                         <Import-Package>
-                            *Restructured
+                            *
                         </Import-Package>
                         <Embed-Dependency>
                             jackson-core,jackson-databind,jackson-annotations

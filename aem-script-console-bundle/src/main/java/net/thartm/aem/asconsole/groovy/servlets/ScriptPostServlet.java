@@ -16,6 +16,7 @@ import org.apache.sling.api.SlingHttpServletResponse;
 
 import javax.jcr.RepositoryException;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Shell runner servlet that executes the content property of an incoming JSON post request. <br />
@@ -24,8 +25,8 @@ import java.io.IOException;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-@SlingServlet(paths = { "/bin/asconsole/groovy/post" }, methods = { "POST" }, extensions = { "json" })
-public class GroovyScriptServlet extends AbstractJsonPostHandlerServlet {
+@SlingServlet(paths = { "/bin/asconsole/groovy/post" }, methods = { "POST" }, extensions = { "json" }, metatype=true)
+public class ScriptPostServlet extends AbstractJsonPostHandlerServlet {
 
     @Reference
     private ScriptService scriptService;
@@ -39,17 +40,9 @@ public class GroovyScriptServlet extends AbstractJsonPostHandlerServlet {
         final ScriptContext context = new GroovyScriptContext(request);
 
         final ScriptResponse scriptResponse = scriptService.runScript(groovyScript, context);
-        //PrintWriter out = response.getWriter();
-        //mapper.writeValue(out, scriptResponse);
 
         final ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         final String json = ow.writeValueAsString(scriptResponse);
         response.getWriter().append(json);
-        /*try {
-            final String json = new JSONObject().put("JSON", "Hello, World!").toString();
-            response.getWriter().append(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
     }
 }

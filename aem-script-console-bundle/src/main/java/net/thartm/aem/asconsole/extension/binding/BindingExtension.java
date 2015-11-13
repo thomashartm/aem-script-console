@@ -3,6 +3,7 @@ package net.thartm.aem.asconsole.extension.binding;
 import groovy.lang.Binding;
 import org.apache.sling.api.SlingHttpServletRequest;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -23,6 +24,6 @@ public interface BindingExtension {
     Map<String, Object> provideVariableMapping(final SlingHttpServletRequest request);
 
     default void registerObject(final Map<String, Object> bindingMap, final Object object, final String... variableKeys) {
-        Stream.of(variableKeys).map(key -> bindingMap.put(key, object));
+        Arrays.asList(variableKeys).forEach(key -> bindingMap.put(key, object));
     }
 }

@@ -1,11 +1,11 @@
 package net.thartm.aem.asconsole.extension.binding.impl;
 
-import com.day.cq.search.QueryBuilder;
-import com.day.cq.wcm.api.PageManager;
-import com.day.cq.wcm.api.PageManagerFactory;
-import com.google.common.collect.Maps;
-import groovy.lang.Binding;
+import java.util.Map;
+
+import javax.jcr.Session;
+
 import net.thartm.aem.asconsole.extension.binding.BindingExtension;
+
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
@@ -15,8 +15,10 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.osgi.framework.BundleContext;
 
-import javax.jcr.Session;
-import java.util.Map;
+import com.day.cq.search.QueryBuilder;
+import com.day.cq.wcm.api.PageManager;
+import com.day.cq.wcm.api.PageManagerFactory;
+import com.google.common.collect.Maps;
 
 /**
  * Provides binding to some of the most commonly used objects: <br />
@@ -26,7 +28,7 @@ import java.util.Map;
  * @since 11/2015
  */
 @Service
-@Component(immediate = true)
+@Component
 public class CommonServicesBinding implements BindingExtension {
 
     @Reference

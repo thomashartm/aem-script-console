@@ -3,11 +3,13 @@ package net.thartm.aem.asconsole.groovy.impl;
 import com.google.common.collect.Maps;
 import groovy.lang.Binding;
 import net.thartm.aem.asconsole.extension.BindingExtensionsProviderService;
+import net.thartm.aem.asconsole.extension.customizer.ImportCustomizationProvider;
 import net.thartm.aem.asconsole.groovy.GroovyScript;
 import net.thartm.aem.asconsole.groovy.GroovyScriptContext;
 import net.thartm.aem.asconsole.script.ScriptResponse;
 import net.thartm.aem.asconsole.util.ReflectionUtil;
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.codehaus.groovy.control.customizers.ImportCustomizer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -31,14 +33,19 @@ public class DefaultGroovyScriptServiceTest {
 
     private BindingExtensionsProviderService bindingExtensionService;
 
+    private ImportCustomizationProvider importCustomizerProvider;
+
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
+
 
     @Before
     public void setUp() {
         runnerService = new DefaultGroovyScriptService();
         bindingExtensionService = mock(BindingExtensionsProviderService.class);
+        importCustomizerProvider = mock(ImportCustomizationProvider.class);
         ReflectionUtil.setFieldValue(this.runnerService, "bindingProviderService", bindingExtensionService);
+        ReflectionUtil.setFieldValue(this.runnerService, "importCustomizationProvider", importCustomizerProvider);
     }
 
     @Test
@@ -46,6 +53,7 @@ public class DefaultGroovyScriptServiceTest {
 
         final Binding binding = mock(Binding.class);
         when(this.bindingExtensionService.getExtensionsBinding(any(SlingHttpServletRequest.class))).thenReturn(binding);
+        when(this.importCustomizerProvider.createImportCustomizer()).thenReturn(new ImportCustomizer());
 
         final ScriptResponse response = executeScript("println 'test'");
         Assert.assertEquals("test", response.getOutput());
@@ -60,6 +68,7 @@ public class DefaultGroovyScriptServiceTest {
 
         final Binding binding = new Binding(mapping);
         when(this.bindingExtensionService.getExtensionsBinding(any(SlingHttpServletRequest.class))).thenReturn(binding);
+        when(this.importCustomizerProvider.createImportCustomizer()).thenReturn(new ImportCustomizer());
 
         final ScriptResponse response = executeScript("printer.print('test')");
         Assert.assertEquals("test", response.getResult());
