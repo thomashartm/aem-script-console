@@ -57,6 +57,15 @@ var AemScriptConsole = function () {
 
         },
 
+        initApplicationToolbar: function () {
+            $('.asconsole-open-editor').click(function () {
+                if ($(this).hasClass('disabled')) {
+                    return;
+                }
+                window.console.log("open editor clicked");
+            });
+        },
+
         initEditorToolbarActions: function () {
 
             $('#create-new').click(function () {
@@ -216,6 +225,7 @@ $(function () {
 
     AemScriptConsole.initEditor();
     AemScriptConsole.initTheme();
+    AemScriptConsole.initApplicationToolbar();
     AemScriptConsole.initEditorToolbarActions();
     AemScriptConsole.initFormToolbarActions();
 

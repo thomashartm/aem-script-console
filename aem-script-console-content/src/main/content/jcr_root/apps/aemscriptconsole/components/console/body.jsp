@@ -13,10 +13,10 @@
         <cq:include script="outputpanels.jsp" />
 
         <cq:include script="formbuilder-actions.jsp" />
-        <div class="panel-body form-builder">
+        <!--<div class="panel-body form-builder">
             <form class="form-horizontal" id="form-builder">
             </form>
-        </div>
+        </div>-->
     </div>
 
     <div class="panel-footer">

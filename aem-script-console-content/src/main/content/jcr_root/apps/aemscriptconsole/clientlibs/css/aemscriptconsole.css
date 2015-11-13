@@ -5,11 +5,11 @@ html{
 }
 
 .panel {
-    font-size: 14px;
+    /*font-size: 14px;*/
 }
 
 .panel .input-group{
-    font-size: 14px;
+    /*font-size: 14px;*/
     border:1px solid darkgrey;
 }
 

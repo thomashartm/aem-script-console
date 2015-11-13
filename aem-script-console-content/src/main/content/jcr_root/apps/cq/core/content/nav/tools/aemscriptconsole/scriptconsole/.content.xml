@@ -3,6 +3,6 @@
           jcr:primaryType="nt:unstructured"
           jcr:title="Script Console"
           target="_blank"
-          href="/apps/aemscriptconsole/content/scriptconsole.html"
+          href="/apps/aemscriptconsole/content/scripteditor.html"
           id="aemscriptconsole">
 </jcr:root>
