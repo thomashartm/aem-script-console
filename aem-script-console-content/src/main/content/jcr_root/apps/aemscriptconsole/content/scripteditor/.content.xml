@@ -85,15 +85,38 @@
                                 sling:resourceType="granite/ui/components/endor/layouts/actionbar"/>
                         <items
                                 jcr:primaryType="nt:unstructured">
-                            <editor
+                            <codeEditor
                                     jcr:primaryType="nt:unstructured"
-                                    class="asconsole-open-editor"
+                                    class="asconsole-switch-to-editor"
                                     text="Editor"
-                                    title="Open Editor"
+                                    title="Code Editor"
                                     icon="icon-edit"
-                                    sling:resourceType="granite/ui/components/endor/actionbar/button">
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button" />
+                            <formEditor
+                                    jcr:primaryType="nt:unstructured"
+                                    class="asconsole-switch-to-form"
+                                    text="Form"
+                                    title="Form Editor"
+                                    icon="icon-edit"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button" />
 
-                            </editor>
+                            <createScriptNode
+                                    jcr:primaryType="nt:unstructured"
+                                    class="asconsole-create-new"
+                                    text="Create New"
+                                    title="Create new Script"
+                                    icon="icon-add"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button" />
+
+                            <saveScriptNode
+                                    jcr:primaryType="nt:unstructured"
+                                    class="asconsole-save-existing"
+                                    text="Save"
+                                    title="Save to ScriptNode"
+                                    icon="icon-checkCircle"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button" />
+
+
                         </items>
 
                     </default>

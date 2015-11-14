@@ -11,12 +11,18 @@
             </div>
         </div>
         <cq:include script="outputpanels.jsp" />
-
-        <cq:include script="formbuilder-actions.jsp" />
         <!--<div class="panel-body form-builder">
             <form class="form-horizontal" id="form-builder">
             </form>
         </div>-->
+    </div>
+
+    <div class="panel panel-default" id="formarea">
+        <div class="panel-heading">
+            FormHeader
+        </div>
+
+        <cq:include script="formeditor.jsp" />
     </div>
 
     <div class="panel-footer">

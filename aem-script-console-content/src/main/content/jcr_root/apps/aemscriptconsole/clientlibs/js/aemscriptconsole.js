@@ -51,6 +51,9 @@ var AemScriptConsole = function () {
             if (lastScript) {
                 editor.setValue(lastScript, -1);
             }
+
+            $('#consolearea').show();
+            $('#formarea').hide();
         },
 
         initTheme: function () {
@@ -58,11 +61,37 @@ var AemScriptConsole = function () {
         },
 
         initApplicationToolbar: function () {
-            $('.asconsole-open-editor').click(function () {
+            $('.asconsole-switch-to-editor').click(function () {
                 if ($(this).hasClass('disabled')) {
                     return;
                 }
                 window.console.log("open editor clicked");
+                $('#formarea').hide();
+                $('#consolearea').show();
+            });
+
+            $('.asconsole-switch-to-form').click(function () {
+                if ($(this).hasClass('disabled')) {
+                    return;
+                }
+                window.console.log("open form editor clicked");
+
+                $('#consolearea').hide();
+                $('#formarea').show();
+            });
+
+            $('.asconsole-create-new').click(function () {
+                if ($(this).hasClass('disabled')) {
+                    return;
+                }
+                window.console.log("Create new clicked");
+            });
+
+            $('.asconsole-save-existing').click(function () {
+                if ($(this).hasClass('disabled')) {
+                    return;
+                }
+                window.console.log("Save editor clicked");
             });
         },
 
