@@ -23,31 +23,7 @@
             </tr>
             </thead>
             <tbody id="viewerpresetlist">
-            <tr class='coral-Table-row'>
-                <td class='coral-Table-cell'>
-                    <label class='coral-Checkbox'>
-                        <input class='coral-Checkbox-input rowSelectBoxes' type='checkbox'>
-                        <span class='coral-Checkbox-checkmark'></span>
-                    </label>
-                </td>
-                <td class='coral-Table-cell'>
 
-                    <input class='coral-Form-field coral-Textfield' id='whatever' title='Enter Parameter Name'
-                           data-text='Enter Parameter Name' type='text' value='' />
-
-                </td>
-                <td class='coral-Table-cell'>Name</td>
-                <td class='coral-Table-cell'>
-                            <span class='coral-CycleButton activeToggle' data-init='cyclebutton'>
-        						<button class='coral-CycleButton-button coral-Button activeButton  isActiveClass ' type='button'
-                                        title='Card' value='on'> Granite.I18n.get("On")
-                                </button>
-        						<button class='coral-CycleButton-button coral-Button activeButton  inActiveClass ' type='button'
-                                        title='Card' value='off'> Granite.I18n.get("Off")
-                                </button>
-							</span>
-                </td>
-            </tr>
             </tbody>
         </table>
 
