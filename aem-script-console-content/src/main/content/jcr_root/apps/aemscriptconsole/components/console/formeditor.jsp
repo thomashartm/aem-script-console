@@ -8,15 +8,12 @@
     </div>-->
 
     <div id="listcontainer" data-fetchSize='30' data-size="1" data-src="">
+
         <article class="foundation-collection-item card-page" data-profile-title="Whatever" data-profile-name="Whatever"
                  data-profile-path="Path">
-            <i class="select"></i>
-            <a class="asconsole-create-new-parameter emptycontent-icon coral-Button coral-Button--square coral-Button--quiet" title="Add parameter field" href="#addparameterfield" data-toggle="modal">
-                <div class="label">
-                    <%= i18n.get("Add Parameter") %>
-                </div>
-            </a>
+            <button class="asconsole-create-new-parameter endor-ActionBar-item coral-Button coral-Button--quiet coral-Button--graniteActionBar" type="button" autocomplete="off" title="Add Parameter"><i class="coral-Icon coral-Icon--add"></i><span><%= i18n.get("Add Parameter") %></span></button>
         </article>
+
         <table class="coral-Table videotable">
             <thead class="card-video selectable">
             <tr class="coral-Table-row">
@@ -45,12 +42,7 @@
 
     <article class="foundation-collection-item card-page" data-profile-title="Whatever" data-profile-name="Whatever"
              data-profile-path="Path">
-        <i class="select"></i>
-        <a class="asconsole-create-new-parameter emptycontent-icon coral-Button coral-Button--square coral-Button--quiet" title="Add parameter field" href="#addparameterfield" data-toggle="modal">
-            <div class="label">
-                <%= i18n.get("Add Parameter") %>
-            </div>
-        </a>
+        <button class="asconsole-create-new-parameter endor-ActionBar-item coral-Button coral-Button--quiet coral-Button--graniteActionBar" type="button" autocomplete="off" title="Add Parameter"><i class="coral-Icon coral-Icon--add"></i><span><%= i18n.get("Add Parameter") %></span></button>
     </article>
 
 </div>
