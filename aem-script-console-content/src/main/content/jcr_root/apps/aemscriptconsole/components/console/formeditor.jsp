@@ -1,8 +1,22 @@
 <%@page session="false" %>
 <%@include file="/libs/granite/ui/global.jsp" %>
 <div class="panel-body formeditorarea">
+    <!--<div class="no-children-banner center">
+        <a class="dam-profiles-create-profile-activator emptycontent-icon coral-Button coral-Button--square coral-Button--quiet" title="Add metadata profile" href="#createprofileform" data-toggle="modal">
+            &nbsp;<i class="endor-ActionButton-icon coral-Icon coral-Icon--add"><%= i18n.get("Add Parameter") %></i>
+        </a>
+    </div>-->
 
     <div id="listcontainer" data-fetchSize='30' data-size="1" data-src="">
+        <article class="foundation-collection-item card-page" data-profile-title="Whatever" data-profile-name="Whatever"
+                 data-profile-path="Path">
+            <i class="select"></i>
+            <a class="asconsole-create-new-parameter emptycontent-icon coral-Button coral-Button--square coral-Button--quiet" title="Add parameter field" href="#addparameterfield" data-toggle="modal">
+                <div class="label">
+                    <%= i18n.get("Add Parameter") %>
+                </div>
+            </a>
+        </article>
         <table class="coral-Table videotable">
             <thead class="card-video selectable">
             <tr class="coral-Table-row">
@@ -26,34 +40,15 @@
 
             </tbody>
         </table>
-
-
-        <!--header class="card-asset selectable">
-        <div style="position:absolute; left:15px;">
-          <input id="selectAllToggle" type='checkbox' /><span />
-        </div>
-        <i class="sort"></i>
-        <div class="label">
-          <div class='main' data-title='TITLE' data-sort-attribute='id' data-sort-selector='.label&#x20;h4'>
-  				  <a href="#" onclick="javascript:sortBy('id')"><%= i18n.get("Preset Title") %></a>
-  		    </div>
-          <div id="typecontainer" class='type' data-title='TYPE' data-sort-selector='.label&#x20;.type' >
-            <a id="typelink" href="#" onclick="javascript:sortBy('category')"><%= i18n.get("Type") %></a>
-          </div>
-          <div id="statecontainer" class='size' data-sort-type='numeric' data-sort-attribute='data-bytes' data-title='SIZE' data-sort-selector='.label&#x20;.size' >
-            <a id="statelink" href="#" onclick="javascript:sortBy('isactive')"><%= i18n.get("State") %></a>
-          </div>
-        </div>
-      </header-->
     </div>
 
 
     <article class="foundation-collection-item card-page" data-profile-title="Whatever" data-profile-name="Whatever"
              data-profile-path="Path">
         <i class="select"></i>
-        <a href="#">
+        <a class="asconsole-create-new-parameter emptycontent-icon coral-Button coral-Button--square coral-Button--quiet" title="Add parameter field" href="#addparameterfield" data-toggle="modal">
             <div class="label">
-                <h4>Whatever</h4>
+                <%= i18n.get("Add Parameter") %>
             </div>
         </a>
     </article>

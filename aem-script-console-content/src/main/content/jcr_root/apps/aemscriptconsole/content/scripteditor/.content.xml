@@ -99,7 +99,6 @@
                                     title="Form Editor"
                                     icon="icon-edit"
                                     sling:resourceType="granite/ui/components/endor/actionbar/button" />
-
                             <createScriptNode
                                     jcr:primaryType="nt:unstructured"
                                     class="asconsole-create-new"
@@ -115,10 +114,7 @@
                                     title="Save to ScriptNode"
                                     icon="icon-checkCircle"
                                     sling:resourceType="granite/ui/components/endor/actionbar/button" />
-
-
                         </items>
-
                     </default>
                 </items>
 

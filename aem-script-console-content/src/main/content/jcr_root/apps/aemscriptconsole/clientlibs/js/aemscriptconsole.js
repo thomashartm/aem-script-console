@@ -95,7 +95,7 @@ var AemScriptConsole = function () {
                 $('#formarea').show();
             });
 
-            $('.asconsole-create-new').click(function () {
+            $('.asconsole-create-new-parameter').click(function () {
                 if ($(this).hasClass('disabled')) {
                     return;
                 }
