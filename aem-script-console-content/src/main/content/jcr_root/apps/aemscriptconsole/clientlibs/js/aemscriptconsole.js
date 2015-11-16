@@ -2,24 +2,17 @@ var AemScriptConsole = function () {
 
     var formInputField =
         '<tr class="coral-Table-row">' +
-            '<td class="coral-Table-cell">' +
-                    '<label class="coral-Checkbox">' +
-                    '<input class="coral-Checkbox-input rowSelectBoxes" type="checkbox">' +
-                    '<span class="coral-Checkbox-checkmark"></span>' +
-                    '</label>' +
-                '</td>' +
-                '<td class="coral-Table-cell">' +
-                    '<input class="coral-Form-field coral-Textfield" id="whatever" title="Enter Parameter Name" data-text="Enter Parameter Name" type="text" value="" />' +
-                '</td>' +
-                '<td class="coral-Table-cell"> Test Name </td>' +
-                '<td class="coral-Table-cell">' +
-                    '<span class="coral-CycleButton activeToggle" data-init="cyclebutton">' +
-                        '<button class="coral-CycleButton-button coral-Button activeButton  isActiveClass " type="button" title="Card" value="on">' + Granite.I18n.get("On")
-                        '</button>' +
-                        '<button class="coral-CycleButton-button coral-Button activeButton  inActiveClass " type="button" title="Card" value="off">' + Granite.I18n.get("Off")
-                        '</button>' +
-                    '</span>' +
-            '</td>' +
+
+        '<td class="coral-Table-cell">' +
+            '<input class="coral-Form-field coral-Textfield" id="whatever" title="Enter Parameter Name" data-text="Enter Parameter Name" type="text" value="" />' +
+        '</td>' +
+        '<td class="coral-Table-cell"> Test Name </td>' +
+        '<td class="coral-Table-cell">' +
+            '<label class="coral-Checkbox">' +
+            '<button class="asconsole-delete-parameter endor-ActionBar-item coral-Button coral-Button--quiet coral-Button--graniteActionBar" '+
+            'type="button" title="Delete"><i class="coral-Icon coral-Icon--delete"></i><span>Delete</span></button>' +
+            '</label>' +
+        '</td>'
         '</tr>';
 
 
@@ -206,7 +199,6 @@ var AemScriptConsole = function () {
                 if ($(this).hasClass('disabled')) {
                     return;
                 }
-
 
 
             });
