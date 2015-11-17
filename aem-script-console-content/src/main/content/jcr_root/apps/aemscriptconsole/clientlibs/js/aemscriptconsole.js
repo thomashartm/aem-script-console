@@ -8,10 +8,7 @@ var AemScriptConsole = function () {
         '</td>' +
         '<td class="coral-Table-cell"> Test Name </td>' +
         '<td class="coral-Table-cell">' +
-            '<label class="coral-Checkbox">' +
-            '<button class="asconsole-delete-parameter endor-ActionBar-item coral-Button coral-Button--quiet coral-Button--graniteActionBar" '+
-            'type="button" title="Delete"><i class="coral-Icon coral-Icon--delete"></i><span>Delete</span></button>' +
-            '</label>' +
+            '<button id="asconsole-delete-parameter" class="endor-ActionBar-item coral-Button coral-Button--quiet coral-Button--graniteActionBar" type="button" title="Delete"><i class="coral-Icon coral-Icon--delete"></i><span>Delete</span></button>' +
         '</td>'
         '</tr>';
 
@@ -95,6 +92,7 @@ var AemScriptConsole = function () {
                 window.console.log("Create new clicked");
 
                 $(formInputField).appendTo('#viewerpresetlist');
+
             });
 
             $('.asconsole-save-existing').click(function () {
@@ -103,6 +101,19 @@ var AemScriptConsole = function () {
                 }
                 window.console.log("Save editor clicked");
             });
+
+            $('#listcontainer').on( 'click', '#asconsole-delete-parameter', function () {
+                window.console.log("Delete field clicked");
+                window.console.log(this);
+
+                var td = $(this).parent();
+                var tr = td.parent();
+                tr.fadeOut(400, function(){
+                    tr.remove();
+                });
+            });
+
+
         },
 
         initEditorToolbarActions: function () {
@@ -202,6 +213,8 @@ var AemScriptConsole = function () {
 
 
             });
+
+
         },
 
         clearEditor: function () {
