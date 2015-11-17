@@ -1,6 +1,8 @@
 # AEM Script console
 Using the AEM script console you can easily execute custom scripts in the context of AEM. The console supports the exuction of groovy script while javascript support is planned as well.
 
+![Editor View](https://github.com/thomashartm/aem-script-console/blob/screenshots/pictures/scriptconsole.png "AEM Script Console Editor View")
+
 The console supports the execution of scripts via a predefined form for each script. Therefore the console has an editor view to define the script, a form view to configure the input parameter form and a script runner UI that renders the form and passes the field values to the script.
 
 ## Supported scripting languages
