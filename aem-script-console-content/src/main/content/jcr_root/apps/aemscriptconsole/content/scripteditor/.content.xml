@@ -1,137 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
-          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
-          jcr:mixinTypes="[rep:AccessControllable]"
-          jcr:primaryType="nt:unstructured"
-          jcr:title="AEM Script Console Editor"
-          sling:resourceType="granite/ui/components/foundation/page">
-    <rep:policy/>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
+    jcr:mixinTypes="[rep:AccessControllable]"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="AEM Script Console Editor"
+    sling:resourceType="granite/ui/components/foundation/page">
     <head jcr:primaryType="nt:unstructured">
         <viewport
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
-        <meta
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/foundation/meta"
-                content="chrome=1"
-                name="X-UA-Compatible"/>
-        <favicon
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/foundation/page/favicon"/>
-        <clientlibs
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/foundation/includeclientlibs"
-                categories="[coralui2,coralui.endor.test,granite.ui.foundation,granite.ui.foundation.admin,aemscriptconsole]"/>
-    </head>
-
-    <body
             jcr:primaryType="nt:unstructured"
-            sling:resourceType="granite/ui/components/foundation/page/body">
+            sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
+        <meta
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/meta"
+            content="chrome=1"
+            name="X-UA-Compatible"/>
+        <favicon
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/page/favicon"/>
+        <clientlibs
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+            categories="[coralui2,coralui.endor.test,granite.ui.foundation,granite.ui.foundation.admin,aemscriptconsole]"/>
+    </head>
+    <body
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/page/body">
         <layout
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/endor/layouts/page"/>
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/endor/layouts/page"/>
         <rail
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/endor/navcolumns"
-                currentId="aem-script-console"
-                srcPath="[cq/core/content/nav,granite/core/content/nav]"/>
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/endor/navcolumns"
+            currentId="aem-script-console"
+            srcPath="[cq/core/content/nav,granite/core/content/nav]"/>
         <breadcrumbs
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/foundation/navigation">
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/navigation">
             <layout
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/endor/layouts/breadcrumbs"/>
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/layouts/breadcrumbs"/>
             <items jcr:primaryType="nt:unstructured"/>
         </breadcrumbs>
         <title
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/foundation/hyperlink"
-                text="AEM Script Console"/>
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/hyperlink"
+            text="AEM Script Console"/>
         <helpactivator
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/foundation/hyperlink"
-                href="#help-popover"
-                text="Help"
-                toggle="popover"/>
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/hyperlink"
+            href="#help-popover"
+            text="Help"
+            toggle="popover"/>
         <user
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/endor/user"
-                href="#granite-user-properties"/>
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/endor/user"
+            href="#granite-user-properties"/>
         <account
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/foundation/include"
-                path="granite/ui/content/userproperties"/>
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/include"
+            path="granite/ui/content/userproperties"/>
         <content
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/container">
+            <layout
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/layouts/content"/>
+            <header
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/foundation/container">
-            <layout
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/endor/layouts/content"/>
-            <!-- Menu -->
-            <header
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/foundation/container">
                 <layout
-                        jcr:primaryType="nt:unstructured"
-                        group="aemscriptconsole-mode"
-                        sling:resourceType="granite/ui/components/foundation/layouts/mode"/>
-                <items
-                        jcr:primaryType="nt:unstructured">
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/layouts/mode"
+                    group="aemscriptconsole-mode"/>
+                <items jcr:primaryType="nt:unstructured">
                     <default
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/foundation/navigation">
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/navigation">
                         <layout
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/endor/layouts/actionbar"/>
-                        <items
-                                jcr:primaryType="nt:unstructured">
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/endor/layouts/actionbar"/>
+                        <items jcr:primaryType="nt:unstructured">
                             <codeEditor
-                                    jcr:primaryType="nt:unstructured"
-                                    class="asconsole-switch-to-editor"
-                                    text="Editor"
-                                    title="Code Editor"
-                                    icon="icon-edit"
-                                    sling:resourceType="granite/ui/components/endor/actionbar/button" />
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                class="asconsole-switch-to-editor"
+                                icon="icon-edit"
+                                text="Editor"
+                                title="Code Editor"/>
                             <formEditor
-                                    jcr:primaryType="nt:unstructured"
-                                    class="asconsole-switch-to-form"
-                                    text="Form"
-                                    title="Form Editor"
-                                    icon="icon-edit"
-                                    sling:resourceType="granite/ui/components/endor/actionbar/button" />
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                class="asconsole-switch-to-form"
+                                icon="icon-edit"
+                                text="Form"
+                                title="Form Editor"/>
                             <createScriptNode
-                                    jcr:primaryType="nt:unstructured"
-                                    class="asconsole-create-new"
-                                    text="Create New"
-                                    title="Create new Script"
-                                    icon="icon-add"
-                                    sling:resourceType="granite/ui/components/endor/actionbar/button" />
-
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                class="asconsole-create-new"
+                                icon="icon-add"
+                                text="Create New"
+                                title="Create new Script"/>
                             <saveScriptNode
-                                    jcr:primaryType="nt:unstructured"
-                                    class="asconsole-save-existing"
-                                    text="Save"
-                                    title="Save to ScriptNode"
-                                    icon="icon-checkCircle"
-                                    sling:resourceType="granite/ui/components/endor/actionbar/button" />
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                class="asconsole-save-existing"
+                                icon="icon-checkCircle"
+                                text="Save"
+                                title="Save to ScriptNode"/>
                         </items>
                     </default>
                 </items>
-
             </header>
             <content
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/foundation/container">
-                <items
-                        jcr:primaryType="nt:unstructured">
-                    <editor jcr:primaryType="nt:unstructured"
-                            sling:resourceType="aemscriptconsole/components/console"
-                            class="aemscriptconsole"
-                            id="aemscriptconsole"/>
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <editor
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="aemscriptconsole/components/console"
+                        class="aemscriptconsole"
+                        id="aemscriptconsole"/>
                 </items>
             </content>
         </content>
-
     </body>
-
 </jcr:root>

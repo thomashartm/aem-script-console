@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Save Script Wizard"
+    sling:resourceType="granite/ui/components/foundation/page">
+    <head jcr:primaryType="nt:unstructured">
+        <viewport
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
+        <meta
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/meta"
+            content="chrome=1"
+            name="X-UA-Compatible"/>
+        <favicon
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/page/favicon"/>
+        <clientlibs
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+            categories="[coralui2,granite.ui.foundation,cq.gui.siteadmin.movepagewizard,granite.ui.foundation.admin]"/>
+    </head>
+    <body
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/page/body">
+        <layout
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/layouts/fit"/>
+        <content
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/form"
+            class="save-script-wizard"
+            id="cq-siteadmin-admin-movepage-form">
+            <items jcr:primaryType="nt:unstructured">
+                <adjustMetaDataStep
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Edit Script Metadata"
+                    sling:resourceType="granite/ui/components/foundation/container"
+                    class="save-script-metadata-step">
+                    <items jcr:primaryType="nt:unstructured">
+                        <rename
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="Edit MetaData"
+                            sling:resourceType="aemscriptconsole/components/savewizard"
+                            backlabel="Cancel"
+                            class="edit-metadata-items"
+                            title="Edit MetaData"
+                            wizardpagecallback="save-script"/>
+                        <cancel
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/hyperlink"
+                            class="foundation-wizard-control"
+                            foundation-wizard-control-action="cancel"
+                            href="/apps/aemscriptconsole/content/scripteditor.html"
+                            text="Cancel"/>
+                        <next
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/button"
+                            class="foundation-wizard-control"
+                            disabled="{Boolean}false"
+                            foundation-wizard-control-action="next"
+                            text="Next"/>
+                    </items>
+                </adjustMetaDataStep>
+                <saveStep
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Save Script"
+                    sling:resourceType="granite/ui/components/foundation/container"
+                    rel="save-script-save-to-destination">
+                    <items jcr:primaryType="nt:unstructured">
+                        <location
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                            name="./location"
+                            rootPath="/etc/"/>
+                        <destination
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/advancedselect"
+                            foundation-mode-group="cq-siteadmin-admin-movepage-destination-container"
+                            foundation-validation-ui="none"
+                            rel="cq-siteadmin-admin-movepage-destination-container"
+                            selectionMode="single">
+                            <layout
+                                jcr:primaryType="nt:unstructured"
+                                name="foundation-layout-card"/>
+                            <toolbar
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/navigation"
+                                class="content-header">
+                                <layout
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/layouts/actionbar"/>
+                                <items jcr:primaryType="nt:unstructured">
+                                    <breadcrumbs
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="cq/gui/components/siteadmin/admin/endor/breadcrumbs"
+                                        baseUrl="/libs/wcm/core/content/sites/movepagewizard.html"
+                                        contentPath="${requestPathInfo.suffix}"
+                                        rootPath="/content"
+                                        rootTitle="Sites"
+                                        skipPreamble="{Boolean}true"/>
+                                </items>
+                            </toolbar>
+                            <datasource
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="cq/gui/components/common/wcm/datasources/childpages"
+                                exclude="/content/(catalogs|dam|launches|mac|publications|usergenerated|communities|community-components|forms|projects|phonegap)(/.*)*"
+                                itemResourceType="cq/gui/components/siteadmin/admin/pagecard"
+                                path="${requestPathInfo.suffix}"/>
+                        </destination>
+                        <prev
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/button"
+                            class="foundation-wizard-control"
+                            foundation-wizard-control-action="prev"
+                            text="Back"/>
+                        <next
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/button"
+                            class="foundation-wizard-control"
+                            disabled="{Boolean}true"
+                            foundation-wizard-control-action="next"
+                            text="Next"/>
+                    </items>
+                </saveStep>
+            </items>
+            <layout
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/layouts/wizard"/>
+        </content>
+    </body>
+</jcr:root>
