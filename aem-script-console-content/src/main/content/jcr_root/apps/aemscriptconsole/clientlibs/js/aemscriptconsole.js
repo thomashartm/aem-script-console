@@ -159,13 +159,13 @@ var AemScriptConsole = function () {
                             AemScriptConsole.setPanelVisibility(true, true, false);
                         }
 
-                        if(xhrMessage.result){
+                        if(xhrMessage.result && xhrMessage.result !== "null" && xhrMessage.result !== ""){
                             $(".info-message-result").append(xhrMessage.result);
                         }else{
                             $(".info-message-result").append("No result");
                         }
 
-                        if(xhrMessage.output) {
+                    if(xhrMessage.output && xhrMessage.output !== "null" && xhrMessage.output !== "") {
                             $(".info-message-output").append(xhrMessage.output);
                         }else{
                             $(".info-message-output").append("No output");
