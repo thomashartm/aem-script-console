@@ -226,8 +226,8 @@ var AemScriptConsole = function () {
         },
 
         clearEditor: function () {
-            //Lockr.rm('lastScript');
-            //editor.destroy();
+            Lockr.rm('lastScript');
+            editor.setValue("");
         },
 
         setLanguageMode: function (mode) {
