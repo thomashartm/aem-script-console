@@ -15,10 +15,14 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
+ * Persists and looks up script and form content and the associated metadata. <br />
+ * Stores the data to the respurce matching the request URL. <br />
+ * Requires appropriate permissions for the respective location.
+ * 
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-@SlingServlet(selectors = "savescript", methods = { "POST" }, extensions = { "json" }, metatype=true)
+@SlingServlet(selectors = "savescript", methods = { "POST" }, extensions = { "json" }, metatype = true)
 public class ScriptPersistenceServlet extends AbstractJsonPostHandlerServlet {
 
     private static final String SCRIPT = "script";
@@ -33,13 +37,12 @@ public class ScriptPersistenceServlet extends AbstractJsonPostHandlerServlet {
         final String scriptType = request.getParameter(SCRIPT_TYPE);
         final String scriptName = request.getParameter(SCRIPT_NAME);
 
-
         final Resource saveTarget = request.getResource();
         final Resource scriptResource = saveTarget.getChild(scriptName);
 
-        if(scriptResource != null){
+        if (scriptResource != null) {
             updateScript(scriptResource, scriptContent, scriptType);
-        }else{
+        } else {
             createScript(saveTarget, scriptName, scriptContent, scriptType);
         }
     }
@@ -54,7 +57,7 @@ public class ScriptPersistenceServlet extends AbstractJsonPostHandlerServlet {
         properties.put("contentType", scriptType);
         resourceResolver.create(parent, scriptName, properties);
 
-        if(resourceResolver.hasChanges()){
+        if (resourceResolver.hasChanges()) {
             resourceResolver.commit();
         }
     }
@@ -68,7 +71,7 @@ public class ScriptPersistenceServlet extends AbstractJsonPostHandlerServlet {
         valueMap.put("script", scriptContent);
         valueMap.put("contentType", scriptType);
 
-        if(resourceResolver.hasChanges()){
+        if (resourceResolver.hasChanges()) {
             resourceResolver.commit();
         }
     }

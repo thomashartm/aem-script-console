@@ -1,11 +1,9 @@
-package net.thartm.aem.asconsole.extension.binding;
+package net.thartm.aem.asconsole.groovy.extension.binding;
 
-import groovy.lang.Binding;
 import org.apache.sling.api.SlingHttpServletRequest;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Stream;
 
 /**
  * Registers the variable bindings.

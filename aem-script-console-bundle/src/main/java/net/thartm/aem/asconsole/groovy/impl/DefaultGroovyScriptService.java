@@ -1,11 +1,9 @@
 package net.thartm.aem.asconsole.groovy.impl;
 
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
-import net.thartm.aem.asconsole.extension.BindingExtensionsProviderService;
-import net.thartm.aem.asconsole.extension.customizer.ImportCustomizationProvider;
+import net.thartm.aem.asconsole.groovy.extension.BindingExtensionsProviderService;
+import net.thartm.aem.asconsole.groovy.extension.customizer.ImportCustomizationProvider;
 import net.thartm.aem.asconsole.groovy.ScriptService;
 import net.thartm.aem.asconsole.script.SaveResponse;
 import net.thartm.aem.asconsole.script.Script;
