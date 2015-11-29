@@ -5,9 +5,10 @@ Using the AEM script and forms console technical and non technical users can eas
 
 The console supports the execution of groovy scripts while javascript support is planned as well.
 
-The console supports the execution of scripts via a predefined form for each script. Therefore the console has an editor view to define the script, a form view to configure the input parameter form and a script runner UI that renders the form and passes the field values to the script.
+The console supports the execution of scripts via a predefined form for each script. 
+Therefore the console has an editor view to define the script, a form view to configure the input parameter form and a script runner UI that renders the form and passes the field values to the script.
 
-For non technical users unnecessary complexity is hidden behind such a form. This form is bound to a script and rendered through the ASFCs scriptrunner interface.
+For non technical users, complexity is hidden behind such a form. This form is bound to a script and rendered through the ASFCs scriptrunner interface.
 
 
 ## Supported scripting languages
@@ -22,5 +23,4 @@ Currently the groovy scripting language is supported. The console comes a number
 All bindings use the current user's session
 
 ## Status
-The console is work in progress. The script execution is already working.
-Scriptrunner is work in progress.
+The console is work in progress. The script execution is already working while the forms interface currently work in progress.
