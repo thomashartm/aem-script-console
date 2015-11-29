@@ -1,7 +1,4 @@
 #base=js
-jquery.js
-jquery-ui.min.js
-bootstrap.min.js
 ace.js
 ext-modelist.js
 mode-groovy.js

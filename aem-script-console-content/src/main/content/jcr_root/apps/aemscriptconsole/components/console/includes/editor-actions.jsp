@@ -15,23 +15,6 @@
                     type="button" autocomplete="off" title="Code Editor">
                 <i class="coral-Icon coral-Icon--delete"></i><span><%= i18n.get("Clear") %></span>
             </button>
-
-            <!--
-            <button  type="button" class="btn btn-default" aria-label="Left Align">
-                <span class="glyphicon glyphicon-ok" aria-hidden="true">&nbsp;Execute</span>
-            </button>
-            <button id="create-new" type="button" class="btn btn-default" aria-label="Left Align">
-                <span class="glyphicon glyphicon-file" aria-hidden="true">&nbsp;New</span>
-            </button>
-            <button id="save-script" type="button" class="btn btn-default" aria-label="Left Align">
-                <span class="glyphicon glyphicon-save" aria-hidden="true">&nbsp;Save</span>
-            </button>
-            <button id="clear-editor" type="button" class="btn btn-default" aria-label="Left Align">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true">&nbsp;Clear</span>
-            </button>
-            <button id="configure-console" type="button" class="btn btn-default" aria-label="Left Align">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true">&nbsp;Configure</span>
-            </button>-->
         </div>
     </nav>
 </div>
