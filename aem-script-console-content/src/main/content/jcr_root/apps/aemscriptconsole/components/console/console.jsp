@@ -8,15 +8,11 @@
     </c:otherwise>
 </c:choose>
 <div class="panel panel-default" id="consolearea">
-    <div class="panel-heading">
-        Filename: xxx   &nbsp; JCR Path with Link: xxx
-    </div>
-    <cq:include script="editor-actions.jsp" />
     <div id="resizable" class="panel-body editorarea">
         <div id="editor">
         </div>
     </div>
-    <cq:include script="outputpanels.jsp" />
+    <cq:include script="includes/outputpanels.jsp" />
 </div>
 
 <div class="panel panel-default" id="formarea">

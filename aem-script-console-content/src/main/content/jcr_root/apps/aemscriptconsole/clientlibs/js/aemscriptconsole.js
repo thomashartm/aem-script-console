@@ -15,12 +15,12 @@ var AemScriptConsole = function () {
 
     var consoleToAreaWidthRatio = 0.9;
 
-    var consoleToAreaHeightRatio = 0.6;
+    var consoleToAreaHeightRatio = 0.5;
 
     function initEditorSizing() {
 
-        var defaultWidth = $('#consolearea').width() * consoleToAreaWidthRatio;
-        $('#resizable').width(Lockr.get('editorWidth', defaultWidth));
+        //var defaultWidth = $('#consolearea').width() * consoleToAreaWidthRatio;
+        //$('#resizable').width(Lockr.get('editorWidth', defaultWidth));
 
         var defaultHeight = $('#consolearea').height() * consoleToAreaHeightRatio;
         $('#resizable').height(Lockr.get('editorHeight', defaultHeight))
@@ -29,7 +29,7 @@ var AemScriptConsole = function () {
 
         $("#resizable").resizable({
             resize: function (event, ui) {
-                Lockr.set('editorWidth', $('#editor').width());
+                //Lockr.set('editorWidth', $('#editor').width());
                 Lockr.set('editorHeight', $('#editor').height());
 
                 editor.resize();
@@ -118,7 +118,7 @@ var AemScriptConsole = function () {
 
         initEditorToolbarActions: function () {
 
-            $('#create-new').click(function () {
+            $('.create-new').click(function () {
                 if ($(this).hasClass('disabled')) {
                     return;
                 }
@@ -130,7 +130,7 @@ var AemScriptConsole = function () {
                 AemScriptConsole.printToMeta("New document created.");
             });
 
-            $('#execute-script').click(function () {
+            $('.execute-script').click(function () {
                 window.console.log("Execute clicked");
                 if ($(this).hasClass('disabled')) {
                     return;
@@ -154,13 +154,13 @@ var AemScriptConsole = function () {
                         AemScriptConsole.clearPanels();
 
                         if (xhrMessage.failed) {
-                            AemScriptConsole.setPanelVisibility(true, true);
-                            $(".info-error").append(xhrMessage.error);
+                            AemScriptConsole.setPanelVisibility(true, true, true);
+                            $(".info-message-error").append(xhrMessage.error);
                         } else {
-                            AemScriptConsole.setPanelVisibility(true, false);
+                            AemScriptConsole.setPanelVisibility(true, true, false);
                         }
 
-                        $(".info-output").append(xhrMessage.output);
+                        $(".info-message-output").append(xhrMessage.output);
                         AemScriptConsole.printToMeta(xhrMessage.executionTime + " ms");
                     });
 
@@ -168,7 +168,7 @@ var AemScriptConsole = function () {
                         window.console.log("Fail");
                         window.console.log(xhrMessage);
 
-                        AemScriptConsole.setPanelVisibility(true, true);
+                        AemScriptConsole.setPanelVisibility(true, true, true);
                         if (xhrMessage.status == 403) {
                             //missing permissions
                         } else {
@@ -185,15 +185,16 @@ var AemScriptConsole = function () {
             });
 
 
-            $('#save-script').click(function () {
+            $('.save-script').click(function () {
                 AemScriptConsole.clearPanels();
                 var script = editor.getSession().getValue()
                 AemScriptConsole.saveScriptToLocalStore(script);
             });
 
-            $('#clear-editor').click(function () {
+            $('.clear-editor').click(function () {
                 AemScriptConsole.clearPanels();
                 AemScriptConsole.clearEditor();
+                AemScriptConsole.hidePanels();
                 var message = "Editor and localStorage [lastScript] cleared";
                 AemScriptConsole.printToMeta(message);
             });
@@ -210,8 +211,6 @@ var AemScriptConsole = function () {
                 if ($(this).hasClass('disabled')) {
                     return;
                 }
-
-
             });
 
 
@@ -232,36 +231,42 @@ var AemScriptConsole = function () {
         },
 
         clearPanels: function () {
-            $(".info-error, .info-output, .info-meta").empty();
+            $(".info-message").empty();
         },
 
         hidePanels: function () {
-            $(".panel-danger, .panel-output, .panel-meta").hide();
+            $(".info-error, .info-result, .info-output, .info-meta").hide();
             window.console.log("All panels hidden");
         },
 
-        setPanelVisibility: function (output, error) {
-            if (output) {
-                $(".panel-output").show();
+        setPanelVisibility: function (result, output, error) {
+            if (result) {
+                $(".info-result").show();
             } else {
-                $(".panel-output").hide();
+                $(".info-result").hide();
+            }
+
+            if (output) {
+                $(".info-output").show();
+            } else {
+                $(".info-output").hide();
             }
 
             if (error) {
-                $(".panel-danger").show();
+                $(".info-error").show();
             } else {
-                $(".panel-danger").hide();
+                $(".info-error").hide();
             }
         },
 
         printToMeta: function (message) {
             window.console.log(message);
-            $(".panel-meta").show();
+            $(".info-meta").show();
             $(".info-meta").fadeIn('slow');
             $(".info-meta").text(message);
             setTimeout(function () {
                 $(".info-meta").fadeOut('slow');
-                $(".panel-meta").hide();
+                $(".info-meta").hide();
             }, 3500);
         }
     }
