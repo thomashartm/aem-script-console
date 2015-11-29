@@ -148,7 +148,6 @@ var AemScriptConsole = function () {
                     });
 
                     posting.done(function (xhrMessage) {
-                        window.console.log("Done");
                         window.console.log(xhrMessage);
 
                         AemScriptConsole.clearPanels();
@@ -160,7 +159,17 @@ var AemScriptConsole = function () {
                             AemScriptConsole.setPanelVisibility(true, true, false);
                         }
 
-                        $(".info-message-output").append(xhrMessage.output);
+                        if(xhrMessage.result){
+                            $(".info-message-result").append(xhrMessage.result);
+                        }else{
+                            $(".info-message-result").append("No result");
+                        }
+
+                        if(xhrMessage.output) {
+                            $(".info-message-output").append(xhrMessage.output);
+                        }else{
+                            $(".info-message-output").append("No output");
+                        }
                         AemScriptConsole.printToMeta(xhrMessage.executionTime + " ms");
                     });
 
