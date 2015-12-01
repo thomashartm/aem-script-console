@@ -22,7 +22,7 @@ import java.util.Map;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-@SlingServlet(selectors = "savescript", methods = { "POST" }, extensions = { "json" }, metatype = true)
+@SlingServlet(paths = {"/bin/private/acfs/script/save"}, methods = { "POST" }, extensions = { "json" }, metatype = true)
 public class ScriptPersistenceServlet extends AbstractJsonPostHandlerServlet {
 
     private static final String SCRIPT = "script";

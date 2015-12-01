@@ -138,6 +138,7 @@
                             id="aemscriptconsole"/>
                     <saveModal
                             jcr:primaryType="nt:unstructured"
+                            action="/bin/private/acfs/script/save"
                             sling:resourceType="granite/ui/components/foundation/form"
                             method="POST"
                             jcr:title="Save Script"
@@ -149,6 +150,20 @@
                                 closable="{Boolean}True"
                                 type="default"/>
                         <items jcr:primaryType="nt:unstructured">
+                            <scriptName
+                                    jcr:primaryType="nt:unstructured"
+                                    fieldLabel="Location"
+                                    required="{Boolean}True"
+                                    renderReadOnly="{Boolean}False"
+                                    name="scriptName"
+                                    sling:resourceType="granite/ui/components/foundation/form/textfield" />
+                            <savePath
+                                    jcr:primaryType="nt:unstructured"
+                                    fieldLabel="Location"
+                                    required="{Boolean}True"
+                                    renderReadOnly="{Boolean}False"
+                                    name="savePath"
+                                    sling:resourceType="granite/ui/components/foundation/form/pathbrowser"/>
 
                         </items>
                         <footer
