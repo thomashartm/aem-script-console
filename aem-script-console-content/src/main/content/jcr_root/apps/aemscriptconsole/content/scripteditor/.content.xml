@@ -145,12 +145,27 @@
                         <layout
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/layouts/modal"
-                                formStyle = "vertical"
-                                closable = "true"
-                                type = "default"/>
+                                formStyle="vertical"
+                                closable="{Boolean}True"
+                                type="default"/>
                         <items jcr:primaryType="nt:unstructured">
 
                         </items>
+                        <footer
+                                jcr:primaryType="nt:unstructured">
+                            <close
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/button"
+                                    text="Cancel">
+                                <layoutConfig
+                                        jcr:primaryType="nt:unstructured"
+                                        close="{Boolean}True"/>
+                            </close>
+                            <submit
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/form/submit"
+                                    text="Save"/>
+                        </footer>
                     </saveModal>
                 </items>
             </content>
