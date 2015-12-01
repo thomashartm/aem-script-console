@@ -4,13 +4,13 @@ var AemScriptConsole = function () {
         '<tr class="coral-Table-row">' +
 
         '<td class="coral-Table-cell">' +
-            '<input class="coral-Form-field coral-Textfield" id="whatever" title="Enter Parameter Name" data-text="Enter Parameter Name" type="text" value="" />' +
+        '<input class="coral-Form-field coral-Textfield" id="whatever" title="Enter Parameter Name" data-text="Enter Parameter Name" type="text" value="" />' +
         '</td>' +
         '<td class="coral-Table-cell"> Test Name </td>' +
         '<td class="coral-Table-cell">' +
-            '<button id="asconsole-delete-parameter" class="endor-ActionBar-item coral-Button coral-Button--quiet coral-Button--graniteActionBar" type="button" title="Delete"><i class="coral-Icon coral-Icon--delete"></i><span>Delete</span></button>' +
+        '<button id="asconsole-delete-parameter" class="endor-ActionBar-item coral-Button coral-Button--quiet coral-Button--graniteActionBar" type="button" title="Delete"><i class="coral-Icon coral-Icon--delete"></i><span>Delete</span></button>' +
         '</td>'
-        '</tr>';
+    '</tr>';
 
 
     var consoleToAreaWidthRatio = 0.9;
@@ -100,15 +100,21 @@ var AemScriptConsole = function () {
                     return;
                 }
                 window.console.log("Save editor clicked");
+
+                window.console.log("Save Script Model called");
+                var modal = $('#saveScriptModal');
+                window.console.log(modal);
+
+                modal.show();
             });
 
-            $('#listcontainer').on( 'click', '#asconsole-delete-parameter', function () {
+            $('#listcontainer').on('click', '#asconsole-delete-parameter', function () {
                 window.console.log("Delete field clicked");
                 window.console.log(this);
 
                 var td = $(this).parent();
                 var tr = td.parent();
-                tr.fadeOut(400, function(){
+                tr.fadeOut(400, function () {
                     tr.remove();
                 });
             });
@@ -159,15 +165,15 @@ var AemScriptConsole = function () {
                             AemScriptConsole.setPanelVisibility(true, true, false);
                         }
 
-                        if(xhrMessage.result && xhrMessage.result !== "null" && xhrMessage.result !== ""){
+                        if (xhrMessage.result && xhrMessage.result !== "null" && xhrMessage.result !== "") {
                             $(".info-message-result").append(xhrMessage.result);
-                        }else{
+                        } else {
                             $(".info-message-result").append("No result");
                         }
 
-                    if(xhrMessage.output && xhrMessage.output !== "null" && xhrMessage.output !== "") {
+                        if (xhrMessage.output && xhrMessage.output !== "null" && xhrMessage.output !== "") {
                             $(".info-message-output").append(xhrMessage.output);
-                        }else{
+                        } else {
                             $(".info-message-output").append("No output");
                         }
                         AemScriptConsole.printToMeta(xhrMessage.executionTime + " ms");
@@ -198,6 +204,7 @@ var AemScriptConsole = function () {
                 AemScriptConsole.clearPanels();
                 var script = editor.getSession().getValue()
                 AemScriptConsole.saveScriptToLocalStore(script);
+
             });
 
             $('.clear-editor').click(function () {
