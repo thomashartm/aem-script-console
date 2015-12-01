@@ -138,7 +138,7 @@
                             id="aemscriptconsole"/>
                     <saveModal
                             jcr:primaryType="nt:unstructured"
-                            action="/bin/private/acfs/script/save"
+                            action="/bin/private/acfs/script/save.json"
                             sling:resourceType="granite/ui/components/foundation/form"
                             method="POST"
                             jcr:title="Save Script"

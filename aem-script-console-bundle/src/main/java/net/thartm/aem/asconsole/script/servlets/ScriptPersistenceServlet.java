@@ -28,6 +28,7 @@ public class ScriptPersistenceServlet extends AbstractJsonPostHandlerServlet {
     private static final String SCRIPT = "script";
     private static final String SCRIPT_TYPE = "scriptType";
     private static final String SCRIPT_NAME = "scriptName";
+    private static final String SCRIPT_PATH = "scriptPath";
 
     @Override
     public void handleRequest(final SlingHttpServletRequest request, final SlingHttpServletResponse response,
@@ -36,6 +37,7 @@ public class ScriptPersistenceServlet extends AbstractJsonPostHandlerServlet {
         final String scriptContent = request.getParameter(SCRIPT);
         final String scriptType = request.getParameter(SCRIPT_TYPE);
         final String scriptName = request.getParameter(SCRIPT_NAME);
+        final String scriptPath = request.getParameter(SCRIPT_PATH);
 
         final Resource saveTarget = request.getResource();
         final Resource scriptResource = saveTarget.getChild(scriptName);
