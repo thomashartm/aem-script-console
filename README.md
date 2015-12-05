@@ -1,7 +1,7 @@
 # ASFC - AEM Script and Forms Console
 Using the AEM script and forms console technical and non technical users can easily execute custom scripts in the context of AEM e.g. to fix or migrate content. 
 
-![Editor View](https://github.com/thomashartm/aem-script-console/blob/screenshots/pictures/scriptconsole.png "AEM Script Console Editor View")
+![Editor View](https://github.com/thomashartm/aem-script-console/blob/screenshots/pictures/aem-script-console-2.png "AEM Script Console Editor View")
 
 The console supports the execution of groovy scripts while javascript support is planned as well.
 
