@@ -25,5 +25,16 @@ All bindings use the current user's session
 ## Status
 The console is work in progress. The script execution is already working while the forms interface currently work in progress.
 
+## How to build and deploy
+Clone the project the enter the project root folder and execute 
+```
+mvn clean install 
+```
+
+To deploy the project just add the autoInstallPackage profile.
+```
+mvn clean install -PautoInstallPackage
+```
+
 ##License
 The software is licensed under the Apache 2.0 License see the attached LICENSE file orhttp://www.apache.org/licenses/LICENSE-2.0.html for details.
