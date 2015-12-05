@@ -9,15 +9,6 @@
         $('#resizable').height(Lockr.get('editorHeight', defaultHeight))
 
         editor.resize();
-
-        /*$("#resizable").resizable({
-            resize: function (event, ui) {
-                //Lockr.set('editorWidth', $('#editor').width());
-                Lockr.set('editorHeight', $('#editor').height());
-
-                editor.resize();
-            }
-        });*/
     };
 
     var styleEditor = function () {
