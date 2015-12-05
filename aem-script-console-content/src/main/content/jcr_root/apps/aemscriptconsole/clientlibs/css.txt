@@ -1,6 +1,2 @@
 #base=css
-#bootstrap.min.css
-#bootstrap-theme.min.css
-jquery-ui.min.css
-jquery-ui.structure.min.css-->
-aemscriptconsole.css
+aemscriptconsole.less

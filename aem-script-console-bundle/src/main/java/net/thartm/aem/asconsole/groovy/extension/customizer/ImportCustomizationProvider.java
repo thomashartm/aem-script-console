@@ -1,8 +1,6 @@
-package net.thartm.aem.asconsole.extension.customizer;
+package net.thartm.aem.asconsole.groovy.extension.customizer;
 
 import org.codehaus.groovy.control.customizers.ImportCustomizer;
-
-import java.util.Set;
 
 /**
  * @author thomas.hartmann@netcentric.biz

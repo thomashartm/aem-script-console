@@ -1,10 +1,7 @@
 #base=js
-jquery.js
-jquery-ui.min.js
-bootstrap.min.js
 ace.js
 ext-modelist.js
 mode-groovy.js
 theme-twilight.js
 lockr.min.js
-aemscriptconsole.js
+scripteditor.js

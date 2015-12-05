@@ -1,4 +1,4 @@
-package net.thartm.aem.asconsole.extension.impl;
+package net.thartm.aem.asconsole.groovy.extension.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -6,8 +6,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.collect.Maps;
 import groovy.lang.Binding;
-import net.thartm.aem.asconsole.extension.binding.BindingExtension;
-import net.thartm.aem.asconsole.extension.BindingExtensionsProviderService;
+import net.thartm.aem.asconsole.groovy.extension.binding.BindingExtension;
+import net.thartm.aem.asconsole.groovy.extension.BindingExtensionsProviderService;
 
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;

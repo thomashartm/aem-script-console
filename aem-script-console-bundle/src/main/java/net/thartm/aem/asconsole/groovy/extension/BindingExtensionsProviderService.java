@@ -1,10 +1,10 @@
-package net.thartm.aem.asconsole.extension;
+package net.thartm.aem.asconsole.groovy.extension;
 
 import groovy.lang.Binding;
 import org.apache.sling.api.SlingHttpServletRequest;
 
 /**
- * Provides access to {@link net.thartm.aem.asconsole.extension.binding.BindingExtension}s
+ * Provides access to {@link net.thartm.aem.asconsole.groovy.extension.binding.BindingExtension}s
  * 
  * @author thomas.hartmann@netcentric.biz
  * @since 11/2015

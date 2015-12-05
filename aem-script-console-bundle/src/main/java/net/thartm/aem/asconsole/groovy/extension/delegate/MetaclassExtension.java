@@ -1,4 +1,4 @@
-package net.thartm.aem.asconsole.extension.delegate;
+package net.thartm.aem.asconsole.groovy.extension.delegate;
 
 /**
  * @author thomas.hartmann@netcentric.biz

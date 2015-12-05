@@ -26,7 +26,7 @@ import java.io.PrintWriter;
  * @since 10/2015
  */
 @SlingServlet(paths = { "/bin/asconsole/groovy/post" }, methods = { "POST" }, extensions = { "json" }, metatype=true)
-public class ScriptPostServlet extends AbstractJsonPostHandlerServlet {
+public class GroovyRunServlet extends AbstractJsonPostHandlerServlet {
 
     @Reference
     private ScriptService scriptService;
