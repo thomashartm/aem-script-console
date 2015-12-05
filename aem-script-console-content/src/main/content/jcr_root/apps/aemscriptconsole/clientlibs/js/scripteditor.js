@@ -198,18 +198,3 @@
     });
 })
 (Granite.$, $(document), Granite.author);
-/*
- AemScriptConsole.localStorage = function () {
-
- }
-
- $(function () {
-
-
- AemScriptConsole.initEditor();
- AemScriptConsole.initTheme();
- AemScriptConsole.initApplicationToolbar();
- AemScriptConsole.initEditorToolbarActions();
- AemScriptConsole.initFormToolbarActions();
-
- });*/
