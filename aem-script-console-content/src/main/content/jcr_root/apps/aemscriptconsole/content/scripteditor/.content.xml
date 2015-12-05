@@ -97,14 +97,14 @@
                             <createScriptNode
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/endor/actionbar/button"
-                                    class="asconsole-create-new"
+                                    class="create-new"
                                     icon="icon-add"
                                     text="Create New"
                                     title="Create new Script"/>
                             <saveScriptNode
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/endor/actionbar/button"
-                                    class="asconsole-save-existing"
+                                    class="save-script"
                                     icon="icon-checkCircle"
                                     text="Save"
                                     title="Save to ScriptNode"/>

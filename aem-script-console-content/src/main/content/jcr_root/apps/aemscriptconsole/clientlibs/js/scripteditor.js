@@ -57,6 +57,19 @@
     };
 
     var initializeEditorToolbar = function(){
+        $('.create-new').click(function () {
+            if ($(this).hasClass('disabled')) {
+                return;
+            }
+
+            // clear message and local storage for this editor session
+            Lockr.rm('lastScript');
+
+            resetAllMessages();
+            editor.getSession().setValue('def resource = resourceResolver.getResource("/content"); \nprintln resource.path');
+            printToMeta("New document created.");
+        });
+
         $('.execute-script').click(function () {
             console.log("Triggered script execution... ");
             if ($(this).hasClass('disabled')) {
@@ -129,6 +142,18 @@
 
             focusEndOfEditorDocument();
         });
+
+        $('.save-script').click(function () {
+            clearInfoPanel();
+            var script = editor.getSession().getValue()
+            saveScriptToLocalStore(script);
+            // TODO now open modal to allow saving the node
+        });
+    };
+
+    var saveScriptToLocalStore = function (script) {
+        Lockr.set('lastScript', script);
+        printToMeta("Script saved to localStorage var [lastScript]");
     };
 
     var focusEndOfEditorDocument = function(){
@@ -141,10 +166,6 @@
     }
 
     setPanelVisibility = function (result, output, error) {
-        for (var i = 0, j = arguments.length; i < j; i++){
-            console.log(arguments[i])
-        };
-
         if (result) {
             $(".info-result").show();
         } else {
