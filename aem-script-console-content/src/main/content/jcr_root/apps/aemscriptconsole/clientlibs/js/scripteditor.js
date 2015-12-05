@@ -166,12 +166,12 @@
 
     var printToMeta = function(message) {
         window.console.log(message);
-        $(".info-message-meta").show();
-        $(".info-message-meta").fadeIn('slow');
+        $(".info-meta").show();
+        $(".info-meta").fadeIn('slow');
         $(".info-message-meta").text(message);
         setTimeout(function () {
-            $(".info-message-meta").fadeOut('slow');
-            $(".info-message-meta").hide();
+            $(".info-meta").fadeOut('slow');
+            $(".info-meta").hide();
         }, 3500);
     };
 
