@@ -3,6 +3,8 @@
     var consoleToAreaWidthRatio = 0.9,
         consoleToAreaHeightRatio = 0.5;
 
+    var saveModal;
+
     var sizeEditor = function () {
 
         var defaultHeight = $('#consolearea').height() * consoleToAreaHeightRatio;
@@ -47,7 +49,7 @@
         editor.setValue("");
     };
 
-    var initializeEditorToolbar = function(){
+    var initializeEditorToolbar = function () {
         $('.create-new').click(function () {
             if ($(this).hasClass('disabled')) {
                 return;
@@ -139,6 +141,14 @@
             var script = editor.getSession().getValue()
             saveScriptToLocalStore(script);
             // TODO now open modal to allow saving the node
+
+            if (!saveModal) {
+                saveModal = new CUI.Modal({
+                    element: $("#saveScriptModal")
+                });
+            } else {
+                saveModal.set({visible: true})
+            }
         });
     };
 
@@ -147,13 +157,13 @@
         printToMeta("Script saved to localStorage var [lastScript]");
     };
 
-    var focusEndOfEditorDocument = function(){
+    var focusEndOfEditorDocument = function () {
 
         editor.focus();
         var session = editor.getSession();
         var count = session.getLength();
 
-        editor.gotoLine(count, session.getLine(count-1).length);
+        editor.gotoLine(count, session.getLine(count - 1).length);
     }
 
     setPanelVisibility = function (result, output, error) {
@@ -176,7 +186,7 @@
         }
     };
 
-    var printToMeta = function(message) {
+    var printToMeta = function (message) {
         window.console.log(message);
         $(".info-meta").show();
         $(".info-meta").fadeIn('slow');

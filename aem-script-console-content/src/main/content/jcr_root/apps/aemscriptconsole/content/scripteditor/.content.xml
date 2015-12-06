@@ -141,7 +141,7 @@
                             action="/bin/private/acfs/script/save.json"
                             sling:resourceType="granite/ui/components/foundation/form"
                             method="POST"
-                            jcr:title="Save Script"
+                            jcr:title="Save Script Node"
                             id="saveScriptModal">
                         <layout
                                 jcr:primaryType="nt:unstructured"
@@ -152,7 +152,8 @@
                         <items jcr:primaryType="nt:unstructured">
                             <scriptName
                                     jcr:primaryType="nt:unstructured"
-                                    fieldLabel="Location"
+                                    fieldLabel="Script Name"
+                                    fieldDescription="Please enter a name for the script node."
                                     required="{Boolean}True"
                                     renderReadOnly="{Boolean}False"
                                     name="scriptName"
@@ -160,11 +161,11 @@
                             <savePath
                                     jcr:primaryType="nt:unstructured"
                                     fieldLabel="Location"
+                                    fieldDescription="Please select the location where to save the script."
                                     required="{Boolean}True"
                                     renderReadOnly="{Boolean}False"
                                     name="savePath"
                                     sling:resourceType="granite/ui/components/foundation/form/pathbrowser"/>
-
                         </items>
                         <footer
                                 jcr:primaryType="nt:unstructured">
