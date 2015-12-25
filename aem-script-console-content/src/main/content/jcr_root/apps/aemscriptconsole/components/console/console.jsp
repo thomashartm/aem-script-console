@@ -16,7 +16,7 @@
 </div>
 
 <div class="panel panel-default" id="formarea">
-    <cq:include script="formeditor.jsp" />
+    <cq:include script="includes/formeditor.jsp" />
 </div>
 
 <div class="panel-footer">
