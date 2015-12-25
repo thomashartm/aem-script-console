@@ -50,6 +50,7 @@
     };
 
     var initializeEditorToolbar = function () {
+
         $('.create-new').click(function () {
             if ($(this).hasClass('disabled')) {
                 return;
@@ -140,7 +141,6 @@
             clearInfoPanel();
             var script = editor.getSession().getValue()
             saveScriptToLocalStore(script);
-            // TODO now open modal to allow saving the node
 
             if (!saveModal) {
                 saveModal = new CUI.Modal({
@@ -149,6 +149,24 @@
             } else {
                 saveModal.set({visible: true})
             }
+        });
+
+        $('#saveScriptModal').submit(function() {
+            var script = editor.getSession().getValue();
+            var scriptName = $("input[name=scriptName]").val();
+            var savePath = $("input[name=savePath]").val();
+
+            if (script.length) {
+                editor.setReadOnly(true);
+                var posting = $.post(CQ.shared.HTTP.getContextPath() + '/bin/private/acfs/script/save.json', {
+                    scriptName: scriptName,
+                    savePath: savePath,
+                    scriptType:"groovy",
+                    script: script
+                });
+            }
+
+            return true;
         });
     };
 
@@ -164,7 +182,7 @@
         var count = session.getLength();
 
         editor.gotoLine(count, session.getLine(count - 1).length);
-    }
+    };
 
     setPanelVisibility = function (result, output, error) {
         if (result) {
