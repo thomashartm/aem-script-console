@@ -151,20 +151,39 @@
             }
         });
 
-        $('#saveScriptModal').submit(function() {
-            var script = editor.getSession().getValue();
-            var scriptName = $("input[name=scriptName]").val();
-            var savePath = $("input[name=savePath]").val();
+        $('#saveScriptModal').submit(function () {
+            var scriptType = "groovy";
 
-            if (script.length) {
-                editor.setReadOnly(true);
-                var posting = $.post(CQ.shared.HTTP.getContextPath() + '/bin/private/acfs/script/save.json', {
-                    scriptName: scriptName,
-                    savePath: savePath,
-                    scriptType:"groovy",
-                    script: script
-                });
+            var savePath = $.trim($("input[name=savePath]").val());
+            if ((!savePath) || (savePath.length == 0)) {
+                // TODO log out message that path is missing
+                return false;
             }
+
+            var scriptName = $.trim($("input[name=scriptName]").val());
+            if ((!scriptName) || (scriptName.length == 0)) {
+                // TODO log out message that name is missing
+                return false;
+            }
+
+            var script = editor.getSession().getValue();
+            if ((!script) || (script.length == 0)) {
+                // TODO log out message that script is missing
+                return false;
+            }
+
+
+            editor.setReadOnly(true);
+            var scriptLocation = savePath + "/" +  scriptName + "." + scriptType;
+            var posting = $.post(CQ.shared.HTTP.getContextPath() + scriptLocation, {
+                "jcr:primaryType": "nt:unstructured",
+                "scriptName": scriptName,
+                "scriptType": scriptType,
+                "script": script,
+                "script@IgnoreBlanks": true
+            });
+
+            window.console.log(posting);
 
             return true;
         });

@@ -11,7 +11,7 @@ import java.util.Optional;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-public interface ScriptPersistenceService {
+public interface ScriptLookupService {
     boolean saveScript(ResourceResolver resourceResolver, Script script, String locationPath)
             throws PersistenceException;
 

@@ -17,7 +17,7 @@ import java.util.Optional;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-public class ScriptPersistenceServiceImpl implements ScriptPersistenceService {
+public class ScriptLookupServiceImpl implements ScriptLookupService {
 
     private Logger LOG = LoggerFactory.getLogger(this.getClass());
 
