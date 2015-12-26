@@ -148,19 +148,6 @@
                                 closable="{Boolean}True"
                                 type="default"/>
                         <items jcr:primaryType="nt:unstructured">
-                           <!--<scriptType
-                                    jcr:primaryType="nt:unstructured"
-                                    fieldLabel="Script Type"
-                                    fieldDescription="Please the type of the script."
-                                    required="{Boolean}True"
-                                    renderReadOnly="{Boolean}False"
-                                    name="scriptType"
-                                    sling:resourceType="granite/ui/components/foundation/form/select" >
-                                <items jcr:primaryType="nt:unstructured">
-                                    <option1
-                                        text="groovy" />
-                                </items>
-                            </scriptType>-->
                             <scriptName
                                     jcr:primaryType="nt:unstructured"
                                     fieldLabel="Script Name"
