@@ -19,7 +19,7 @@
         <clientlibs
             jcr:primaryType="nt:unstructured"
             sling:resourceType="granite/ui/components/foundation/includeclientlibs"
-            categories="[coralui2,coralui.endor.test,granite.ui.foundation,granite.ui.foundation.admin,aemscriptconsole]"/>
+            categories="[coralui2,coralui.endor.test,granite.ui.foundation,granite.ui.foundation.admin]"/>
     </head>
     <body
         jcr:primaryType="nt:unstructured"
@@ -59,16 +59,67 @@
             sling:resourceType="granite/ui/components/foundation/include"
             path="granite/ui/content/userproperties"/>
         <content
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="granite/ui/components/foundation/container">
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/container">
             <layout
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/endor/layouts/content"/>
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/endor/layouts/content"/>
+            <aside
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/container">
+                <layout
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/endor/layouts/sidepanels"/>
+                <items jcr:primaryType="nt:unstructured">
+                    <references
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/include"
+                            id="cq-rail-references"
+                            path="/mnt/overlay/aemscriptconsole/content/commons/sidepanels/references"/>
+                </items>
+            </aside>
+            <header
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/container">
+                <layout
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/layouts/mode"
+                        group="aemscriptconsole-mode"/>
+                <items jcr:primaryType="nt:unstructured">
+                    <default
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/navigation">
+                        <layout
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/endor/layouts/actionbar"/>
+                        <items jcr:primaryType="nt:unstructured">
+                            <search
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/innerrailtoggle"
+                                    icon="icon-search"
+                                    targetId="cq-rail-references"
+                                    text="Select Script"
+                                    title="Select Script"/>
+                            <refresh
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                    class="refresh-script"
+                                    icon="icon-checkCircle"
+                                    text="Refresh"
+                                    title="Refresh"/>
+                        </items>
+                    </default>
+                </items>
+            </header>
             <content
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="aemscriptconsole/components/scriptrunner"
-                class="aemscriptrunner"
-                id="aemscriptrunner"/>
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+
+
+                </items>
+            </content>
+
         </content>
     </body>
 </jcr:root>

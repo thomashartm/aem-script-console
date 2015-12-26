@@ -84,7 +84,7 @@
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/endor/actionbar/button"
                                     class="execute-script"
-                                    icon="icon-checkCircle"
+                                    icon="icon-play-circle"
                                     text="Run"
                                     title="Run"/>
                             <clear
