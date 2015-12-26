@@ -12,6 +12,8 @@ import java.util.Optional;
  * @since 10/2015
  */
 public interface ScriptLookupService {
+
+    @Deprecated
     boolean saveScript(ResourceResolver resourceResolver, Script script, String locationPath)
             throws PersistenceException;
 
