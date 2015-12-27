@@ -6,8 +6,8 @@
 <entry key="version">1.0-SNAPSHOT</entry>
 <entry key="dependencies" />
 <entry key="packageFormatVersion">2</entry>
-<entry key="description">cqshell-package Package</entry>
-<entry key="group">cqshell-group</entry>
-<entry key="name">cqshell-content</entry>
-<entry key="path">/etc/packages/cqshell-group/cqshell-content-1.0-SNAPSHOT.zip</entry>
+<entry key="description">AEM Scripts and Forms Console Package</entry>
+<entry key="group">asfc-group</entry>
+<entry key="name">asfc-content</entry>
+<entry key="path">/etc/packages/asfc-group/asfc-content-1.0-SNAPSHOT.zip</entry>
 </properties>
