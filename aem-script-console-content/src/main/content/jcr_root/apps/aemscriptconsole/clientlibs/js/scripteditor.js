@@ -151,39 +151,50 @@
             }
         });
 
-        $('#saveScriptModal').submit(function () {
+        $('#saveScriptModal').submit(function (event) {
             var scriptType = "groovy";
 
             var savePath = $.trim($("input[name=savePath]").val());
             if ((!savePath) || (savePath.length == 0)) {
-                // TODO log out message that path is missing
-                return false;
+                $(".info-message-error").append("Unable to save script. Save path argument is empty.");
+                return;
             }
 
             var scriptName = $.trim($("input[name=scriptName]").val());
             if ((!scriptName) || (scriptName.length == 0)) {
-                // TODO log out message that name is missing
-                return false;
+                $(".info-message-error").append("Unable to save script. Name argument is empty.");
+                return;
             }
 
             var script = editor.getSession().getValue();
             if ((!script) || (script.length == 0)) {
-                // TODO log out message that script is missing
-                return false;
+                setPanelVisibility(true, true, true);
+                $(".info-message-error").append("Unable to save script. Script argument is empty.");
+                return;
             }
 
 
             editor.setReadOnly(true);
-            var scriptLocation = savePath + "/" +  scriptName + "." + scriptType;
+            var scriptLocation = savePath + "/" + scriptName + "." + scriptType;
             var posting = $.post(CQ.shared.HTTP.getContextPath() + scriptLocation, {
                 "jcr:primaryType": "asfc:script",
                 "name": scriptName,
                 "scriptType": scriptType,
                 "script": script,
                 "script@IgnoreBlanks": true
+            }).done(function( data ) {
+                printToMeta("Successfully saved script " + scriptLocation);
+            }).fail(function( data ) {
+                setPanelVisibility(true, true, true);
+                $(".info-message-error").append("Failed to save script " + scriptLocation);
             });
 
-            return true;
+
+
+            event.preventDefault();
+            $('#saveScriptModal').hide();
+            $('#saveScriptModal').empty();
+            $('#saveScriptModal').remove();
         });
     };
 
