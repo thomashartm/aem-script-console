@@ -13,6 +13,6 @@
     - name (string)
     - script (string)
     - scriptType (string)
-    + form (asfc:form) = nt:unstructured copy primary
+    + form (asfc:form) = asfc:form primary mandatory autocreated
     + * (nt:base) = nt:base
 

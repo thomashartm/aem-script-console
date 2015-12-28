@@ -176,14 +176,12 @@
             editor.setReadOnly(true);
             var scriptLocation = savePath + "/" +  scriptName + "." + scriptType;
             var posting = $.post(CQ.shared.HTTP.getContextPath() + scriptLocation, {
-                "jcr:primaryType": "nt:unstructured",
-                "scriptName": scriptName,
+                "jcr:primaryType": "asfc:script",
+                "name": scriptName,
                 "scriptType": scriptType,
                 "script": script,
                 "script@IgnoreBlanks": true
             });
-
-            window.console.log(posting);
 
             return true;
         });
