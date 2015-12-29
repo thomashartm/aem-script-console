@@ -137,7 +137,7 @@
             focusEndOfEditorDocument();
         });
 
-        $('.save-script').click(function () {
+        /*$('.save-script').click(function () {
             clearInfoPanel();
             var script = editor.getSession().getValue()
             saveScriptToLocalStore(script);
@@ -149,7 +149,7 @@
             } else {
                 saveModal.set({visible: true})
             }
-        });
+        });*/
 
         $('#saveScriptModal').submit(function (event) {
             var scriptType = "groovy";
@@ -187,9 +187,9 @@
             }).fail(function( data ) {
                 setPanelVisibility(true, true, true);
                 $(".info-message-error").append("Failed to save script " + scriptLocation);
+            }).always(function( data ) {
+                editor.setReadOnly(false);
             });
-
-
 
             event.preventDefault();
             $('#saveScriptModal').hide();

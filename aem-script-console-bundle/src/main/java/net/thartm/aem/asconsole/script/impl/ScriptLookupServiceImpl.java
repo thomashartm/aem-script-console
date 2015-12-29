@@ -1,14 +1,25 @@
 package net.thartm.aem.asconsole.script.impl;
 
+import com.day.cq.search.PredicateGroup;
+import com.day.cq.search.Query;
+import com.day.cq.search.QueryBuilder;
+import com.day.cq.search.result.SearchResult;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import net.thartm.aem.asconsole.groovy.GroovyScript;
 import net.thartm.aem.asconsole.script.Script;
-import org.apache.sling.api.resource.PersistenceException;
+import net.thartm.aem.asconsole.script.ScriptLookupService;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ValueMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.jcr.Session;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,37 +32,40 @@ public class ScriptLookupServiceImpl implements ScriptLookupService {
 
     private Logger LOG = LoggerFactory.getLogger(this.getClass());
 
+    @Reference
+    private QueryBuilder queryBuilder;
+
     @Override
-    public boolean saveScript(final ResourceResolver resourceResolver, final Script script, final String locationPath)
-            throws PersistenceException {
+    public Optional<Script> loadScript(final ResourceResolver resourceResolver, final String path) {
+        // loads a script from the provided location
+        final Resource resource = resourceResolver.getResource(path);
+        final ValueMap valueMap = resource.getValueMap();
 
-        // saves a script at the provided location
-        final Resource resource = resourceResolver.getResource(locationPath);
-        if (resource != null) {
-            final Map<String, Object> properties = Maps.newHashMap();
-            properties.put("fileExtension", script.getFileExtension());
-            properties.put("script", script.getScriptContent());
-
-            final Resource scriptResource = resourceResolver.create(resource, script.getName(), properties);
-            LOG.debug("Saved script [{}]", scriptResource.getPath());
-
-            return true;
+        final String scriptType = valueMap.get("scriptType", "");
+        if(StringUtils.equals(scriptType, "groovy")) {
+            final GroovyScript groovyScript = new GroovyScript(resource);
+            return Optional.of(groovyScript);
         }
 
-        return false;
+        return Optional.empty();
     }
 
     @Override
-    public Optional<Script> loadScript(final ResourceResolver resourceResolver, final String locationPath) {
-        // loads a script from the provided location
-        final Optional<Script> script = Optional.empty();
-        return script;
-    }
+    public List<Resource> findScripts(final ResourceResolver resourceResolver, final String... terms) {
 
-    @Override
-    public List<Script> searchForScripts(final ResourceResolver resourceResolver, final String searchTerm) {
-        // searches scripts that patch a particular pattern
+        final Session session = resourceResolver.adaptTo(Session.class);
+        if (session == null) {
+            throw new IllegalStateException("Could not get session from resource resolver");
+        }
 
-        return Collections.EMPTY_LIST;
+        final Map<String, String> map = Maps.newHashMap();
+        map.put("type", "asfc:script");
+        map.put("p.hits", "full");
+        map.put("p.limit", "-1");
+
+        final Query query = this.queryBuilder.createQuery(PredicateGroup.create(map), session);
+        final SearchResult result = query.getResult();
+
+        return Lists.newArrayList(result.getResources());
     }
 }

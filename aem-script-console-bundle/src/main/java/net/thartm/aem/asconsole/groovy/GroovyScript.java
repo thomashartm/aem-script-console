@@ -2,9 +2,11 @@ package net.thartm.aem.asconsole.groovy;
 
 import net.thartm.aem.asconsole.script.Script;
 import net.thartm.aem.asconsole.util.Assert;
+import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ValueMap;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -28,6 +30,13 @@ public class GroovyScript implements Script {
 
     public GroovyScript(final String script) {
         this.script = script;
+    }
+
+    public GroovyScript(final Resource resource) {
+        final ValueMap valueMap = resource.getValueMap();
+        this.script = valueMap.get("script", StringUtils.EMPTY);
+        this.name = valueMap.get("name", StringUtils.EMPTY);
+        this.path  = resource.getPath();
     }
 
     @Override
