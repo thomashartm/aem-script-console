@@ -2,6 +2,7 @@
           jcr:primaryType="sling:OrderedFolder"
           jcr:title="AEM Script Console"
           id="aem-script-console">
+    <asfc/>
     <scriptconsole/>
     <scriptrunner/>
 </jcr:root>

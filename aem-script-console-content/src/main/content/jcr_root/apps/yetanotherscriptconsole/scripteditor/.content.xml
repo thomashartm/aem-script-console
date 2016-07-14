@@ -3,5 +3,5 @@
           xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
           jcr:mixinTypes="[rep:AccessControllable]"
           jcr:primaryType="nt:unstructured"
-          jcr:title="AEM Script Console Editor"
+          jcr:title="AEM Script Console Editor 2"
           sling:resourceType="granite/ui/components/foundation/page" />
