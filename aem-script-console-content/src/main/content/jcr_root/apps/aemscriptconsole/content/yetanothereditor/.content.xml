@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:mixinTypes="[sling:VanityPath]"
+          jcr:primaryType="nt:unstructured"
+          jcr:title="Groovy Editor"
+          sling:resourceType="granite/ui/components/shell/page"
+          consoleId="monitoring">
+    <head jcr:primaryType="nt:unstructured">
+        <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
+                categories="[coralui3,granite.ui.coral.foundation]"/>
+        <viewport
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/admin/page/viewport"/>
+        <meta
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/meta"
+                content="chrome=1"
+                name="X-UA-Compatible"/>
+        <favicon
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/page/favicon"/>
+    </head>
+    <content
+            granite:class="paddedContainer"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <content
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <editor
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="aemscriptconsole/components/console"
+                            class="aemscriptconsole"
+                            id="aemscriptconsole"/>
+
+                </items>
+            </content>
+            <!--<content
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="aemscriptconsole/components/console""/>-->
+            <!--<deleteChartModal
+                    granite:id="deleteChartModal"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Delete Chart"
+                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                    closable="{Boolean}true"
+                    variant="warning">
+                <items jcr:primaryType="nt:unstructured">
+                    <container
+                            granite:id="deleteChartForm"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form"
+                            method="post"
+                            style="aligned">
+                        <items jcr:primaryType="nt:unstructured">
+                            <text
+                                    granite:id="deleteChartText"
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                    text="Are you sure you want to delete chart {0}?"/>
+                            <deleteInput
+                                    granite:id="deleteInput"
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/hidden"
+                                    name=":operation"
+                                    value="delete"/>
+                            <redirect
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/hidden"
+                                    name=":redirect"
+                                    value="/libs/granite/operations/content/monitoring/page.html"/>
+                        </items>
+                    </container>
+                </items>
+                <footer jcr:primaryType="nt:unstructured">
+                    <delete
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                            formId="deleteChartForm"
+                            text="Delete"
+                            type="submit"
+                            variant="primary"/>
+                    <cancel
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                            text="Cancel">
+                        <parentConfig
+                                jcr:primaryType="nt:unstructured"
+                                close="{Boolean}true"/>
+                    </cancel>
+                </footer>
+            </deleteChartModal>-->
+        </items>
+    </content>
+    <title
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/text"
+            text="Monitoring"/>
+    <actions jcr:primaryType="nt:unstructured">
+        <secondary jcr:primaryType="nt:unstructured">
+            <add
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
+                    href="/libs/granite/operations/content/monitoring/editChart.html"
+                    text="Create"
+                    variant="primary"/>
+        </secondary>
+    </actions>
+</jcr:root>

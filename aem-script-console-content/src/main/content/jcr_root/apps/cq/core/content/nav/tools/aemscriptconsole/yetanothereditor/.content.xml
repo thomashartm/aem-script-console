@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
           jcr:primaryType="nt:unstructured"
-          jcr:title="ASFC Script Console"
+          jcr:title="Yet Another Editor"
           target="_blank"
-          href="/etc/asfc.html"
+          href="/apps/aemscriptconsole/content/yetanothereditor.html"
           id="aemscriptconsole">
 </jcr:root>
