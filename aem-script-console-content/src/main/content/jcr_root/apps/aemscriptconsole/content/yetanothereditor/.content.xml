@@ -27,6 +27,67 @@
             jcr:primaryType="nt:unstructured"
             sling:resourceType="granite/ui/components/coral/foundation/container">
         <items jcr:primaryType="nt:unstructured">
+            <header
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/container">
+                <layout
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/layouts/mode"
+                        group="aemscriptconsole-mode"/>
+                <items jcr:primaryType="nt:unstructured">
+                    <default
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/navigation">
+                        <layout
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/endor/layouts/actionbar"/>
+                        <items jcr:primaryType="nt:unstructured">
+                            <execute
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                    class="execute-script"
+                                    icon="icon-checkCircle"
+                                    text="Run"
+                                    title="Run"/>
+                            <clear
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                    class="clear-editor"
+                                    icon="icon-delete"
+                                    text="Clear"
+                                    title="Clear"/>
+                            <createScriptNode
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                    class="asconsole-create-new"
+                                    icon="icon-add"
+                                    text="Create New"
+                                    title="Create new Script"/>
+                            <saveScriptNode
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                    class="asconsole-save-existing"
+                                    icon="icon-checkCircle"
+                                    text="Save"
+                                    title="Save to ScriptNode"/>
+                            <codeEditor
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                    class="asconsole-switch-to-editor"
+                                    icon="icon-edit"
+                                    text="Editor"
+                                    title="Code Editor"/>
+                            <formEditor
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                    class="asconsole-switch-to-form"
+                                    icon="icon-edit"
+                                    text="Form"
+                                    title="Form Editor"/>
+                        </items>
+                    </default>
+                </items>
+            </header>
             <content
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/foundation/container">
@@ -96,18 +157,4 @@
             </deleteChartModal>-->
         </items>
     </content>
-    <title
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="granite/ui/components/coral/foundation/text"
-            text="Monitoring"/>
-    <actions jcr:primaryType="nt:unstructured">
-        <secondary jcr:primaryType="nt:unstructured">
-            <add
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
-                    href="/libs/granite/operations/content/monitoring/editChart.html"
-                    text="Create"
-                    variant="primary"/>
-        </secondary>
-    </actions>
 </jcr:root>
