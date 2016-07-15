@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+          xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="cq:Page">
+    <jcr:content
+            jcr:mixinTypes="[sling:VanityPath]"
+            jcr:primaryType="nt:unstructured"
+            jcr:title="AEM Scripts"
+            sling:resourceType="granite/ui/components/shell/collectionpage"
+            sling:vanityOrder="{Long}100"
+            sling:vanityPath="/aem/scriptoverview"
+            consoleId="asfc-script-overview"
+            contentPath="${requestPathInfo.suffix}"
+            currentView="${state[&quot;payment.shell.collectionpage.layoutId&quot;].string}"
+            modeGroup="asfc-script-overview-admin-childpages"
+            pageURITemplate="/apps/aemscriptconsole/content/scriptoverview.html{+id}"
+            targetCollection=".asfc-script-overview-admin-childpages">
+        <redirector
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/admin/contentchecker"
+                allowed="^(/etc/aemscriptconsole(.*))$"
+                path="${requestPathInfo.suffix}"
+                redirectWhenEmpty="/aem/scriptoverview.html/etc/aemscriptconsole"/>
+        <head jcr:primaryType="nt:unstructured">
+            <clientlibs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
+                    categories="[cq.common.wcm]"/>
+        </head>
+        <views jcr:primaryType="nt:unstructured">
+            <list
+                    granite:rel="asfc-script-overview-admin-childpages"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="List View"
+                    sling:resourceType="granite/ui/components/coral/foundation/table"
+                    icon="viewList"
+                    layoutId="list"
+                    limit="{Long}40"
+                    metaResourceType="cq/gui/components/coral/admin/page/meta"
+                    modeGroup="asfc-script-overview-admin-childpages"
+                    path="${requestPathInfo.suffix}"
+                    rootPath="/etc/aemscriptconsole"
+                    rowReorderAction="/bin/wcmcommand?cmd=movePage&amp;srcPath={item}&amp;destPath={item}&amp;before={before}&amp;_charset_=utf-8&amp;"
+                    selectionMode="row"
+                    size="${empty requestPathInfo.selectors[1] ? &quot;40&quot; : requestPathInfo.selectors[1]}"
+                    sortMode="remote"
+                    src="/mnt/overlay/aemscriptconsole/content/scriptoverview/jcr:content/views/list{.offset,limit}.html{+id}{?sortName,sortDir}"
+                    stateId="scriptoverview.shell.collectionpage">
+                <columns jcr:primaryType="nt:unstructured">
+                    <select
+                            jcr:primaryType="nt:unstructured"
+                            select="{Boolean}true"/>
+                    <title
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="Title"
+                            sortable="{Boolean}true"/>
+                    <modified
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="Modified"
+                            sortable="{Boolean}true"
+                            sortType="date"/>
+                    <published
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="Published"
+                            sortable="{Boolean}true"
+                            sortType="date"/>
+                </columns>
+                <datasource
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="cq/gui/components/common/wcm/datasources/childresources"
+                        acceptedTypes="cq:Page,sling:Folder,sling:orderedFolder"
+                        itemResourceType="commerce/gui/components/admin/paymentmethods/childrow"
+                        limit="${empty requestPathInfo.selectors[1] ? &quot;41&quot; : requestPathInfo.selectors[1] + 1}"
+                        offset="${requestPathInfo.selectors[0]}"
+                        path="${requestPathInfo.suffix}"/>
+            </list>
+        </views>
+    </jcr:content>
+</jcr:root>

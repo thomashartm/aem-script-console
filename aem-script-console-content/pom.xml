@@ -55,6 +55,10 @@
                             <!-- Navigation entry-->
                             <root>/apps/cq/core/content/nav/tools/aemscriptconsole</root>
                         </filter>
+                        <filter>
+                            <!-- Data location -->
+                            <root>/etc/aemscriptconsole</root>
+                        </filter>
                     </filters>
                     <embeddeds>
                         <embedded>
