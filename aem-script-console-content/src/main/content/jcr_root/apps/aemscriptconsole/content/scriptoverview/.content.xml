@@ -5,7 +5,7 @@
     <jcr:content
             jcr:mixinTypes="[sling:VanityPath]"
             jcr:primaryType="nt:unstructured"
-            jcr:title="AEM Scripts"
+            jcr:title="Yet another AEM script console"
             sling:resourceType="granite/ui/components/shell/collectionpage"
             sling:vanityOrder="{Long}100"
             sling:vanityPath="/aem/scriptoverview"
@@ -23,7 +23,7 @@
             <clientlibs
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
-                    categories="[cq.common.wcm]"/>
+                    categories="[coralui3,granite.ui.coral.foundation]"/>
         </head>
         <views jcr:primaryType="nt:unstructured">
             <card
@@ -33,6 +33,8 @@
                     sling:resourceType="granite/ui/components/coral/foundation/masonry"
                     icon="viewCard"
                     limit="{Long}20"
+                    selectionCount="single"
+                    selectionMode="{Boolean}false"
                     metaResourceType="cq/gui/components/coral/admin/page/meta"
                     modeGroup="asfc-script-overview-admin-childpages"
                     path="${requestPathInfo.suffix}"
@@ -42,12 +44,81 @@
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="cq/gui/components/common/wcm/datasources/childpages"
                         applyWeighting="{Boolean}true"
-                        itemResourceType="cq/gui/components/coral/admin/page/card"
+                        itemResourceType="aemscriptconsole/components/scriptpage"
                         limit="${empty requestPathInfo.selectors[1] ? &quot;21&quot; : requestPathInfo.selectors[1] + 1}"
                         offset="${requestPathInfo.selectors[0]}"
                         path="${requestPathInfo.suffix}"/>
             </card>
         </views>
+        <actions jcr:primaryType="nt:unstructured">
+            <primary jcr:primaryType="nt:unstructured"/>
+            <secondary jcr:primaryType="nt:unstructured"/>
+            <selection jcr:primaryType="nt:unstructured">
+                <disable
+                        granite:class="foundation-toggleable-control"
+                        granite:id="agent-disable-activator"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
+                        icon="minusCircle"
+                        text="Disable"
+                        title="Disable"
+                        variant="actionBar">
+                    <granite:data
+                            jcr:primaryType="nt:unstructured"
+                            foundation-toggleable-control-action="show"
+                            foundation-toggleable-control-target="#agentDisableModal"/>
+                </disable>
+                <enable
+                        granite:class="foundation-toggleable-control"
+                        granite:hidden="{Boolean}true"
+                        granite:id="agent-enable-activator"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
+                        icon="checkCircle"
+                        text="Enable"
+                        title="Enable"
+                        variant="actionBar">
+                    <granite:data
+                            jcr:primaryType="nt:unstructured"
+                            foundation-toggleable-control-action="show"
+                            foundation-toggleable-control-target="#agentEnableModal"/>
+                </enable>
+                <pause
+                        granite:class="foundation-toggleable-control"
+                        granite:hidden="{Boolean}true"
+                        granite:id="agent-pause-activator"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
+                        href="#agentPauseModal"
+                        icon="pauseCircle"
+                        text="Pause"
+                        title="Pause"
+                        toggle="modal"
+                        variant="actionBar">
+                    <granite:data
+                            jcr:primaryType="nt:unstructured"
+                            foundation-toggleable-control-action="show"
+                            foundation-toggleable-control-target="#agentPauseModal"/>
+                </pause>
+                <resume
+                        granite:class="foundation-toggleable-control"
+                        granite:hidden="{Boolean}true"
+                        granite:id="agent-resume-activator"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
+                        href="#agentResumeModal"
+                        icon="pausePlayCircle"
+                        text="Resume"
+                        title="Resume"
+                        toggle="modal"
+                        variant="actionBar">
+                    <granite:data
+                            jcr:primaryType="nt:unstructured"
+                            foundation-toggleable-control-action="show"
+                            foundation-toggleable-control-target="#agentResumeModal"/>
+                </resume>
+            </selection>
+        </actions>
         <breadcrumbs
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="wcm/commons/ui/shell/datasources/breadcrumbs"
