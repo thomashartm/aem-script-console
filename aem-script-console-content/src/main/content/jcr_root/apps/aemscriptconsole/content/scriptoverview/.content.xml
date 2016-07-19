@@ -5,7 +5,7 @@
     <jcr:content
             jcr:mixinTypes="[sling:VanityPath]"
             jcr:primaryType="nt:unstructured"
-            jcr:title="Yet another AEM script console"
+            jcr:title="AEM Script and Forms Console ::: Overview"
             sling:resourceType="granite/ui/components/shell/collectionpage"
             sling:vanityOrder="{Long}100"
             sling:vanityPath="/aem/scriptoverview"
@@ -53,80 +53,11 @@
         <actions jcr:primaryType="nt:unstructured">
             <primary jcr:primaryType="nt:unstructured"/>
             <secondary jcr:primaryType="nt:unstructured"/>
-            <selection jcr:primaryType="nt:unstructured">
-                <disable
-                        granite:class="foundation-toggleable-control"
-                        granite:id="agent-disable-activator"
-                        jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
-                        icon="minusCircle"
-                        text="Disable"
-                        title="Disable"
-                        variant="actionBar">
-                    <granite:data
-                            jcr:primaryType="nt:unstructured"
-                            foundation-toggleable-control-action="show"
-                            foundation-toggleable-control-target="#agentDisableModal"/>
-                </disable>
-                <enable
-                        granite:class="foundation-toggleable-control"
-                        granite:hidden="{Boolean}true"
-                        granite:id="agent-enable-activator"
-                        jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
-                        icon="checkCircle"
-                        text="Enable"
-                        title="Enable"
-                        variant="actionBar">
-                    <granite:data
-                            jcr:primaryType="nt:unstructured"
-                            foundation-toggleable-control-action="show"
-                            foundation-toggleable-control-target="#agentEnableModal"/>
-                </enable>
-                <pause
-                        granite:class="foundation-toggleable-control"
-                        granite:hidden="{Boolean}true"
-                        granite:id="agent-pause-activator"
-                        jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
-                        href="#agentPauseModal"
-                        icon="pauseCircle"
-                        text="Pause"
-                        title="Pause"
-                        toggle="modal"
-                        variant="actionBar">
-                    <granite:data
-                            jcr:primaryType="nt:unstructured"
-                            foundation-toggleable-control-action="show"
-                            foundation-toggleable-control-target="#agentPauseModal"/>
-                </pause>
-                <resume
-                        granite:class="foundation-toggleable-control"
-                        granite:hidden="{Boolean}true"
-                        granite:id="agent-resume-activator"
-                        jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
-                        href="#agentResumeModal"
-                        icon="pausePlayCircle"
-                        text="Resume"
-                        title="Resume"
-                        toggle="modal"
-                        variant="actionBar">
-                    <granite:data
-                            jcr:primaryType="nt:unstructured"
-                            foundation-toggleable-control-action="show"
-                            foundation-toggleable-control-target="#agentResumeModal"/>
-                </resume>
-            </selection>
         </actions>
         <breadcrumbs
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="wcm/commons/ui/shell/datasources/breadcrumbs"
                 path="${requestPathInfo.suffix}"
-                rootTitle="Script Pages"/>
+                rootTitle="Scripts"/>
     </jcr:content>
-    <previewcolumn
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="aemscriptconsole/components/scriptpagepreview"
-            path="${requestPathInfo.suffix}"/>
 </jcr:root>
