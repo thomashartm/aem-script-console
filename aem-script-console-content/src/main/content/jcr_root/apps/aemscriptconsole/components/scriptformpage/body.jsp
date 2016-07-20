@@ -5,7 +5,7 @@
 <div class="container" data-dps="paginate" data-page-padding="15" >
 
     <div class="bg">
-        TEst
+        <cq:include path="par" resourceType="foundation/components/parsys"/>
     </div>
 
 </div><%
