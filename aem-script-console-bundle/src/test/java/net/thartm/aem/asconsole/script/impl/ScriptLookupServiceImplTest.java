@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  * @author thomas.hartmann@netcentric.biz
  * @since 11/2015
  */
-public class ScriptPersistenceServiceImplTest {
+public class ScriptLookupServiceImplTest {
 
 
     @Test

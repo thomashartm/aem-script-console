@@ -1,0 +1,18 @@
+<'sling'='http://sling.apache.org/jcr/sling/1.0'>
+<'nt'='http://www.jcp.org/jcr/nt/1.0'>
+<'asfc'='http://www.thartm.net/aem/asfc/1.0'>
+
+[asfc:form] > mix:title, mix:created, mix:lastModified, nt:unstructured
+    - * (undefined)
+    - * (undefined) multiple
+    + * (nt:base) = nt:base
+
+[asfc:script] > mix:title, mix:created, mix:lastModified, nt:unstructured
+    - * (undefined)
+    - * (undefined) multiple
+    - name (string)
+    - script (string)
+    - scriptType (string)
+    + form (asfc:form) = asfc:form primary mandatory autocreated
+    + * (nt:base) = nt:base
+

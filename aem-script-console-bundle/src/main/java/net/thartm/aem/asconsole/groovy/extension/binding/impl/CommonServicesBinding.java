@@ -1,10 +1,10 @@
-package net.thartm.aem.asconsole.extension.binding.impl;
+package net.thartm.aem.asconsole.groovy.extension.binding.impl;
 
 import java.util.Map;
 
 import javax.jcr.Session;
 
-import net.thartm.aem.asconsole.extension.binding.BindingExtension;
+import net.thartm.aem.asconsole.groovy.extension.binding.BindingExtension;
 
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;

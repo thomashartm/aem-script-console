@@ -2,8 +2,8 @@ package net.thartm.aem.asconsole.groovy.impl;
 
 import com.google.common.collect.Maps;
 import groovy.lang.Binding;
-import net.thartm.aem.asconsole.extension.BindingExtensionsProviderService;
-import net.thartm.aem.asconsole.extension.customizer.ImportCustomizationProvider;
+import net.thartm.aem.asconsole.groovy.extension.BindingExtensionsProviderService;
+import net.thartm.aem.asconsole.groovy.extension.customizer.ImportCustomizationProvider;
 import net.thartm.aem.asconsole.groovy.GroovyScript;
 import net.thartm.aem.asconsole.groovy.GroovyScriptContext;
 import net.thartm.aem.asconsole.script.ScriptResponse;

@@ -1,12 +1,9 @@
-package net.thartm.aem.asconsole.extension.customizer.impl;
+package net.thartm.aem.asconsole.groovy.extension.customizer.impl;
 
-import com.google.common.collect.Sets;
-import net.thartm.aem.asconsole.extension.customizer.ImportCustomizationProvider;
+import net.thartm.aem.asconsole.groovy.extension.customizer.ImportCustomizationProvider;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.codehaus.groovy.control.customizers.ImportCustomizer;
-
-import java.util.Set;
 
 /**
  * Provides default imports that are added as compiler configurations

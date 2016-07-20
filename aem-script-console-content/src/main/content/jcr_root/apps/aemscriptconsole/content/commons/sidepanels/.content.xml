@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="nt:unstructured">
+    <references
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/container"
+            id="cq-rail-references">
+        <items jcr:primaryType="nt:unstructured">
+            <title
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="dam/gui/components/admin/endor/innerrailtitle"
+                    title="Select Script"/>
+           <!-- <clientlibs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+                    categories="[cq.gui.damadmin.references]"/>-->
+            <!--<scripts
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/references/components/references"
+                    adminUrl="/apps/aemscriptconsole/content/scriptrunner.html"
+                    text="Scripts">
+                <items jcr:primaryType="nt:unstructured">
+                    <list
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/contsys"
+                            class="list">
+                        <items jcr:primaryType="nt:unstructured">
+
+                            <assetReferences
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/references/components/group"
+                                    class="asset-references"
+                                    title="Asset References">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <complexReferences
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/references/components/type"
+                                            itemResourceType="dam/gui/components/admin/references/complexReferences"
+                                            title="Asset References"
+                                            type="complexAssetReference"/>
+                                </items>
+                            </assetReferences>
+
+                        </items>
+                    </list>
+                </items>
+            </scripts>-->
+        </items>
+    </references>
+</jcr:root>
