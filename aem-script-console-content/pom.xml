@@ -46,15 +46,10 @@
                 <extensions>true</extensions>
                 <configuration>
                     <group>aem-script-console-group</group>
-                    <filters>
-                        <filter>
-                            <!-- CQ shell implementation -->
-                            <root>/apps/aemscriptconsole</root>
-                        </filter>
-                        <filter>
-                            <!-- Navigation entry-->
-                            <root>/apps/cq/core/content/nav/tools/aemscriptconsole</root>
-                        </filter>
+                    <filterSource>src/main/META-INF/vault/filter.xml</filterSource>
+                    <!-- to prevent merging with the default filter coming from cq-parent,
+                        remove that filter here explicitly -->
+                    <filters combine.self="override">
                     </filters>
                     <embeddeds>
                         <embedded>
