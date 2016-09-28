@@ -11,6 +11,8 @@ Therefore the console has an editor view to define the script, a form view to co
 For non technical users, complexity is hidden behind such a form. This form is bound to a script and rendered through the ASFCs scriptrunner interface.
 
 
+!!!!!The project is still experimental!!!!
+
 ## Supported scripting languages
 Currently the groovy scripting language is supported. The console comes a number of object bindings:
 - resolver
