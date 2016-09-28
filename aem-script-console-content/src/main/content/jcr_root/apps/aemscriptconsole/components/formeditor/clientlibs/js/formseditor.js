@@ -1,5 +1,7 @@
 (function ($, $document, gAuthor) {
 
 
-})
-(Granite.$, $(document), Granite.author);
+
+
+
+})(Granite.$, $(document), Granite.author);

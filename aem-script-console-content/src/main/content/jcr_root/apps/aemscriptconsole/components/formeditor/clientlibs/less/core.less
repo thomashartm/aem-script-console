@@ -1,15 +1,65 @@
 .form-properties {
-    input[type=text],
-    textarea {
-        width: 100%;
-    }
+  input[type=text],
+  textarea {
+    width: 100%;
+  }
+}
+
+.dragvert-container {
+  width: 300px;
+  border: 2px dotted grey;
+  margin: 10px;
+  padding-bottom: 10px;
+  float: left;
+}
+
+
+.properties-container {
+  width: 600px;
+  border: 2px solid grey;
+  margin: 10px;
+  padding-bottom: 10px;
+  float: left;
+}
+
+.dragvert-element {
+  width: 260px;
+  padding: 10px;
+  margin: 10px;
+  margin-bottom: 0;
+
+  cursor: pointer;
+  cursor: grab;
+
+  -ms-touch-action: none;
+  touch-action: none;
+
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.dragvert-element.is-dragging {
+  position: absolute;
+  opacity: 0.9;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+
+  cursor: move;
+  cursor: grabbing;
+}
+
+.dragvert-element.is-dragging.remove-element {
+  border: red 1px dotted;
 }
 
 #form-builder-view {
-    input[type=text] {
-        max-width: 40rem;
-        border: 1px solid #b9b9b9;
-    }
+  input[type=text] {
+    max-width: 40rem;
+    border: 1px solid #b9b9b9;
+  }
 }
 
 .template-title {
@@ -19,7 +69,7 @@
   }
   > i {
     vertical-align: middle;
-    height: 2.0rem ;
+    height: 2.0rem;
     background: #c0c0c0;
     font-size: 1.5rem;
     padding: 0.625rem 0.625rem 0.375rem 0.625rem;
