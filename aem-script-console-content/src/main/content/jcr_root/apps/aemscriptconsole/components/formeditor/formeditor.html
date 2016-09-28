@@ -1,0 +1,141 @@
+<sly data-sly-use.editor="net.thartm.aem.asconsole.models.FormEditor">
+
+    <div class="dragvert-container fe-dragvert-source">
+        <div class="dragvert-element coral--dark" data-form-element-type="textfield"
+             data-form-field-id="txt-generic"
+             data-form-field-value=""
+             data-form-field-validation=""
+             data-form-field-mandatory="false">
+            textfield
+        </div>
+        <div class="dragvert-element coral--dark" data-form-element-type="checkbox">
+            Checkbox
+        </div>
+        <div class="dragvert-element coral--dark" data-form-element-type="select">
+            Selectfield
+        </div>
+        <div class="dragvert-element coral--dark" data-form-element-type="number">
+            Numberfield
+        </div>
+    </div>
+
+
+    <div class="dragvert-container fe-dragvert-target" data-container-ops-counter="0"></div>
+
+    <div class="properties-container">
+        <form class="coral-Form coral-Form--vertical" style="width: 500px;">
+            <section class="coral-Form-fieldset">
+                <h3 class="coral-Form-fieldset-legend">Properties</h3>
+
+                <div class="coral-Form-fieldwrapper">
+                    <label class="coral-Form-fieldlabel">Field Name</label>
+                    <input class="coral-Form-field coral-Textfield" type="text" placeholder="Required" aria-required="true">
+                    <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip"
+                          data-quicktip-type="info" data-quicktip-arrow="right"></span>
+                </div>
+            </section>
+        </form>
+    </div>
+
+    <script>
+        $(".dragvert-container").on("taphold mousedown", function (e) {
+            var element = $(e.target),
+                    source = $(this),
+                    target = $(".dragvert-container").not(source);
+            //
+            // Setting fixed height to avoid resizing of container during drag
+            source.height(source.height());
+            //
+            // Start Drag'n'drop
+            new CUI.DragAction(e, source, element, [target]);
+        }).on("dragenter", function (e) {
+            //
+            // Making space for new element
+            $(this).css("height", $(this).height() + e.item.outerHeight(true));
+
+            var toogleRemove = $(e.target).hasClass("fe-dragvert-source");
+            $(e.item).toggleClass("remove-element", toogleRemove);
+
+        }).on("dragleave", function (e) {
+            //
+            // Setting height of target back to auto after element left boundaries
+            // of target
+            $(this).css("height", "auto");
+        }).on("dragend", function (e) {
+            //
+            // Setting height of source back to auto after drag is finished
+            e.sourceElement.css("height", "auto");
+        }).on("drop", function (e) {
+            //
+            // Stop Drag'n'drop - move element to new position in DOM
+            if ($(e.target).hasClass("fe-dragvert-source")) {
+                $(e.item).remove();
+            } else {
+
+                var targetElement = $(e.item).clone();
+                targetElement.data("formFieldId", "field" + getAndIncrementContainerIndex());
+                console.log(targetElement.data());
+                targetElement.appendTo(this);
+            }
+        })
+
+
+        $(document).on("dblclick", ".fe-dragvert-target .dragvert-element", function (e) {
+            createPropertiesForm(e);
+        });
+
+        function createPropertiesForm(e) {
+            $(".properties-container .coral-Form-fieldset").empty();
+
+            var element = $(e.currentTarget);
+            console.log("Handler for .dblclick() called: " + element.data("formElementType"));
+        }
+
+        function addTextInputField(parent, settings) {
+
+        }
+
+        function getTargetContainerIndex() {
+            var target = $(".fe-dragvert-target");
+            return parseInt(target.data("containerOpsCounter"));
+        }
+
+        function getAndIncrementContainerIndex() {
+            var target = $(".fe-dragvert-target");
+            var current = parseInt(target.data("containerOpsCounter"));
+            target.data("containerOpsCounter", current + 1);
+            return current;
+        }
+    </script>
+
+    <!--//<div class="formbuilder-wrapper">
+        <div id="form-builder-properties">
+            <div id="preview-rail">
+                <a href="#"
+                   class="coral-Icon coral-Icon--viewOn coral-Icon--sizeM preview-search-panel"
+                   data-preview-path=""
+                   data-preview-repo-path=""
+                   data-foundation-content-history="push"
+                   data-foundation-content-control-action="push"></a>
+            </div>
+            <div id="tabs-navigation" class="coral-TabPanel" data-init="tabs">
+                <nav class="coral-TabPanel-navigation" role="tablist">
+                    <a id="tab-add" href="#tab-add" data-toggle="tab" class="coral-TabPanel-tab is-active">Select Predicate</a>
+                    <a id="tab-edit" href="#tab-edit" class="coral-TabPanel-tab" data-toggle="tab">Settings</a>
+                </nav>
+                <div class="coral-TabPanel-content">
+                    <section class="types active coral-TabPanel-pane is-active">
+
+                    </section>
+                    <section class="settings coral-TabPanel-pane">
+                        <div class="placeholder"><i>Select a field to edit</i></div>
+
+                    </section>
+                </div>
+            </div>
+        </div>
+        ${editor.formPath}
+        <sly data-sly-include="formview.html"/>
+
+    </div>-->
+</sly>
