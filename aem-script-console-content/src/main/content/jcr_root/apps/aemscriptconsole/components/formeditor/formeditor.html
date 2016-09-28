@@ -38,74 +38,7 @@
     </div>
 
     <script>
-        $(".dragvert-container").on("taphold mousedown", function (e) {
-            var element = $(e.target),
-                    source = $(this),
-                    target = $(".dragvert-container").not(source);
-            //
-            // Setting fixed height to avoid resizing of container during drag
-            source.height(source.height());
-            //
-            // Start Drag'n'drop
-            new CUI.DragAction(e, source, element, [target]);
-        }).on("dragenter", function (e) {
-            //
-            // Making space for new element
-            $(this).css("height", $(this).height() + e.item.outerHeight(true));
 
-            var toogleRemove = $(e.target).hasClass("fe-dragvert-source");
-            $(e.item).toggleClass("remove-element", toogleRemove);
-
-        }).on("dragleave", function (e) {
-            //
-            // Setting height of target back to auto after element left boundaries
-            // of target
-            $(this).css("height", "auto");
-        }).on("dragend", function (e) {
-            //
-            // Setting height of source back to auto after drag is finished
-            e.sourceElement.css("height", "auto");
-        }).on("drop", function (e) {
-            //
-            // Stop Drag'n'drop - move element to new position in DOM
-            if ($(e.target).hasClass("fe-dragvert-source")) {
-                $(e.item).remove();
-            } else {
-
-                var targetElement = $(e.item).clone();
-                targetElement.data("formFieldId", "field" + getAndIncrementContainerIndex());
-                console.log(targetElement.data());
-                targetElement.appendTo(this);
-            }
-        })
-
-
-        $(document).on("dblclick", ".fe-dragvert-target .dragvert-element", function (e) {
-            createPropertiesForm(e);
-        });
-
-        function createPropertiesForm(e) {
-            $(".properties-container .coral-Form-fieldset").empty();
-
-            var element = $(e.currentTarget);
-            console.log("Handler for .dblclick() called: " + element.data("formElementType"));
-        }
-
-        function addTextInputField(parent, settings) {
-
-        }
-
-        function getTargetContainerIndex() {
-            var target = $(".fe-dragvert-target");
-            return parseInt(target.data("containerOpsCounter"));
-        }
-
-        function getAndIncrementContainerIndex() {
-            var target = $(".fe-dragvert-target");
-            var current = parseInt(target.data("containerOpsCounter"));
-            target.data("containerOpsCounter", current + 1);
-            return current;
-        }
     </script>
 
     <!--//<div class="formbuilder-wrapper">
