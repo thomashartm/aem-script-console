@@ -33,6 +33,7 @@
             // Stop Drag'n'drop - move element to new position in DOM
             if ($(e.target).hasClass("fe-dragvert-source")) {
                 $(e.item).remove();
+                clearedPropertiesForm();
             } else {
                 var targetElement = $(e.item).clone();
                 targetElement.data("formFieldId", "field" + getAndIncrementContainerIndex());
@@ -47,8 +48,7 @@
     });
 
     var createPropertiesForm = function (e) {
-        var target = $(".properties-container .coral-Form-fieldset");
-        target.empty();
+        var target = clearedPropertiesForm();
 
         var element = $(e.currentTarget);
 
@@ -98,6 +98,12 @@
         var current = parseInt(target.data("containerOpsCounter"));
         target.data("containerOpsCounter", current + 1);
         return current;
+    };
+
+    var clearedPropertiesForm = function(){
+        var target = $(".properties-container .coral-Form-fieldset");
+        target.empty();
+        return target;
     };
 
     $(document).ready(function () {
