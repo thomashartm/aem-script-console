@@ -1,6 +1,21 @@
-<sly data-sly-use.editor="net.thartm.aem.asconsole.models.FormEditor">
+<sly data-sly-use.editor="net.thartm.aem.asconsole.models.FormBuilder">
 
     <div class="dragvert-container fe-dragvert-source">
+        <div class="drag-form-element coral--dark" data-form-element-type="textfield"
+             data-form-field-id="txt-generic"
+             data-form-field-value=""
+             data-form-field-validation=""
+             data-form-field-mandatory="false"
+             coral-dragaction
+             coral-dragaction-handle="#handle"
+             coral-dragaction-axis="horizontal">
+            <b>handle</b> Textfield
+        </div>
+    </div>
+
+    <div class="dragvert-container fe-dragvert-target" data-container-ops-counter="0"></div>
+
+        <!--<div class="dragvert-container fe-dragvert-source">
         <div class="dragvert-element coral--dark" data-form-element-type="textfield"
              data-form-field-id="txt-generic"
              data-form-field-value=""
@@ -35,40 +50,5 @@
                 </div>
             </section>
         </form>
-    </div>
-
-    <script>
-
-    </script>
-
-    <!--//<div class="formbuilder-wrapper">
-        <div id="form-builder-properties">
-            <div id="preview-rail">
-                <a href="#"
-                   class="coral-Icon coral-Icon--viewOn coral-Icon--sizeM preview-search-panel"
-                   data-preview-path=""
-                   data-preview-repo-path=""
-                   data-foundation-content-history="push"
-                   data-foundation-content-control-action="push"></a>
-            </div>
-            <div id="tabs-navigation" class="coral-TabPanel" data-init="tabs">
-                <nav class="coral-TabPanel-navigation" role="tablist">
-                    <a id="tab-add" href="#tab-add" data-toggle="tab" class="coral-TabPanel-tab is-active">Select Predicate</a>
-                    <a id="tab-edit" href="#tab-edit" class="coral-TabPanel-tab" data-toggle="tab">Settings</a>
-                </nav>
-                <div class="coral-TabPanel-content">
-                    <section class="types active coral-TabPanel-pane is-active">
-
-                    </section>
-                    <section class="settings coral-TabPanel-pane">
-                        <div class="placeholder"><i>Select a field to edit</i></div>
-
-                    </section>
-                </div>
-            </div>
-        </div>
-        ${editor.formPath}
-        <sly data-sly-include="formview.html"/>
-
     </div>-->
 </sly>

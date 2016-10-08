@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
-          xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
           jcr:mixinTypes="[sling:VanityPath]"
           jcr:primaryType="nt:unstructured"
-          jcr:title="AEM Script and Forms Console ::: Forms"
+          jcr:title="AEM Script and Forms Console ::: Formeditor"
           sling:resourceType="granite/ui/components/shell/page"
           consoleId="monitoring">
     <head jcr:primaryType="nt:unstructured">
         <clientlibs
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
-                categories="[aemscriptconsole.formeditor,coralui2,granite.ui.foundation,granite.ui.foundation.admin]"/>
+                categories="[coralui3,granite.ui.coral.foundation]"/>
         <viewport
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/admin/page/viewport"/>
@@ -26,49 +25,8 @@
     <content
             granite:class="paddedContainer"
             jcr:primaryType="nt:unstructured"
-            sling:resourceType="granite/ui/components/coral/foundation/container">
-        <items jcr:primaryType="nt:unstructured">
-            <header
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/foundation/container">
-                <layout
-                        jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/foundation/layouts/mode"
-                        group="aemscriptconsole-mode"/>
-                <items jcr:primaryType="nt:unstructured">
-                    <default
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/foundation/navigation">
-                        <layout
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/endor/layouts/actionbar"/>
-                        <items jcr:primaryType="nt:unstructured">
-                            <addField
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/endor/actionbar/button"
-                                    class="execute-script"
-                                    icon="icon-checkCircle"
-                                    text="Add"
-                                    title="Add Field"/>
-                        </items>
-                    </default>
-                </items>
-            </header>
-            <content
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/foundation/container">
-
-                    <items jcr:primaryType="nt:unstructured">
-                        <formeditor
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="aemscriptconsole/components/formeditor"
-                                class="aemscriptconsole"
-                                id="aemscriptconsole"/>
-                    </items>
-
-            </content>
-
-        </items>
+            sling:resourceType="aemscriptconsole/components/formbuilder">
     </content>
 </jcr:root>
+
 

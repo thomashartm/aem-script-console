@@ -48,23 +48,23 @@
     });
 
     var createPropertiesForm = function (e) {
-        var target = clearedPropertiesForm();
+        var fieldLocation = clearedPropertiesForm();
 
         var element = $(e.currentTarget);
 
         var type = element.data("formElementType");
 
         if (type === "textfield") {
-            addTextInputField(target, {value: element.data("formFieldId"), type: type, label: "Field ID"});
-            addTextInputField(target, {value: 200, type: type, label: "Max Length"});
-            addCheckboxField(target, {value: "true", id: "mandatory", label: "Mandatory"})
+            addTextInputField(fieldLocation, element, {value: element.data("formFieldId"), type: type, label: "Field ID"});
+            addTextInputField(fieldLocation, element, {value: 200, type: type, label: "Max Length"});
+            addCheckboxField(fieldLocation, element, {value: "true", id: "mandatory", label: "Mandatory"})
         } else {
             console.log("I'm afraid this type is not supported yet");
         }
         console.log("Handler for .dblclick() called: " + element.data("formElementType"));
     };
 
-    var addTextInputField = function (parent, settings) {
+    var addTextInputField = function (parent, element, settings) {
         $("<label class='coral-Form-fieldlabel'>" + settings.label + "</label>")
             .appendTo(parent);
 
@@ -75,7 +75,7 @@
             .appendTo(parent);
     };
 
-    var addCheckboxField = function (parent, settings) {
+    var addCheckboxField = function (parent, element, settings) {
         var label = $("<label class='coral-Checkbox'></label>");
         label.appendTo(parent);
 

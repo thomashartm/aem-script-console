@@ -8,8 +8,11 @@ import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 
-@Model(adaptables = { SlingHttpServletRequest.class })
-public class FormEditor {
+import java.util.Collections;
+import java.util.List;
+
+@Model(adaptables = { SlingHttpServletRequest.class, Resource.class })
+public class FormBuilder {
 
     @SlingObject
     private SlingHttpServletRequest request;
@@ -33,6 +36,11 @@ public class FormEditor {
             return resource.getPath();
         }
         return StringUtils.EMPTY;
+    }
+
+    public List<Resource> getFormElements(){
+
+        return Collections.emptyList();
     }
 
 }
