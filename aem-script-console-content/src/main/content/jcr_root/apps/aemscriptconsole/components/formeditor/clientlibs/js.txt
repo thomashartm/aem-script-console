@@ -1,3 +1,0 @@
-#base=js
-
-formseditor-coral3.js
