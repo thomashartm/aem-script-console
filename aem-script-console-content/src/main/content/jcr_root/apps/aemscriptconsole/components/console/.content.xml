@@ -3,5 +3,3 @@
     jcr:primaryType="nt:unstructured">
     <console.jsp/>
 </jcr:root>
-
-<!-- Change to sightly -->

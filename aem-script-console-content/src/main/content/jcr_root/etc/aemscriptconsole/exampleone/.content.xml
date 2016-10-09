@@ -4,7 +4,8 @@
           jcr:primaryType="cq:Page">
     <jcr:content
             jcr:primaryType="nt:unstructured"
-            jcr:title="Script Editor"
-            sling:resourceType="aemscriptconsole/components/formbuilder"/>
+            jcr:title="Script and Form Example 1"
+            cq:template="aemscriptconsole/templates/scriptnode"
+            sling:resourceType="aemscriptconsole/components/scriptrunner"/>
 
 </jcr:root>

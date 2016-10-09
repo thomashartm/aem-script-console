@@ -19,7 +19,7 @@
                     granite:id="form-editor"
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/coral/foundation/form"
-                    action="${requestPathInfo.suffix}.html"
+                    action="/apps/aemscriptconsole/content/formeditor.saveform.html${requestPathInfo.suffix}"
                     method="post">
                 <items jcr:primaryType="nt:unstructured">
                     <content
