@@ -6,12 +6,12 @@
     <!-- P A R E N T P R O J E C T D E S C R I P T I O N -->
     <!-- ====================================================================== -->
 
-    <groupId>net.thartm.cq</groupId>
-    <artifactId>aem-script-console</artifactId>
+    <groupId>biz.netcentric.aem</groupId>
+    <artifactId>scriptconsole</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>AEM Script console - Reactor Project</name>
+    <name>Netcentric - AEM Script Console - Reactor Project</name>
     <description>Scripting console project for administrative purposes using the AEM 6 touch UI.</description>
 
     <!-- ====================================================================== -->
@@ -329,8 +329,8 @@
     </profiles>
 
     <modules>
-        <module>aem-script-console-bundle</module>
-        <module>aem-script-console-content</module>
+        <module>scriptconsole-bundle</module>
+        <module>scriptconsole-content</module>
     </modules>
 
 </project>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<workspaceFilter version="1.0">
-    <filter root="/apps/aemscriptconsole" />
-    <filter root="/apps/cq/core/content/nav/tools/aemscriptconsole"/>
-    <filter root="/etc/aemscriptconsole" mode="update"/>
-    <filter root="/etc/designs/aemscriptconsole" mode="replace"/>
-</workspaceFilter>
