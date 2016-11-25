@@ -5,7 +5,7 @@
     <jcr:content
             jcr:mixinTypes="[sling:VanityPath]"
             jcr:primaryType="nt:unstructured"
-            jcr:title="AEM Script and Forms Console ::: Overview"
+            jcr:title="AEM Script Console ::: Overview"
             sling:resourceType="granite/ui/components/shell/collectionpage"
             sling:vanityOrder="{Long}100"
             sling:vanityPath="/aem/scriptoverview"
