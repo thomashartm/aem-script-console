@@ -16,7 +16,7 @@ import biz.netcentric.aem.scriptconsole.util.Assert;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-public class GroovyPersistableScript implements PersistableScript {
+public class PersistableGroovyScript implements PersistableScript {
 
     private static final String NAME_PATTERN = "%s.%s";
 
@@ -28,11 +28,11 @@ public class GroovyPersistableScript implements PersistableScript {
 
     private String path;
 
-    public GroovyPersistableScript(final String script) {
+    public PersistableGroovyScript(final String script) {
         this.script = script;
     }
 
-    public GroovyPersistableScript(final Resource resource) {
+    public PersistableGroovyScript(final Resource resource) {
         final ValueMap valueMap = resource.getValueMap();
         this.script = valueMap.get("script", StringUtils.EMPTY);
         this.name = valueMap.get("name", StringUtils.EMPTY);
