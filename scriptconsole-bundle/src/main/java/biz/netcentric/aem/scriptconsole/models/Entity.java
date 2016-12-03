@@ -5,9 +5,12 @@ import javax.inject.Named;
 
 import com.day.cq.i18n.I18n;
 import org.apache.commons.lang.StringUtils;
+import org.apache.sling.api.SlingConstants;
+import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
+import org.apache.sling.models.annotations.Via;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 
 /**
@@ -16,7 +19,7 @@ import org.apache.sling.models.annotations.injectorspecific.SlingObject;
  * @author thomas.hartmann@netcentric.biz
  * @since 07/2016
  */
-@Model(adaptables = Resource.class)
+@Model(adaptables = SlingHttpServletRequest.class)
 public class Entity {
 
     @Inject
@@ -27,6 +30,10 @@ public class Entity {
     @Inject
     @SlingObject
     private Resource resource;
+
+    @Inject
+    @SlingObject
+    private SlingHttpServletRequest request;
 
     public String getTitle() {
         return StringUtils.isEmpty(title) ? getName() : title;
@@ -47,7 +54,11 @@ public class Entity {
         return Icon.FILE.getName();
     }
 
+    public String getType(){
+        return resource.getResourceResolver().getResource(getPath()).getResourceType();
+    }
+
     public boolean isFolder() {
-        return resource.isResourceType("sling:folder") || resource.isResourceType("nt:folder");
+        return resource.isResourceType("sling:Folder") || resource.isResourceType("nt:folder");
     }
 }
