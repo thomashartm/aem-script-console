@@ -1,18 +1,14 @@
-# ASFC - AEM Script and Forms Console
-Using the AEM script and forms console technical and non technical users can easily execute custom scripts in the context of AEM e.g. to fix or migrate content. 
+# ASFC - AEM Script Console
+With the AEM script console technical and non technical users can easily execute custom scripts in the context of AEM e.g. to fix or migrate content. 
 
 ![Editor View](https://github.com/thomashartm/aem-script-console/blob/screenshots/pictures/script-console-overview.png "AEM Script Console Overview")
 ![Editor View](https://github.com/thomashartm/aem-script-console/blob/screenshots/pictures/script-console-editor.png "AEM Script Console Editor")
 
 The console supports the execution of groovy scripts while javascript support is planned as well.
 
-The console supports the execution of scripts via a predefined form for each script. 
-Therefore the console has an editor view to define the script, a form view to configure the input parameter form and a script runner UI that renders the form and passes the field values to the script.
+The console supports the execution of stored or submitted scripts. 
+Therefore the console has an editor view to define the script and a script runner UI that allows to start a stored script without having to deal with an editng interface.
 
-For non technical users, complexity is hidden behind such a form. This form is bound to a script and rendered through the ASFCs scriptrunner interface.
-
-
-!!!!!The project is still experimental!!!!
 
 ## Supported scripting languages
 Currently the groovy scripting language is supported. The console comes a number of object bindings:
@@ -24,6 +20,12 @@ Currently the groovy scripting language is supported. The console comes a number
 - queryBuilder
 
 All bindings use the current user's session
+
+The following closure bindings are supported:
+
+- getNode
+- getResource
+- getPage
 
 ## Status
 The console is work in progress. The script execution is already working while the forms interface currently work in progress.
@@ -38,6 +40,9 @@ To deploy the project just add the autoInstallPackage profile.
 ```
 mvn clean install -PautoInstallPackage
 ```
+
+## Requirements
+AEM 6.2 is required.
 
 ##License
 The software is licensed under the Apache 2.0 License see the attached LICENSE file orhttp://www.apache.org/licenses/LICENSE-2.0.html for details.
