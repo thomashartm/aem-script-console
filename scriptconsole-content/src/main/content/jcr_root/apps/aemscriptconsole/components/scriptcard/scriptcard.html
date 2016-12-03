@@ -1,17 +1,36 @@
 <sly data-sly-use.entity="biz.netcentric.aem.scriptconsole.models.Entity">
-    <coral-card
-            class="foundation-collection-navigator coral-Card"
-            data-foundation-collection-navigator-href="/apps/aemscriptconsole/content/scriptrunner.html${entity.path}.html">
-        <coral-card-asset class="coral-Card-asset" style="">
-        </coral-card-asset>
-        <div class="coral-Card-wrapper">
-            <coral-card-content class="coral-Card-content">
-                <coral-card-context class="coral-Card-context">${entity.title}</coral-card-context>
-                <coral-card-title class="foundation-collection-item-title coral-Card-title">${entity.name}</coral-card-title>
+
+    <sly data-sly-test="${entity.isFolder}">
+        <coral-card class="foundation-collection-navigator coral-Card"
+                    data-foundation-collection-navigator-href="/aem/scriptoverview.html${entity.path}">
+            <coral-card-content>
+                <coral-card-context class="coral-Card-context">${'folder' @ i18n}
+                </coral-card-context>
+                <coral-card-title class="foundation-collection-item-title">
+                    ${entity.title}
+                </coral-card-title>
             </coral-card-content>
-        </div>
-    </coral-card>
-    <coral-quickactions target="_prev" alignMy="left top" alignAt="left top">
-        <coral-quickactions-item icon="gearsEdit" class="foundation-anchor" data-foundation-anchor-href="/apps/aemscriptconsole/content/scripteditor.html${entity.path}">Script</coral-quickactions-item>
-    </coral-quickactions>
+            <meta class="foundation-collection-quickactions"
+                  data-foundation-collection-quickactions-rel="cq-siteadmin-admin-actions-folderproperties-activator">
+        </coral-card>
+    </sly>
+
+    <sly data-sly-test="${!entity.isFolder}">
+        <coral-card class="foundation-collection-navigator coral-Card"
+                    data-foundation-collection-navigator-href="/apps/aemscriptconsole/content/scriptrunner.html${entity.path}.html">
+            <coral-card-asset class="coral-Card-asset" style="">
+            </coral-card-asset>
+            <div class="coral-Card-wrapper">
+                <coral-card-content class="coral-Card-content">
+                    <coral-card-context class="coral-Card-context">${entity.title}</coral-card-context>
+                    <coral-card-title class="foundation-collection-item-title coral-Card-title">${entity.name}</coral-card-title>
+                </coral-card-content>
+            </div>
+        </coral-card>
+        <coral-quickactions target="_prev" alignMy="left top" alignAt="left top">
+            <coral-quickactions-item icon="gearsEdit" class="foundation-anchor"
+                                     data-foundation-anchor-href="/apps/aemscriptconsole/content/scripteditor.html${entity.path}">Script
+            </coral-quickactions-item>
+        </coral-quickactions>
+    </sly>
 </sly>

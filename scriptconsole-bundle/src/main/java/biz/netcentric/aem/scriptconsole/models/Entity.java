@@ -3,6 +3,7 @@ package biz.netcentric.aem.scriptconsole.models;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.day.cq.i18n.I18n;
 import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -10,7 +11,8 @@ import org.apache.sling.models.annotations.Optional;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 
 /**
- *
+ * Resource based entity inside the script persistence location.
+ * 
  * @author thomas.hartmann@netcentric.biz
  * @since 07/2016
  */
@@ -39,9 +41,13 @@ public class Entity {
     }
 
     public String getIcon() {
-        if (resource.isResourceType("sling:folder") || resource.isResourceType("nt:folder")) {
+        if (isFolder()) {
             return Icon.FOLDER.getName();
         }
         return Icon.FILE.getName();
+    }
+
+    public boolean isFolder() {
+        return resource.isResourceType("sling:folder") || resource.isResourceType("nt:folder");
     }
 }

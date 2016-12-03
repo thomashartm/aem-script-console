@@ -12,8 +12,6 @@ Therefore the console has an editor view to define the script and a script runne
 ![Editor View](https://github.com/thomashartm/aem-script-console/blob/screenshots/pictures/script-console-editor.png "AEM Script Console Editor")
 
 
-
-
 ## Supported scripting languages
 Currently the groovy scripting language is supported. The console comes a number of object bindings:
 - resolver

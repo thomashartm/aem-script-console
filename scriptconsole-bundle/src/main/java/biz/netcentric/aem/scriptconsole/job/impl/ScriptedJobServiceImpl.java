@@ -1,12 +1,11 @@
 package biz.netcentric.aem.scriptconsole.job.impl;
 
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Service;
+
 import biz.netcentric.aem.scriptconsole.PersistableScript;
 import biz.netcentric.aem.scriptconsole.ScriptContext;
 import biz.netcentric.aem.scriptconsole.job.ScriptedJobService;
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Reference;
-import org.apache.felix.scr.annotations.Service;
-import org.apache.sling.event.jobs.JobManager;
 
 /**
  * @author thomas.hartmann@netcentric.biz
@@ -15,10 +14,6 @@ import org.apache.sling.event.jobs.JobManager;
 @Service
 @Component(metatype = false)
 public class ScriptedJobServiceImpl implements ScriptedJobService{
-
-
-    @Reference
-    private JobManager jobManager;
 
     public void triggerJob(final PersistableScript persistableScript, final ScriptContext context){
 
