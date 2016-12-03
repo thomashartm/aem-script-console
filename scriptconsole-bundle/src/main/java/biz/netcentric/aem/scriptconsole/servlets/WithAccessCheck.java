@@ -6,6 +6,7 @@ import javax.jcr.RepositoryException;
 
 import org.apache.jackrabbit.api.security.user.Authorizable;
 import org.apache.jackrabbit.api.security.user.Group;
+import org.apache.jackrabbit.api.security.user.User;
 import org.apache.jackrabbit.api.security.user.UserManager;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -24,12 +25,16 @@ public interface WithAccessCheck {
         }
 
         final Authorizable currentAuthorizable = userManager.getAuthorizable(resourceResolver.getUserID());
+        final User thisUser = (User) currentAuthorizable;
+        if (!thisUser.isDisabled() && thisUser.isAdmin()) {
+            return true;
+        }
 
         for (final String groupName : getEnabledGroups()) {
             final Authorizable authorizableGroup = userManager.getAuthorizable(groupName);
-            if (authorizableGroup != null  && authorizableGroup.isGroup()) {
+            if (authorizableGroup != null && authorizableGroup.isGroup()) {
                 final Group group = (Group) authorizableGroup;
-                if (group.isMember(currentAuthorizable)) {
+                if (group.isMember(thisUser)) {
                     return true;
                 }
             }
