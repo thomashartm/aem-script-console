@@ -12,7 +12,7 @@ import org.apache.sling.api.resource.ResourceResolver;
  */
 public interface ScriptLookupService {
 
-    Optional<PersistableScript> loadScript(ResourceResolver resourceResolver, String locationPath);
+    Optional<CustomScript> loadScript(ResourceResolver resourceResolver, String locationPath);
 
     List<Resource> findScripts(ResourceResolver resourceResolver, String... terms);
 }

@@ -8,7 +8,7 @@ public interface ScriptResponse {
 
     String getResult();
 
-    PersistableScript getPersistableScript();
+    CustomScript getCustomScript();
 
     String getOutput();
 

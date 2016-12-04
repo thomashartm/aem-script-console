@@ -23,7 +23,7 @@ import biz.netcentric.aem.scriptconsole.ScriptContext;
 import biz.netcentric.aem.scriptconsole.ScriptResponse;
 import biz.netcentric.aem.scriptconsole.ScriptService;
 import biz.netcentric.aem.scriptconsole.empty.EmptyScriptResponse;
-import biz.netcentric.aem.scriptconsole.groovy.PersistableGroovyScript;
+import biz.netcentric.aem.scriptconsole.groovy.CustomGroovyScript;
 import biz.netcentric.aem.scriptconsole.groovy.GroovyScriptContext;
 import biz.netcentric.aem.scriptconsole.groovy.impl.ScriptConsoleConfiguration;
 import biz.netcentric.aem.scriptconsole.servlets.AbstractJsonHandlerServlet;
@@ -61,7 +61,7 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
         }
 
         final ScriptResponse scriptResponse = processScript(request);
-        final ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        final ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         final String json = ow.writeValueAsString(scriptResponse);
 
         response.getWriter().append(json);
@@ -82,7 +82,7 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
         final String script = request.getParameter(RequestDefaults.PARAMETER_SCRIPT);
         final ScriptContext context = new GroovyScriptContext(request);
 
-        final PersistableGroovyScript groovyScript = new PersistableGroovyScript(script);
+        final CustomGroovyScript groovyScript = new CustomGroovyScript(script);
         return scriptService.runScript(groovyScript, context);
     }
 
@@ -107,7 +107,7 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
                         LOG.trace(scriptSource);
                     }
 
-                    final PersistableGroovyScript groovyScript = new PersistableGroovyScript(scriptSource);
+                    final CustomGroovyScript groovyScript = new CustomGroovyScript(scriptSource);
                     return scriptService.runScript(groovyScript, context);
                 } finally {
                     close(bin, is);

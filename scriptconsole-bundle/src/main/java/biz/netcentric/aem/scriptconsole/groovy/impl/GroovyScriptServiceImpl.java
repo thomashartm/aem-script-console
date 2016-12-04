@@ -9,7 +9,7 @@ import org.codehaus.groovy.control.CompilerConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import biz.netcentric.aem.scriptconsole.PersistableScript;
+import biz.netcentric.aem.scriptconsole.CustomScript;
 import biz.netcentric.aem.scriptconsole.SaveResponse;
 import biz.netcentric.aem.scriptconsole.ScriptContext;
 import biz.netcentric.aem.scriptconsole.ScriptResponse;
@@ -39,9 +39,9 @@ public class GroovyScriptServiceImpl implements ScriptService {
     private ImportCustomizationProvider importCustomizationProvider;
 
     @Override
-    public ScriptResponse runScript(final PersistableScript persistableScript, final ScriptContext context) {
+    public ScriptResponse runScript(final CustomScript customScript, final ScriptContext context) {
 
-        final GroovyScriptResponse scriptResponse = new GroovyScriptResponse(persistableScript);
+        final GroovyScriptResponse scriptResponse = new GroovyScriptResponse(customScript);
         scriptResponse.setStartTime(Calendar.getInstance().getTime());
 
         final OutputCollector outputCollector = new OutputCollector();
@@ -49,7 +49,7 @@ public class GroovyScriptServiceImpl implements ScriptService {
 
         outputInterceptor.start();
         try {
-            final String result = evaluateScript(persistableScript, context);
+            final String result = evaluateScript(customScript, context);
             scriptResponse.setResult(result);
             LOG.trace("eval() script result: " + result);
         } catch (final Throwable t) {
@@ -65,14 +65,14 @@ public class GroovyScriptServiceImpl implements ScriptService {
     }
 
     @Override
-    public SaveResponse saveScript(final PersistableScript persistableScript, final ScriptContext context) {
+    public SaveResponse saveScript(final CustomScript customScript, final ScriptContext context) {
         // TODO implement save operation
         return null;
     }
 
-    private String evaluateScript(final PersistableScript persistableScript, final ScriptContext context) {
+    private String evaluateScript(final CustomScript customScript, final ScriptContext context) {
         final GroovyShell shell = createConfiguredShell(context);
-        final Object result = shell.evaluate(persistableScript.getSourceCode());
+        final Object result = shell.evaluate(customScript.getSourceCode());
 
         return result != null ? result.toString() : "null";
     }

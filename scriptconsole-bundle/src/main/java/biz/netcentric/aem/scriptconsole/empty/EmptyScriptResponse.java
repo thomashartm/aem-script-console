@@ -2,7 +2,7 @@ package biz.netcentric.aem.scriptconsole.empty;
 
 import org.apache.commons.lang.StringUtils;
 
-import biz.netcentric.aem.scriptconsole.PersistableScript;
+import biz.netcentric.aem.scriptconsole.CustomScript;
 import biz.netcentric.aem.scriptconsole.ScriptResponse;
 
 /**
@@ -15,8 +15,8 @@ public class EmptyScriptResponse implements ScriptResponse {
         return StringUtils.EMPTY;
     }
 
-    public PersistableScript getPersistableScript() {
-        return new NonExistingPersistableScript();
+    public CustomScript getCustomScript() {
+        return new NonExistingCustomScript();
     }
 
     @Override

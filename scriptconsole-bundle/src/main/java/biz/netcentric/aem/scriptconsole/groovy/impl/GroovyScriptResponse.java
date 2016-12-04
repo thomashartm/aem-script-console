@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 
-import biz.netcentric.aem.scriptconsole.PersistableScript;
+import biz.netcentric.aem.scriptconsole.CustomScript;
 import biz.netcentric.aem.scriptconsole.ScriptResponse;
 
 /**
@@ -13,7 +13,7 @@ import biz.netcentric.aem.scriptconsole.ScriptResponse;
  */
 public class GroovyScriptResponse implements ScriptResponse {
 
-    private PersistableScript persistableScript;
+    private CustomScript customScript;
 
     private String result;
 
@@ -29,16 +29,16 @@ public class GroovyScriptResponse implements ScriptResponse {
 
     private long executionTime = 0;
 
-    GroovyScriptResponse(final PersistableScript persistableScript) {
-        this.persistableScript = persistableScript;
+    GroovyScriptResponse(final CustomScript customScript) {
+        this.customScript = customScript;
     }
 
     public String getResult() {
         return result;
     }
 
-    public PersistableScript getPersistableScript() {
-        return persistableScript;
+    public CustomScript getCustomScript() {
+        return customScript;
     }
 
     public String getOutput() {
@@ -58,8 +58,8 @@ public class GroovyScriptResponse implements ScriptResponse {
         return endTime;
     }
 
-    public void setPersistableScript(final PersistableScript persistableScript) {
-        this.persistableScript = persistableScript;
+    public void setCustomScript(final CustomScript customScript) {
+        this.customScript = customScript;
     }
 
     public void setResult(final String result) {

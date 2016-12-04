@@ -8,18 +8,18 @@ public interface ScriptService {
 
     /**
      *
-     * @param persistableScript
+     * @param customScript
      * @param context
      * @return
      */
-    ScriptResponse runScript(final PersistableScript persistableScript, final ScriptContext context);
+    ScriptResponse runScript(final CustomScript customScript, final ScriptContext context);
 
     /**
      * Saves a script to the jcr repository.
      *
-     * @param persistableScript
+     * @param customScript
      * @param context
      * @return
      */
-    SaveResponse saveScript(final PersistableScript persistableScript, final ScriptContext context);
+    SaveResponse saveScript(final CustomScript customScript, final ScriptContext context);
 }
