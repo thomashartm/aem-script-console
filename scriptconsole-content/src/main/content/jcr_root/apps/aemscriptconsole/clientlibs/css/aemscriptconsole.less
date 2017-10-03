@@ -9,64 +9,22 @@ html {
   box-sizing: inherit;
 }
 
-#consolearea {
-  .panel {
-    /*font-size: 14px;*/
-    width: 100%;
-  }
-
-  .panel .input-group {
-    /*font-size: 14px;*/
-    border: 1px solid darkgrey;
-  }
-
-  .editorarea {
-    padding: 0px;
-    border: 1px solid darkgrey;
-  }
+.aemscriptconsole-header{
+  position: relative;
 }
-
-#editormessage {
-  .info-item {
-    margin-left: 0.2rem;
-    margin-right: 0.2rem;
-
-    .info-message{
-      color: #666 !important;
-      font-weight:lighter !important;
-      margin-left: 0.2rem;
-    }
-
-    .coral-Alert-message-white {
-      background-color: #FFFFFF !important;
-    }
-  }
-}
-
-#resizable {
-  width: 100%;
-  height: 50%;
-  padding: 5px;
-  border: 2px solid grey;
-}
-
-#resizable h3 {
-  text-align: center;
-  margin: 0;
-}
-
-#resizable {
-  position: relative
-}
-
-/*#editor{position: absolute; top:0;left:0;right:0;bottom:0;}*/
 
 #editor {
-  /** Setting height is also important, otherwise editor wont showup**/
-  /**height: 300px;*/
   position: absolute;
-  top: 0;
+  top: 3rem;
+  right: 0;
+  bottom: 70%;
   left: 0;
+}
+#infoarea {
+  position: absolute;
+  top: 30%;
   right: 0;
   bottom: 0;
+  left: 0;
+  margin:0
 }

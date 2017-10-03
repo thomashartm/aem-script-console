@@ -1,5 +1,10 @@
-<%@include file="/libs/granite/ui/global.jsp" %>
-<div class="panel panel-default" id="editormessage">
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories=['aemscriptconsole']}"/>
+
+<div id="editor">
+
+</div>
+<div id="infoarea">
     <div class="info-item info-error">
 
         <div class="coral-Alert coral-Alert--error coral-Alert--large">

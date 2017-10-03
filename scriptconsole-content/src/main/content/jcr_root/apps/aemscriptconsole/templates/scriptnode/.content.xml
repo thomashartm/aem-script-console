@@ -7,7 +7,6 @@
     <jcr:content
             cq:designPath="/etc/designs/aemscriptconsole"
             jcr:primaryType="cq:PageContent"
-            sling:resourceType="aemscriptconsole/components/scriptrunner">
-
+            sling:resourceType="aemscriptconsole/components/script">
     </jcr:content>
 </jcr:root>
