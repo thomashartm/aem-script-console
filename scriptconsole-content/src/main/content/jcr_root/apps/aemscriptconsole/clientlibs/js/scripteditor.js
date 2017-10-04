@@ -1,5 +1,6 @@
 (function ($, $document, gAuthor) {
 
+    var EDITOR_ID = "#editor";
     var consoleToAreaWidthRatio = 0.9,
         consoleToAreaHeightRatio = 0.5;
 
@@ -7,7 +8,7 @@
 
     var sizeEditor = function () {
 
-        var defaultHeight = $('#consolearea').height() * consoleToAreaHeightRatio;
+        var defaultHeight = $(EDITOR_ID).height() * consoleToAreaHeightRatio;
         $('#resizable').height(Lockr.get('editorHeight', defaultHeight))
 
         editor.resize();
@@ -27,8 +28,7 @@
             editor.setValue(lastScript, -1);
         }
 
-        $('#consolearea').show();
-        $('#formarea').hide();
+        $('#infoarea').show();
     };
 
     var hideAllPanels = function () {
@@ -76,7 +76,7 @@
             if (script.length) {
 
                 editor.setReadOnly(true);
-                var posting = $.post(CQ.shared.HTTP.getContextPath() + '/bin/asconsole/groovy/post.json', {
+                var posting = $.post('/bin/netcentric/scriptconsole/run/groovy.json', {
                     script: script
                 });
 
@@ -135,66 +135,6 @@
             printToMeta("Editor and localStorage [lastScript] cleared");
 
             focusEndOfEditorDocument();
-        });
-
-        /*$('.save-script').click(function () {
-            clearInfoPanel();
-            var script = editor.getSession().getValue()
-            saveScriptToLocalStore(script);
-
-            if (!saveModal) {
-                saveModal = new CUI.Modal({
-                    element: $("#saveScriptModal")
-                });
-            } else {
-                saveModal.set({visible: true})
-            }
-        });*/
-
-        $('#saveScriptModal').submit(function (event) {
-            var scriptType = "groovy";
-
-            var savePath = $.trim($("input[name=savePath]").val());
-            if ((!savePath) || (savePath.length == 0)) {
-                $(".info-message-error").append("Unable to save script. Save path argument is empty.");
-                return;
-            }
-
-            var scriptName = $.trim($("input[name=scriptName]").val());
-            if ((!scriptName) || (scriptName.length == 0)) {
-                $(".info-message-error").append("Unable to save script. Name argument is empty.");
-                return;
-            }
-
-            var script = editor.getSession().getValue();
-            if ((!script) || (script.length == 0)) {
-                setPanelVisibility(true, true, true);
-                $(".info-message-error").append("Unable to save script. Script argument is empty.");
-                return;
-            }
-
-
-            editor.setReadOnly(true);
-            var scriptLocation = savePath + "/" + scriptName + "." + scriptType;
-            var posting = $.post(CQ.shared.HTTP.getContextPath() + scriptLocation, {
-                "jcr:primaryType": "asfc:script",
-                "name": scriptName,
-                "scriptType": scriptType,
-                "script": script,
-                "script@IgnoreBlanks": true
-            }).done(function( data ) {
-                printToMeta("Successfully saved script " + scriptLocation);
-            }).fail(function( data ) {
-                setPanelVisibility(true, true, true);
-                $(".info-message-error").append("Failed to save script " + scriptLocation);
-            }).always(function( data ) {
-                editor.setReadOnly(false);
-            });
-
-            event.preventDefault();
-            $('#saveScriptModal').hide();
-            $('#saveScriptModal').empty();
-            $('#saveScriptModal').remove();
         });
     };
 
