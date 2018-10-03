@@ -1,7 +1,0 @@
-#base=js
-ace.js
-ext-modelist.js
-mode-groovy.js
-theme-twilight.js
-lockr.min.js
-scripteditor.js
