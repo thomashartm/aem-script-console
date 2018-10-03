@@ -68,7 +68,7 @@
                                     granite:class="groovyconsole-scriptdetails"
                                     granite:id="groovyconsole-scriptdetails"
                                     jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="nclabs/groovyconsole/components/scriptview"/>
+                                    sling:resourceType="nclabs/groovyconsole/components/overview"/>
                             </items>
                         </details>
                     </items>

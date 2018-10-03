@@ -5,7 +5,7 @@
         cq:defaultView="html"
         jcr:mixinTypes="[sling:VanityPath]"
         jcr:primaryType="nt:unstructured"
-        jcr:title="NCLabs - Groovy Script Console"
+        jcr:title="NCLabs - Groovyconsole for AEM"
         sling:resourceType="granite/ui/components/shell/collectionpage"
         consoleId="nclabs-groovyconsole-overview"
         currentView="${state[&quot;shell.collectionpage.layoutId&quot;].string}"
@@ -38,7 +38,7 @@
                         <datasource
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="cq/gui/components/common/wcm/datasources/childresources"
-                            itemResourceType="/apps/nclabs/groovyconsole/components/scriptcard"
+                            itemResourceType="nclabs/groovyconsole/components/card"
                             path="/etc/nclabs/groovyconsole/scripts"/>
                         <granite:data
                             jcr:primaryType="nt:unstructured"

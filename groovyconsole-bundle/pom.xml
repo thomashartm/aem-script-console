@@ -46,6 +46,7 @@
                         <Bundle-SymbolicName>biz.netcentric.nclabs.groovyconsole</Bundle-SymbolicName>
                         <Sling-Model-Packages>biz.netcentric.nclabs.groovyconsole.model</Sling-Model-Packages>
                         <!--<Export-Package>biz.netcentric.nclabs.groovyconsole.*</Export-Package>-->
+                        <Export-Package>biz.netcentric.nclabs.groovyconsole.*</Export-Package>
                         <Import-Package>*</Import-Package>
                         <Embed-Dependency>
                             jackson-core,jackson-databind,jackson-annotations
@@ -58,7 +59,7 @@
                 <groupId>org.apache.sling</groupId>
                 <artifactId>maven-sling-plugin</artifactId>
                 <configuration>
-                    <slingUrl>http://${crx.host}:${crx.port}/apps/aemscriptconsole/install</slingUrl>
+                    <slingUrl>http://${crx.host}:${crx.port}/apps/nclabs/groovyconsole/install</slingUrl>
                     <usePut>true</usePut>
                 </configuration>
             </plugin>
