@@ -1,0 +1,38 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories=['nclabs.groovyconsole']}"/>
+<sly data-sly-use.model="biz.netcentric.nclabs.groovyconsole.model.ScriptItem">
+
+    <coral-tabview>
+        <coral-tablist target="groovy-script-panel">
+            <coral-tab>Metadata</coral-tab>
+            <coral-tab>Source</coral-tab>
+        </coral-tablist>
+        <coral-panelstack id="groovy-script-panel">
+            <coral-panel class="coral-Well">
+                <coral-list>
+                    <coral-list-item icon="fileCode" href="#fileCode">${model.scriptLocation}</coral-list-item>
+                    <coral-list-item icon="user" href="#user">${model.runningAs}</coral-list-item>
+                </coral-list>
+            </coral-panel>
+            <coral-panel class="coral-Well">
+                Panel 2
+                <div id="groovy-script-source" data-script-location="${model.scriptLocation}">
+                    ${model.scriptSource}
+                </div>
+            </coral-panel>
+        </coral-panelstack>
+    </coral-tabview>
+
+    <coral-tabview>
+        <coral-tablist target="groovy-results-panel">
+            <coral-tab>Output and Results</coral-tab>
+        </coral-tablist>
+        <coral-panelstack id="groovy-results-timing">
+            <coral-panel class="coral-Well" id="groovy-results-panel-el">
+            </coral-panel>
+        </coral-panelstack>
+    </coral-tabview>
+
+</sly>
+
+

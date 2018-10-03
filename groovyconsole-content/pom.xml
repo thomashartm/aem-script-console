@@ -54,7 +54,7 @@
                     <embeddeds>
                         <embedded>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>scriptconsole-bundle</artifactId>
+                            <artifactId>groovyconsole-bundle</artifactId>
                             <target>/apps/nclabs/groovyconsole/install</target>
                         </embedded>
                         <embedded>
