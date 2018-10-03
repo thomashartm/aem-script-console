@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/apps/nclabs/groovyconsole" mode="replace"/>
-    <filter root="/etc/nclabs/groovyconsole" mode="replace"/>
+    <filter root="/apps/nclabs/groovyconsole"/>
+    <filter root="/etc/nclabs/groovyconsole"/>
     <!--<filter root="/apps/cq/core/content/nav/tools/general"/>
     <filter root="/etc/nclabs/groovyconsole" mode="update"/>-->
 </workspaceFilter>
