@@ -1,8 +1,8 @@
-# AEM Script Console 
+# AEM  Groovy Script Console
 
 ![Editor View](https://travis-ci.org/thomashartm/aem-script-console.svg?branch=master "Travis CI")
 
-With the AEM script console technical and non technical users can easily execute custom scripts in the context of AEM e.g. to fix or migrate content. 
+With the AEM script console technical and non technical users can easily execute custom groovy scripts in the context of AEM e.g. to fix or migrate content. 
 
 ![Editor View](https://github.com/thomashartm/aem-script-console/blob/screenshots/pictures/script-console-overview.png "AEM Script Console Overview")
 
