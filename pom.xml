@@ -6,20 +6,20 @@
     <!-- P A R E N T P R O J E C T D E S C R I P T I O N -->
     <!-- ====================================================================== -->
 
-    <groupId>biz.netcentric.aem</groupId>
-    <artifactId>scriptconsole</artifactId>
+    <groupId>biz.netcentric.nclabs</groupId>
+    <artifactId>groovyconsole</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Netcentric - AEM Script Console - Reactor Project</name>
-    <description>Scripting console project for administrative purposes using the AEM 6 touch UI.</description>
+    <name>Netcentric - Groovyconsole for AEM - Reactor Project</name>
+    <description>Groovyconsole project for administrative purposes in AEM 6</description>
 
     <!-- ====================================================================== -->
     <!-- P R O P E R T I E S -->
     <!-- ====================================================================== -->
     <properties>
         <crx.host>localhost</crx.host>
-        <crx.port>2000</crx.port>
+        <crx.port>6200</crx.port>
         <jdk.version>1.8</jdk.version>
         <jackson.version>2.0.2</jackson.version>
     </properties>
@@ -118,7 +118,7 @@
             <dependency>
                 <groupId>com.adobe.aem</groupId>
                 <artifactId>uber-jar</artifactId>
-                <version>6.2.0</version>
+                <version>6.4.1</version>
                 <classifier>apis</classifier>
                 <scope>provided</scope>
             </dependency>
@@ -270,12 +270,7 @@
                 <version>1.3</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <groupId>org.apache.sling</groupId>
-                <artifactId>org.apache.sling.testing.sling-mock</artifactId>
-                <version>1.4.1.R1695088</version>
-                <scope>test</scope>
-            </dependency>
+
             <dependency>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>org.apache.sling.testing.sling-mock</artifactId>
@@ -336,8 +331,8 @@
     </profiles>
 
     <modules>
-        <module>scriptconsole-bundle</module>
-        <module>scriptconsole-content</module>
+        <module>groovyconsole-bundle</module>
+        <module>groovyconsole-content</module>
     </modules>
 
 </project>
