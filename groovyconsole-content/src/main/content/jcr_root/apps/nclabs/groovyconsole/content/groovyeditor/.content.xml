@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+          xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="cq:Page">
+    <jcr:content
+            jcr:mixinTypes="[sling:VanityPath]"
+            jcr:primaryType="nt:unstructured"
+            jcr:title="Groovyconsole Editor"
+            sling:resourceType="granite/ui/components/shell/page">
+        <head jcr:primaryType="nt:unstructured">
+            <clientlibs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
+                    categories="[coralui3,granite.ui.coral.foundation,nclabs.groovyconsole]"/>
+            <viewport
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/admin/page/viewport"/>
+            <meta
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/meta"
+                    content="chrome=1"
+                    name="X-UA-Compatible"/>
+            <favicon
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/page/favicon"/>
+        </head>
+        <title
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/text"
+                text="Groovy Editor"/>
+        <actions jcr:primaryType="nt:unstructured">
+            <primary jcr:primaryType="nt:unstructured">
+                <run
+                        granite:class="execute-script"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                        action="execute.group.action"
+                        icon="fast"
+                        target=".foundation-collection"
+                        text="Run"
+                        variant="primary">
+                    <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/renderconditions/simple"
+                            expression="${requestPathInfo.suffix != null &amp;&amp; requestPathInfo.selectorString != &quot;copy&quot;}"/>
+                </run>
+                <clear
+                        granite:class="clear-script"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                        action="dataRemove.group.action"
+                        icon="fast"
+                        target=".foundation-collection"
+                        text="Clear"
+                        variant="primary">
+                    <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/renderconditions/simple"
+                            expression="${requestPathInfo.suffix != null &amp;&amp; requestPathInfo.selectorString != &quot;copy&quot;}"/>
+                </clear>
+            </primary>
+        </actions>
+        <content
+                granite:class="paddedContainer"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+            <items jcr:primaryType="nt:unstructured">
+                <details
+                        granite:class="paddedContainer"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form">
+                    <items jcr:primaryType="nt:unstructured">
+                        <details
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/well">
+                            <items jcr:primaryType="nt:unstructured">
+                                <scriptdetails
+                                        granite:class="groovyconsole-editor"
+                                        granite:id="groovyconsole-editor"
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="nclabs/groovyconsole/components/editor"/>
+                            </items>
+                        </details>
+                    </items>
+                </details>
+            </items>
+        </content>
+    </jcr:content>
+</jcr:root>
