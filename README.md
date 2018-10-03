@@ -13,7 +13,8 @@ Therefore the console has an editor view to define the script and a script runne
 
 
 ## Supported scripting languages
-Currently the groovy scripting language is supported. The console comes a number of object bindings:
+Currently the groovy scripting language is supported. 
+The console comes a number of object bindings:
 - resolver
 - session
 - jackrabbitSession
@@ -21,8 +22,7 @@ Currently the groovy scripting language is supported. The console comes a number
 - bundleContext
 - queryBuilder
 
-All bindings use the current user's session
-
+All bindings use the current user's session or a service user if configured for a script.
 The following closure bindings are supported:
 
 - getNode
@@ -44,7 +44,8 @@ mvn clean install -PautoInstallPackage
 ```
 
 ## Requirements
-AEM 6.2 is required.
+AEM 6.3 is required and 6.4 recommended.
 
-##License
-The software is licensed under the Apache 2.0 License see the attached LICENSE file orhttp://www.apache.org/licenses/LICENSE-2.0.html for details.
+## License
+The software is licensed under the Apache 2.0 License see the attached LICENSE file or 
+http://www.apache.org/licenses/LICENSE-2.0.html for details.
