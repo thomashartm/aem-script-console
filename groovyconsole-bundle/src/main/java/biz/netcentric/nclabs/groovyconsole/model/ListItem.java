@@ -20,7 +20,7 @@ import javax.inject.Named;
  * @since 0/2018
  */
 @Model(adaptables = SlingHttpServletRequest.class)
-public class ScriptListItemModel {
+public class ListItem {
 
     @Inject
     @Named("jcr:title")
