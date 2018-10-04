@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
-          xmlns:jcr="http://www.jcp.org/jcr/1.0"
-          jcr:description="Template for groovy scripts whioch are supposed to be executed via the NCLabs groovyconsole."
-          jcr:primaryType="cq:Template"
-          jcr:title="Groovy Script"
-          allowedPaths="[/etc/nclabs/groovyconsole/scripts(/.*)?]">
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:description="Template for groovy scripts whioch are supposed to be executed via the NCLabs groovyconsole."
+    jcr:primaryType="cq:Template"
+    jcr:title="Groovy Script"
+    allowedPaths="[/etc/nclabs/groovyconsole/scripts(/.*)?]">
     <jcr:content
-            cq:designPath="/etc/nclabs/groovyconsole"
-            jcr:primaryType="cq:PageContent"
-            sling:resourceType="nclabs/groovyconsole/components/script">
-    </jcr:content>
+        cq:designPath="/etc/nclabs/groovyconsole"
+        jcr:primaryType="cq:PageContent"
+        sling:resourceType="nclabs/groovyconsole/components/script"/>
 </jcr:root>
