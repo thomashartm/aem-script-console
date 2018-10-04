@@ -1,0 +1,24 @@
+<div class="editor-right">
+    <coral-tabview>
+  		<coral-tablist target="coral-demo-panel-1">
+            <coral-tab id="tab-add" href="#" data-target="#field-add">${'Builder Form' @ i18n}</coral-tab>
+            <coral-tab id="tab-edit" href="#" data-target="#field-edit">${'Settings' @ i18n}</coral-tab>
+        </coral-tablist>
+		<coral-panelstack>
+	        <coral-panel id="field-add">
+				<ul id="formbuilder-field-templates">
+                </ul>
+	        </coral-panel>
+            <coral-panel id="formbuilder-tab-name" class="tab-form-settings">
+	            <div id="tab-name">
+					<!--/*TODO Template Resource*/-->
+	            </div>
+	            <div class="placeholder">
+                    <i>
+						${'Select a metadata schema editor field to edit settings' @ i18n}
+                    </i>
+                </div>
+	        </coral-panel>
+	    </coral-panelstack>
+	</coral-tabview>
+</div>
