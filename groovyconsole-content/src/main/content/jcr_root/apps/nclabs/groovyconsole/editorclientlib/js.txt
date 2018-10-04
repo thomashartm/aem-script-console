@@ -1,9 +1,0 @@
-#base=js
-
-execute-groovy.js
-editor.js
-ace/ace.js
-ace/theme-dracula.js
-ace/mode-groovy.js
-deps/lockr.js
-

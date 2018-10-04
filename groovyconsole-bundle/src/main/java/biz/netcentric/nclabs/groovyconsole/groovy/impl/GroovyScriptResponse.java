@@ -1,7 +1,7 @@
 package biz.netcentric.nclabs.groovyconsole.groovy.impl;
 
 import biz.netcentric.nclabs.groovyconsole.ScriptResponse;
-import biz.netcentric.nclabs.groovyconsole.model.PersistableScript;
+import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScript;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Date;
@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class GroovyScriptResponse implements ScriptResponse {
 
-    private PersistableScript persistableScript;
+    private GroovyScript groovyScript;
 
     private String result;
 
@@ -30,16 +30,16 @@ public class GroovyScriptResponse implements ScriptResponse {
 
     private long executionTime = 0;
 
-    GroovyScriptResponse(final PersistableScript persistableScript) {
-        this.persistableScript = persistableScript;
+    GroovyScriptResponse(final GroovyScript groovyScript) {
+        this.groovyScript = groovyScript;
     }
 
     public String getResult() {
         return result;
     }
 
-    public PersistableScript getPersistableScript() {
-        return persistableScript;
+    public GroovyScript getGroovyScript() {
+        return groovyScript;
     }
 
     public String getOutput() {
@@ -59,8 +59,8 @@ public class GroovyScriptResponse implements ScriptResponse {
         return endTime;
     }
 
-    public void setPersistableScript(final PersistableScript persistableScript) {
-        this.persistableScript = persistableScript;
+    public void setGroovyScript(final GroovyScript groovyScript) {
+        this.groovyScript = groovyScript;
     }
 
     public void setResult(final String result) {

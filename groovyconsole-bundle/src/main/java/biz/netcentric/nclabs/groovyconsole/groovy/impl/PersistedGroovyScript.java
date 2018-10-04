@@ -1,6 +1,6 @@
-package biz.netcentric.nclabs.groovyconsole.groovy;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl;
 
-import biz.netcentric.nclabs.groovyconsole.model.PersistableScript;
+import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScript;
 import biz.netcentric.nclabs.groovyconsole.util.Assert;
 import com.day.cq.commons.jcr.JcrConstants;
 import org.apache.commons.io.IOUtils;
@@ -17,12 +17,15 @@ import java.util.*;
 import java.util.stream.StreamSupport;
 
 /**
+ * Groovy script which is persisted and retrieved inside of a repository location.
+ * Any script which is supposed to be executed by the script shell and a eventually a non technical user must be a persisted PersistedGroovyScript.
+ *
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-public class PersistableGroovyScript implements PersistableScript {
+public class PersistedGroovyScript implements GroovyScript {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PersistableGroovyScript.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PersistedGroovyScript.class);
 
     private static final String NAME_PATTERN = "%s.%s";
 
@@ -48,7 +51,7 @@ public class PersistableGroovyScript implements PersistableScript {
      * @param resource
      * @throws IOException
      */
-    public PersistableGroovyScript(final Resource resource) throws IOException {
+    public PersistedGroovyScript(final Resource resource) throws IOException {
         final boolean isScriptResource = StringUtils.endsWith(resource.getName(), FILE_EXT);
 
         this.scriptResource = isScriptResource ? resource : retrieveFileResourceChild(resource);

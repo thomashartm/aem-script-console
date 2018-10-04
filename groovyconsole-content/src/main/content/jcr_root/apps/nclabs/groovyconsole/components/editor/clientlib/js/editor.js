@@ -2,16 +2,20 @@
 
     var EDITOR_ID = "#editor";
     var consoleToAreaWidthRatio = 0.9,
-        consoleToAreaHeightRatio = 0.5;
+        consoleToAreaHeightRatio = 0.9;
 
     var saveModal;
 
     var sizeEditor = function () {
+        let windowHeight = $(window).innerHeight();
+        var defaultHeight = windowHeight * consoleToAreaHeightRatio;
+        $('#resizable').css('height', Lockr.get('editorHeight', defaultHeight));
 
-        var defaultHeight = $(EDITOR_ID).height() * consoleToAreaHeightRatio;
-        $('#resizable').height(Lockr.get('editorHeight', defaultHeight))
+        let windowWidth = $(window).innerWidth();
+        $('#resizable').css('width', Lockr.get('editorWidth', windowWidth * consoleToAreaWidthRatio));
 
-        editor.resize();
+        editor.setAutoScrollEditorIntoView(true);
+		editor.resize();
     };
 
     var styleEditor = function () {
@@ -103,6 +107,7 @@
                     } else {
                         $(".info-message-output").append("No output");
                     }
+
                     printToMeta(xhrMessage.executionTime + " ms");
                 });
 
@@ -144,12 +149,11 @@
     };
 
     var focusEndOfEditorDocument = function () {
-
         editor.focus();
         var session = editor.getSession();
         var count = session.getLength();
-
-        editor.gotoLine(count, session.getLine(count - 1).length);
+        console.log(count);
+        editor.gotoLine(0, session.getLine(count - 1).length);
     };
 
     setPanelVisibility = function (result, output, error) {

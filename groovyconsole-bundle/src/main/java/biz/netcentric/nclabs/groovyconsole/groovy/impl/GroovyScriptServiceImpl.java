@@ -5,7 +5,7 @@ import biz.netcentric.nclabs.groovyconsole.ScriptResponse;
 import biz.netcentric.nclabs.groovyconsole.ScriptService;
 import biz.netcentric.nclabs.groovyconsole.groovy.extension.BindingExtensionsProviderService;
 import biz.netcentric.nclabs.groovyconsole.groovy.extension.customizer.ImportCustomizationProvider;
-import biz.netcentric.nclabs.groovyconsole.model.PersistableScript;
+import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScript;
 import biz.netcentric.nclabs.groovyconsole.model.SaveResponse;
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
@@ -30,6 +30,8 @@ public class GroovyScriptServiceImpl implements ScriptService {
 
     private final Logger LOG = LoggerFactory.getLogger(GroovyScriptServiceImpl.class);
 
+    private static final String NO_RETURN_VALUE_PROVIDED = "No return value provided by script.";
+
     @Reference
     private BindingExtensionsProviderService bindingProviderService;
 
@@ -37,9 +39,9 @@ public class GroovyScriptServiceImpl implements ScriptService {
     private ImportCustomizationProvider importCustomizationProvider;
 
     @Override
-    public ScriptResponse runScript(final PersistableScript persistableScript, final ScriptExecutionContext context) {
+    public ScriptResponse runScript(final GroovyScript groovyScript, final ScriptExecutionContext context) {
 
-        final GroovyScriptResponse scriptResponse = new GroovyScriptResponse(persistableScript);
+        final GroovyScriptResponse scriptResponse = new GroovyScriptResponse(groovyScript);
         scriptResponse.setStartTime(Calendar.getInstance().getTime());
 
         final OutputCollector outputCollector = new OutputCollector();
@@ -47,9 +49,12 @@ public class GroovyScriptServiceImpl implements ScriptService {
 
         outputInterceptor.start();
         try {
-            final String result = evaluateScript(persistableScript, context);
+            final String result = evaluateScript(groovyScript, context);
             scriptResponse.setResult(result);
-            LOG.trace("eval() script result: " + result);
+
+            if(LOG.isTraceEnabled()) {
+                LOG.trace("eval() script result: " + result);
+            }
         } catch (final Exception e) {
             LOG.error(e.getMessage() + e, e);
             scriptResponse.setError(e.getMessage());
@@ -68,15 +73,15 @@ public class GroovyScriptServiceImpl implements ScriptService {
     }
 
     @Override
-    public SaveResponse saveScript(final PersistableScript persistableScript, final ScriptExecutionContext context) {
+    public SaveResponse saveScript(final GroovyScript groovyScript, final ScriptExecutionContext context) {
         throw new NoSuchMethodError("Not implemented yet");
     }
 
-    private String evaluateScript(final PersistableScript persistableScript, final ScriptExecutionContext context) {
+    private String evaluateScript(final GroovyScript groovyScript, final ScriptExecutionContext context) {
         final GroovyShell shell = createConfiguredShell(context);
-        final Object result = shell.evaluate(persistableScript.getSourceCode());
+        final Object result = shell.evaluate(groovyScript.getSourceCode());
 
-        return result != null ? result.toString() : "null";
+        return result != null ? result.toString() : NO_RETURN_VALUE_PROVIDED;
     }
 
     private GroovyShell createConfiguredShell(final ScriptExecutionContext context) {

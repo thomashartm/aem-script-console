@@ -1,6 +1,6 @@
 package biz.netcentric.nclabs.groovyconsole;
 
-import biz.netcentric.nclabs.groovyconsole.model.PersistableScript;
+import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScript;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 
@@ -22,7 +22,7 @@ public interface ScriptLookupService {
      * @param locationPath     Path of the script
      * @return Script entity
      */
-    Optional<PersistableScript> loadScript(ResourceResolver resourceResolver, String locationPath);
+    Optional<GroovyScript> loadScript(ResourceResolver resourceResolver, String locationPath);
 
     /**
      * Finds scripts by a search term.

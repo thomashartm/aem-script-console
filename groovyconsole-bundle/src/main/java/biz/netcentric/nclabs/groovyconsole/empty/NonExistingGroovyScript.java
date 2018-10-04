@@ -1,6 +1,6 @@
 package biz.netcentric.nclabs.groovyconsole.empty;
 
-import biz.netcentric.nclabs.groovyconsole.model.PersistableScript;
+import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScript;
 import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -9,7 +9,7 @@ import org.apache.sling.api.resource.ResourceResolver;
  * @author thomas.hartmann@netcentric.biz
  * @since 11/2016
  */
-public class NonExistingPersistableScript implements PersistableScript {
+public class NonExistingGroovyScript implements GroovyScript {
 
     @Override
     public String getSourceCode() {

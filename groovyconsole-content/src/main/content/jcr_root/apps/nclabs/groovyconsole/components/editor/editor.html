@@ -2,9 +2,9 @@
      data-sly-call="${clientlib.all @ categories=['nclabs.groovyconsole.editor']}"/>
 <div id="resizable">
     <!--/* ACE based editor panel */-->
-    <pre id="editor">
+    <div id="editor">
 
-    </pre>
+    </div>
     <script>
         var editor = ace.edit("editor");
         editor.session.setMode("ace/mode/groovy");

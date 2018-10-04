@@ -1,7 +1,7 @@
 package biz.netcentric.nclabs.groovyconsole.empty;
 
 import biz.netcentric.nclabs.groovyconsole.ScriptResponse;
-import biz.netcentric.nclabs.groovyconsole.model.PersistableScript;
+import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScript;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -14,8 +14,8 @@ public class EmptyScriptResponse implements ScriptResponse {
         return StringUtils.EMPTY;
     }
 
-    public PersistableScript getPersistableScript() {
-        return new NonExistingPersistableScript();
+    public GroovyScript getGroovyScript() {
+        return new NonExistingGroovyScript();
     }
 
     @Override

@@ -1,11 +1,12 @@
-package biz.netcentric.nclabs.groovyconsole.groovy.servlets;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl.servlets;
 
 import biz.netcentric.nclabs.groovyconsole.ScriptExecutionContext;
 import biz.netcentric.nclabs.groovyconsole.ScriptResponse;
 import biz.netcentric.nclabs.groovyconsole.ScriptService;
 import biz.netcentric.nclabs.groovyconsole.empty.EmptyScriptResponse;
 import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScriptExecutionContext;
-import biz.netcentric.nclabs.groovyconsole.groovy.PersistableGroovyScript;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.DynamicGroovyScript;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.PersistedGroovyScript;
 import biz.netcentric.nclabs.groovyconsole.groovy.impl.ScriptConsoleConfiguration;
 import biz.netcentric.nclabs.groovyconsole.servlets.AbstractJsonHandlerServlet;
 import biz.netcentric.nclabs.groovyconsole.servlets.DefaultParameter;
@@ -65,21 +66,13 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
     public void handleRequest(final SlingHttpServletRequest request, final SlingHttpServletResponse response,
             final ObjectMapper mapper) throws IOException, RepositoryException {
 
-        checkPermissions(request, response);
-
+        this.checkForPermissions(request, response);
         final ScriptResponse scriptResponse = this.processScript(request, response);
+
         final ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         final String json = ow.writeValueAsString(scriptResponse);
 
         response.getWriter().append(json);
-    }
-
-    private void checkPermissions(SlingHttpServletRequest request, SlingHttpServletResponse response)
-            throws RepositoryException, IOException {
-        // guard clause that checks wether the user has all required priviledges to access the service
-        if (!this.isPriviledgedUser(request)) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, UNAUTHORIZED_ERROR_MESSAGE);
-        }
     }
 
     private ScriptResponse processScript(final SlingHttpServletRequest request, final SlingHttpServletResponse response)
@@ -87,8 +80,31 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
         final Map<String, String[]> map = request.getParameterMap();
         if (map.containsKey(DefaultParameter.SCRIPT_LOCATION.get())) {
             return this.processStoredScript(request, response);
+        } else if(map.containsKey(DefaultParameter.SCRIPT.get())){
+            return this.processScriptSubmission(request, response);
         }
 
+        return new EmptyScriptResponse();
+    }
+
+
+    private void checkForPermissions(SlingHttpServletRequest request, SlingHttpServletResponse response)
+            throws RepositoryException, IOException {
+        // guard clause that checks wether the user has all required priviledges to access the service
+        if (!this.isPriviledgedUser(request)) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, UNAUTHORIZED_ERROR_MESSAGE);
+        }
+    }
+
+    private ScriptResponse processScriptSubmission(final SlingHttpServletRequest request, final SlingHttpServletResponse response) {
+        final String source = request.getParameter(DefaultParameter.SCRIPT.get());
+
+        if(StringUtils.isNotEmpty(source)){
+            final ScriptExecutionContext context = new GroovyScriptExecutionContext(request);
+
+            final DynamicGroovyScript groovyScript = new DynamicGroovyScript(source, ".groovy");
+            return scriptService.runScript(groovyScript, context);
+        }
         return new EmptyScriptResponse();
     }
 
@@ -98,11 +114,10 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
         final Resource resource = request.getResourceResolver().getResource(path);
 
         if (resource != null) {
-
             ResourceResolver serviceResolver = null;
             try {
 
-                final PersistableGroovyScript groovyScript = new PersistableGroovyScript(resource);
+                final PersistedGroovyScript groovyScript = new PersistedGroovyScript(resource);
 
                 ScriptExecutionContext context = new GroovyScriptExecutionContext(request);
                 if (StringUtils.isNotEmpty(groovyScript.getUserName())) {
@@ -126,7 +141,7 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
         throw new RepositoryException(String.format("Jcr data element for path [%s] is empty", path));
     }
 
-    private ResourceResolver getResourceResolverForCustomUser(final String userParameter) throws LoginException, IOException {
+    private ResourceResolver getResourceResolverForCustomUser(final String userParameter) throws LoginException {
         final Map<String, Object> authenticationInfo = new HashMap<>();
         authenticationInfo.put(ResourceResolverFactory.SUBSERVICE, SUBSERVICE);
         authenticationInfo.put(ResourceResolverFactory.USER, userParameter);
@@ -134,7 +149,7 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
     }
 
     private ScriptExecutionContext getScriptContextForCustomUser(final SlingHttpServletRequest request,
-            final ResourceResolver resourceResolver) throws IOException, LoginException {
+            final ResourceResolver resourceResolver) throws LoginException {
         final Set<String> usersWhitelist = this.scriptConsoleConfiguration.getAllowedUsers();
 
         if (!usersWhitelist.contains(resourceResolver.getUserID())) {
@@ -142,14 +157,6 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
         }
 
         return new GroovyScriptExecutionContext(request, resourceResolver);
-    }
-
-    private void close(final InputStream... streams) throws IOException {
-        for (final InputStream stream : streams) {
-            if (stream != null) {
-                stream.close();
-            }
-        }
     }
 
     @Override

@@ -1,6 +1,6 @@
 package biz.netcentric.nclabs.groovyconsole;
 
-import biz.netcentric.nclabs.groovyconsole.model.PersistableScript;
+import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScript;
 
 /**
  * Execution response of a script, which is supposed to be rendered by the script backend endpoint of our user interface.
@@ -12,7 +12,7 @@ public interface ScriptResponse {
 
     String getResult();
 
-    PersistableScript getPersistableScript();
+    GroovyScript getGroovyScript();
 
     String getOutput();
 
