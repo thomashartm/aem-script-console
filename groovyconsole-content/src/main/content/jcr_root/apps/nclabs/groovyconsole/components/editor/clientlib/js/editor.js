@@ -76,6 +76,8 @@
                     script: script
                 });
 
+                saveScriptToLocalStore(script);
+
                 posting.done(function (xhrMessage) {
                     console.log(xhrMessage);
                     clearInfoPanel();
@@ -182,6 +184,16 @@
         showEditor();
         initializeEditorToolbar();
         printToMeta("Editor has been successfully loaded... ");
+    });
+
+    window.addEventListener("beforeunload", function (event) {
+        // Cancel the event as stated by the standard.
+        event.preventDefault();
+        // Chrome requires returnValue to be set.
+        event.returnValue = '';
+
+        let script = editor.getSession().getValue();
+        saveScriptToLocalStore(script);
     });
 
 })
