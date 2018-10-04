@@ -41,7 +41,7 @@
                         variant="primary">
                 </run>
                 <clear
-                        granite:class="clear-script"
+                        granite:class="clear-editor"
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/coral/foundation/collection/action"
                         action="dataRemove.group.action"
