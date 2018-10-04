@@ -41,8 +41,7 @@ import java.util.Set;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-@SlingServlet(paths = { "/bin/nclabs/groovyconsole/execute" }, methods = { "POST", "GET" }, extensions = {
-        "json" }, metatype = false)
+@SlingServlet(paths = { "/bin/nclabs/groovyconsole/execute" }, methods = { "POST", "GET" }, extensions = { "json" }, metatype = false)
 public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implements WithAccessCheck {
 
     private static final String CONTENT_TYPE_APPLICATION_JSON = "application/json";

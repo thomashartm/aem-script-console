@@ -34,7 +34,7 @@
                         path="${requestPathInfo.suffix}"
                         selectionCount="single"
                         selectionMode="{Boolean}false"
-                        src="/apps/nclabs/groovyconsole/content/scriptshell-overview.html{+id}">
+                        src="/apps/nclabs/groovyconsole/content/scriptshell.html{+id}">
                         <datasource
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="cq/gui/components/common/wcm/datasources/childresources"

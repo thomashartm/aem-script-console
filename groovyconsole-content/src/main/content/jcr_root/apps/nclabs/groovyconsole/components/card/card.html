@@ -17,15 +17,15 @@
     <sly data-sly-test="${!entity.isFolder}">
         <coral-card fixedwidth variant="inverted" assetwidth="200" assetheight="200"
         	class="foundation-collection-navigator coral-Card"
-            data-foundation-collection-navigator-href="/apps/nclabs/groovyconsole/content/scriptexecuter.html${model.path}">
+            data-foundation-collection-navigator-href="/apps/nclabs/groovyconsole/content/scriptshell.html${model.path}">
             <coral-card-info data-sly-test="${model.hasDescription}">
                 <coral-alert variant="info">
-                    <coral-alert-header>Info</coral-alert-header>
+                    <coral-alert-header>${'Info' @ i18n}</coral-alert-header>
                     <coral-alert-content>${model.description}</coral-alert-content>
                 </coral-alert>
             </coral-card-info>
             <coral-card-content>
-                <coral-card-context>Groovy Script</coral-card-context>
+                <coral-card-context>${'Groovy Script' @ i18n}</coral-card-context>
                 <coral-card-title>${model.title}</coral-card-title>
                 <coral-card-propertylist>
                 </coral-card-propertylist>

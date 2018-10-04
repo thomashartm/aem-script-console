@@ -57,13 +57,11 @@
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/container">
             <items jcr:primaryType="nt:unstructured">
-
                 <groovyeditor
                         granite:class="groovyconsole-editor"
                         granite:id="groovyconsole-editor"
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="nclabs/groovyconsole/components/editor"/>
-
             </items>
         </content>
     </jcr:content>

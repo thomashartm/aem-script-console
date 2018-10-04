@@ -1,24 +1,24 @@
 (function ($, $document, gAuthor) {
 
-    var EDITOR_ID = "#editor";
-    var consoleToAreaWidthRatio = 0.9,
+    let EDITOR_ID = "#editor";
+    let consoleToAreaWidthRatio = 0.9,
         consoleToAreaHeightRatio = 0.9;
 
-    var saveModal;
+    let saveModal;
 
-    var sizeEditor = function () {
+    let sizeEditor = function () {
         let windowHeight = $(window).innerHeight();
-        var defaultHeight = windowHeight * consoleToAreaHeightRatio;
+        let defaultHeight = windowHeight * consoleToAreaHeightRatio;
         $('#resizable').css('height', Lockr.get('editorHeight', defaultHeight));
 
         let windowWidth = $(window).innerWidth();
         $('#resizable').css('width', Lockr.get('editorWidth', windowWidth * consoleToAreaWidthRatio));
 
         editor.setAutoScrollEditorIntoView(true);
-		editor.resize();
+        editor.resize();
     };
 
-    var styleEditor = function () {
+    let styleEditor = function () {
         window.editor = ace.edit("editor");
         editor.setTheme("ace/theme/dracula");
         (function () {
@@ -26,8 +26,8 @@
         }());
     };
 
-    var showEditor = function () {
-        var lastScript = Lockr.get('lastScript');
+    let showEditor = function () {
+        let lastScript = Lockr.get('lastScript');
         if (lastScript) {
             editor.setValue(lastScript, -1);
         }
@@ -35,25 +35,17 @@
         $('#infoarea').show();
     };
 
-    var hideAllPanels = function () {
-        $(".info-error, .info-result, .info-output, .info-meta").hide();
+    let clearInfoPanel = function () {
+        let infoArea = $("#infoarea");
+        infoArea.empty();
     };
 
-    var resetAllMessages = function () {
-        clearInfoPanel();
-        hideAllPanels();
-    };
-
-    var clearInfoPanel = function () {
-        $(".info-message").empty();
-    };
-
-    var clearEditor = function () {
+    let clearEditor = function () {
         Lockr.rm('lastScript');
         editor.setValue("");
     };
 
-    var initializeEditorToolbar = function () {
+    let initializeEditorToolbar = function () {
 
         $('.create-new').click(function () {
             if ($(this).hasClass('disabled')) {
@@ -63,7 +55,7 @@
             // clear message and local storage for this editor session
             Lockr.rm('lastScript');
 
-            resetAllMessages();
+            clearInfoPanel();
             editor.getSession().setValue('def resource = resourceResolver.getResource("/content"); \nprintln resource.path');
             printToMeta("New document created.");
         });
@@ -76,51 +68,39 @@
 
             clearInfoPanel();
 
-            var script = editor.getSession().getValue();
+            let script = editor.getSession().getValue();
             if (script.length) {
 
                 editor.setReadOnly(true);
-                var posting = $.post('/bin/nclabs/groovyconsole/execute.json', {
+                let posting = $.post('/bin/nclabs/groovyconsole/execute.json', {
                     script: script
                 });
 
                 posting.done(function (xhrMessage) {
                     console.log(xhrMessage);
-
                     clearInfoPanel();
 
-                    if (xhrMessage.failed) {
-                        setPanelVisibility(true, true, true);
-                        $(".info-message-error").append(xhrMessage.error);
-                    } else {
-                        setPanelVisibility(true, true, false);
+                    if (xhrMessage.failed){
+                        showError("Script failed", xhrMessage.error);
                     }
 
                     if (xhrMessage.result && xhrMessage.result !== "null" && xhrMessage.result !== "") {
-                        $(".info-message-result").append(xhrMessage.result);
-                    } else {
-                        $(".info-message-result").append("No result");
+                        showResult("Script Result", xhrMessage.result);
                     }
 
                     if (xhrMessage.output && xhrMessage.output !== "null" && xhrMessage.output !== "") {
-                        $(".info-message-output").append(xhrMessage.output);
-                    } else {
-                        $(".info-message-output").append("No output");
+                        showOutput("Output", xhrMessage.output);
                     }
 
                     printToMeta(xhrMessage.executionTime + " ms");
                 });
 
                 posting.fail(function (xhrMessage) {
-                    console.log("Fail");
-                    console.log(xhrMessage);
-
-                    setPanelVisibility(true, true, true);
-                    if (xhrMessage.status == 403) {
+                    if (xhrMessage.failed && xhrMessage.status == 403) {
                         //missing permissions
-                        console.log("Missing permissions")
+                        showError("Missing permissions")
                     } else {
-                        console.log("Unable to execute script");
+                        showError("Unable to execute script");
                     }
                 });
 
@@ -135,7 +115,6 @@
         $('.clear-editor').click(function () {
             clearInfoPanel();
             clearEditor();
-            hideAllPanels();
 
             printToMeta("Editor and localStorage [lastScript] cleared");
 
@@ -143,58 +122,67 @@
         });
     };
 
-    var saveScriptToLocalStore = function (script) {
-        Lockr.set('lastScript', script);
-        printToMeta("Script saved to localStorage var [lastScript]");
+    let showError = function (header, message) {
+        displayInInfoPanel("error", header, message);
     };
 
-    var focusEndOfEditorDocument = function () {
+    let showOutput = function (header, message) {
+        displayInInfoPanel("info", header, message);
+    };
+
+    let showResult = function (header, message) {
+        displayInInfoPanel("success", header, message);
+    };
+
+    let displayInInfoPanel = function (variant, header, message) {
+        var infoBox = new Coral.Alert().set({
+            size: "L",
+            variant: variant,
+            header: {
+                innerHTML: header
+            },
+            content: {
+                innerHTML: message
+            }
+        });
+
+        let infoArea = $("#infoarea");
+        infoBox.classList.add("widebox");
+        infoArea.append(infoBox);
+    };
+
+    let saveScriptToLocalStore = function (script) {
+        Lockr.set('lastScript', script);
+        printToMeta("Script saved to localStorage let [lastScript]");
+    };
+
+    let focusEndOfEditorDocument = function () {
         editor.focus();
-        var session = editor.getSession();
-        var count = session.getLength();
+        let session = editor.getSession();
+        let count = session.getLength();
         console.log(count);
         editor.gotoLine(0, session.getLine(count - 1).length);
     };
 
-    setPanelVisibility = function (result, output, error) {
-        if (result) {
-            $(".info-result").show();
-        } else {
-            $(".info-result").hide();
-        }
-
-        if (output) {
-            $(".info-output").show();
-        } else {
-            $(".info-output").hide();
-        }
-
-        if (error) {
-            $(".info-error").show();
-        } else {
-            $(".info-error").hide();
-        }
-    };
-
-    var printToMeta = function (message) {
-        window.console.log(message);
+    let printToMeta = function (message) {
+        /*window.console.log(message);
         $(".info-meta").show();
         $(".info-meta").fadeIn('slow');
         $(".info-message-meta").text(message);
         setTimeout(function () {
             $(".info-meta").fadeOut('slow');
             $(".info-meta").hide();
-        }, 3500);
+        }, 3500);*/
     };
 
     $(document).ready(function () {
         console.log("Loading editor... ");
-        hideAllPanels();
         styleEditor();
         sizeEditor();
         showEditor();
         initializeEditorToolbar();
         printToMeta("Editor has been successfully loaded... ");
     });
+
 })
 (Granite.$, $(document), Granite.author);
