@@ -11,3 +11,4 @@ target
 .vlt
 .svn
 atlassian-ide-plugin.xml
+*.jar
