@@ -1,8 +1,8 @@
-# AEM Script Console 
+# AEM  Groovy Script Console
 
 ![Editor View](https://travis-ci.org/thomashartm/aem-script-console.svg?branch=master "Travis CI")
 
-With the AEM script console technical and non technical users can easily execute custom scripts in the context of AEM e.g. to fix or migrate content. 
+With the AEM script console technical and non technical users can easily execute custom groovy scripts in the context of AEM e.g. to fix or migrate content. 
 
 ![Editor View](https://github.com/thomashartm/aem-script-console/blob/screenshots/pictures/script-console-overview.png "AEM Script Console Overview")
 
@@ -13,7 +13,8 @@ Therefore the console has an editor view to define the script and a script runne
 
 
 ## Supported scripting languages
-Currently the groovy scripting language is supported. The console comes a number of object bindings:
+Currently the groovy scripting language is supported. 
+The console comes a number of object bindings:
 - resolver
 - session
 - jackrabbitSession
@@ -21,8 +22,7 @@ Currently the groovy scripting language is supported. The console comes a number
 - bundleContext
 - queryBuilder
 
-All bindings use the current user's session
-
+All bindings use the current user's session or a service user if configured for a script.
 The following closure bindings are supported:
 
 - getNode
@@ -44,7 +44,8 @@ mvn clean install -PautoInstallPackage
 ```
 
 ## Requirements
-AEM 6.2 is required.
+AEM 6.3 is required and 6.4 recommended.
 
-##License
-The software is licensed under the Apache 2.0 License see the attached LICENSE file orhttp://www.apache.org/licenses/LICENSE-2.0.html for details.
+## License
+The software is licensed under the Apache 2.0 License see the attached LICENSE file or 
+http://www.apache.org/licenses/LICENSE-2.0.html for details.
