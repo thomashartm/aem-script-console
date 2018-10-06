@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Groovyconsole for AEM Formswizard"
+        sling:resourceType="granite/ui/components/coral/foundation/page">
+        <head jcr:primaryType="nt:unstructured">
+            <viewport
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/admin/page/viewport"/>
+            <favicon
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/page/favicon"/>
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
+                categories="[coralui3,granite.ui.coral.foundation,nclabs.groovyconsole.forms]"/>
+        </head>
+        <body
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/page/body">
+            <items jcr:primaryType="nt:unstructured">
+                <form
+                    granite:id="groovyconsole-forms-wizard-form"
+                    granite:rel="groovyconsole-forms-wizard-form"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/form"
+                    action="/bin/nclabs/groovyconsole/form.html"
+                    foundationForm="{Boolean}true"
+                    maximized="{Boolean}true"
+                    method="post"
+                    novalidate="{Boolean}true"
+                    style="vertical">
+                    <granite:data
+                        jcr:primaryType="nt:unstructured"
+                        config-type="groovyconsole-formbuilder"
+                        content-path="${requestPathInfo.suffix}"/>
+                    <successresponse
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Form has been successfully created/updated"
+                        sling:resourceType="cq/workflow/admin/console/components/form/responses/redirect"
+                        redirect="/apps/nclabs/groovyconsole/scriptshell-overview.html"
+                        text="Form has been build for a groovy script."/>
+                    <items jcr:primaryType="nt:unstructured">
+                        <charset
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/hidden"
+                            name="_charset_"
+                            value="utf-8"/>
+                        <status
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/hidden"
+                            ignoreData="{Boolean}true"
+                            name=":status"
+                            value="browser"/>
+                        <wizard
+                            granite:rel="groovyconsole-forms-builder-wizard"
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="Form Definition Wizard"
+                            sling:resourceType="granite/ui/components/coral/foundation/wizard"
+                            cancelHref="/apps/nclabs/groovyconsole/scriptshell-overview.html">
+                            <items jcr:primaryType="nt:unstructured">
+                                <create
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/container"
+                                    rel="groovyconsole-forms-builder-create">
+                                    <layout
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <column1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <path
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/hidden"
+                                                    name="path"
+                                                    value="${requestPathInfo.suffix}"/>
+                                                <fielddef
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                                    class="groovyconsole-forms-builder-create-fieldtype"
+                                                    fieldDescription="Field type of the form field"
+                                                    fieldLabel="Field Definition">
+                                                    <field
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                        <items jcr:primaryType="nt:unstructured">
+                                                            <fieldtype
+                                                                jcr:primaryType="nt:unstructured"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                                fieldLabel="Field Type"
+                                                                name="fieldType">
+                                                                <items jcr:primaryType="nt:unstructured">
+                                                                    <text
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        text="Text"
+                                                                        value="granite/ui/components/coral/foundation/form/textfield"/>
+                                                                    <checkbox
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        text="Checkbox"
+                                                                        value="checkbox"/>
+                                                                </items>
+                                                            </fieldtype>
+                                                            <name
+                                                                jcr:primaryType="nt:unstructured"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                                fieldLabel="Field Name"
+                                                                name="name"
+                                                                renderReadOnly="{Boolean}false"
+                                                                required="{Boolean}true"/>
+                                                            <mandatory
+                                                                jcr:primaryType="nt:unstructured"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                                checked="{Boolean}false"
+                                                                class="hide list-option-listfrom-showhide-target foundation-layout-util-vmargin"
+                                                                name="isMandatory"
+                                                                text="Mandatory Field"
+                                                                uncheckedValue="false"
+                                                                value="true"/>
+                                                            <properties
+                                                                jcr:primaryType="nt:unstructured"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+                                                                fieldLabel="FieldProperties"
+                                                                name="./fieldProperties"/>
+                                                        </items>
+                                                    </field>
+                                                </fielddef>
+                                            </items>
+                                        </column1>
+                                    </items>
+                                    <parentConfig jcr:primaryType="nt:unstructured">
+                                        <prev
+                                            granite:class="foundation-wizard-control"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
+                                            href="/mnt/overlay/cq/workflow/admin/console/content/launchers.html"
+                                            text="Cancel"
+                                            variant="quiet">
+                                            <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                foundation-wizard-control-action="cancel"/>
+                                        </prev>
+                                        <next
+                                            granite:class="foundation-wizard-control groovyconsole-formbuilder-submit-btn"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Save"
+                                            type="submit"
+                                            variant="primary">
+                                            <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                foundation-wizard-control-action="next"/>
+                                        </next>
+                                    </parentConfig>
+                                </create>
+                            </items>
+                        </wizard>
+                    </items>
+                </form>
+            </items>
+        </body>
+    </jcr:content>
+</jcr:root>
