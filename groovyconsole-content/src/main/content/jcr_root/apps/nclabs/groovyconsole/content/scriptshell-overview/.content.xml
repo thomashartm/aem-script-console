@@ -11,12 +11,12 @@
         currentView="${state[&quot;shell.collectionpage.layoutId&quot;].string}"
         modeGroup="nclabs-groovyconsole-overview-collection"
         pageURITemplate="/apps/nclabs/groovyconsole/content/scriptshell-overview.html{+id}"
-        targetCollection=".nclabs-groovyconsole-overview-collection">
+        targetCollection=".nclabs-groovyconsole-overview-childpages">
         <head jcr:primaryType="nt:unstructured">
             <clientlibs
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
-                categories="[coralui3,granite.ui.coral.foundation,nclabs.groovyconsole.editor]"/>
+                categories="[coralui3,granite.ui.coral.foundation,nclabs.groovyconsole.shell]"/>
         </head>
         <views jcr:primaryType="nt:unstructured">
             <content
@@ -26,6 +26,8 @@
                 sling:resourceType="granite/ui/components/coral/foundation/container">
                 <items jcr:primaryType="nt:unstructured">
                     <card
+                        granite:rel="nclabs-groovyconsole-overview-childpages"
+                        granite:id="nclabs-groovyconsole-overview"
                         jcr:primaryType="nt:unstructured"
                         jcr:title="Card View"
                         sling:resourceType="granite/ui/components/coral/foundation/masonry"
@@ -36,13 +38,13 @@
                         selectionMode="{Boolean}false"
                         src="/apps/nclabs/groovyconsole/content/scriptshell.html{+id}">
                         <datasource
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="cq/gui/components/common/wcm/datasources/childresources"
-                            itemResourceType="nclabs/groovyconsole/components/card"
-                            path="/etc/nclabs/groovyconsole/scripts"/>
-                        <granite:data
-                            jcr:primaryType="nt:unstructured"
-                            foundation-mode-group="nclabs-groovyconsole-overview-collection"/>
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="cq/gui/components/common/wcm/datasources/childresources"
+                                applyWeighting="{Boolean}true"
+                                itemResourceType="nclabs/groovyconsole/components/card"
+                                limit="${empty requestPathInfo.selectors[1] ? &quot;21&quot; : requestPathInfo.selectors[1] + 1}"
+                                offset="${requestPathInfo.selectors[0]}"
+                                path="/etc/nclabs/groovyconsole/scripts"/>
                     </card>
                     <!-- ADD list view and grid -->
                 </items>

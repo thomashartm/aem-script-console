@@ -1,6 +1,7 @@
 <sly data-sly-use.model="biz.netcentric.nclabs.groovyconsole.model.ListItem">
     <sly data-sly-test="${entity.isFolder}">
         <coral-card class="foundation-collection-navigator coral-Card"
+                    data-foundation-collection-id="nclabs-groovyconsole-scriptshell"
                     data-foundation-collection-navigator-href="/entity.path">
             <coral-card-content>
                 <coral-card-context class="coral-Card-context">${'folder' @ i18n}
@@ -17,8 +18,9 @@
     <sly data-sly-test="${!entity.isFolder}">
         <coral-card fixedwidth variant="inverted" assetwidth="200" assetheight="200"
         	class="foundation-collection-navigator coral-Card"
-            data-foundation-collection-navigator-href="/apps/nclabs/groovyconsole/content/scriptshell.html${model.path}">
-            <coral-card-info data-sly-test="${model.hasDescription}">
+            data-foundation-collection-id="nclabs-groovyconsole-scriptshell"
+            data-foundation-collection-navigator-href="/apps/nclabs/groovyconsole/content/scriptshell.html${model.path}" >
+            <coral-card-info data-sly-test="${model.hasDescription}" id="nclabs-groovyconsole-scriptshell-card">
                 <coral-alert variant="info">
                     <coral-alert-header>${'Info' @ i18n}</coral-alert-header>
                     <coral-alert-content>${model.description}</coral-alert-content>
@@ -29,7 +31,22 @@
                 <coral-card-title>${model.title}</coral-card-title>
                 <coral-card-propertylist>
                 </coral-card-propertylist>
+
+
             </coral-card-content>
+            <div class="foundation-collection-quickactions"
+                 data-foundation-collection-quickactions-rel="none">
+            </div>
         </coral-card>
+        <coral-quickactions target="_prev">
+            <coral-quickactions-item icon="fast" type="button" href="/apps/nclabs/groovyconsole/content/scriptshell.html${model.path}">
+                ${'Execute in Shell' @ i18n}
+            </coral-quickactions-item>
+            <coral-quickactions-item
+                    icon="gearsEdit" type="button" href="/apps/nclabs/groovyconsole/content/groovyeditor.html${model.path}">
+                ${'Open in Editor' @ i18n}
+            </coral-quickactions-item>
+
+        </coral-quickactions>
     </sly>
 </sly>
