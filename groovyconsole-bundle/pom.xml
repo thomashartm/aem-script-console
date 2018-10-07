@@ -25,18 +25,13 @@
     <build>
 
         <plugins>
+
+
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-scr-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>generate-scr-descriptor</id>
-                        <goals>
-                            <goal>scr</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -47,7 +42,8 @@
                         <Sling-Model-Packages>biz.netcentric.nclabs.groovyconsole.model</Sling-Model-Packages>
                         <!--<Export-Package>biz.netcentric.nclabs.groovyconsole.*</Export-Package>-->
                         <Export-Package>biz.netcentric.nclabs.groovyconsole.*</Export-Package>
-                        <Import-Package>*</Import-Package>
+                        <!-- Import any version of javax.inject, to allow running on multiple versions of AEM -->
+                        <Import-Package>javax.inject;version=0.0.0,*</Import-Package>
                         <Embed-Dependency>
                             jackson-core,jackson-databind,jackson-annotations
                         </Embed-Dependency>
@@ -55,6 +51,8 @@
                     </instructions>
                 </configuration>
             </plugin>
+
+
             <plugin>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>maven-sling-plugin</artifactId>

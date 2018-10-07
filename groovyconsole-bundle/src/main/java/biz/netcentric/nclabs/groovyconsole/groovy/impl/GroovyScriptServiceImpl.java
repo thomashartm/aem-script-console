@@ -3,17 +3,16 @@ package biz.netcentric.nclabs.groovyconsole.groovy.impl;
 import biz.netcentric.nclabs.groovyconsole.ScriptExecutionContext;
 import biz.netcentric.nclabs.groovyconsole.ScriptResponse;
 import biz.netcentric.nclabs.groovyconsole.ScriptService;
+import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScript;
 import biz.netcentric.nclabs.groovyconsole.groovy.extension.BindingExtensionsProviderService;
 import biz.netcentric.nclabs.groovyconsole.groovy.extension.customizer.ImportCustomizationProvider;
-import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScript;
 import biz.netcentric.nclabs.groovyconsole.model.SaveResponse;
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.ui.SystemOutputInterceptor;
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Reference;
-import org.apache.felix.scr.annotations.Service;
 import org.codehaus.groovy.control.CompilerConfiguration;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,8 +23,8 @@ import java.util.Calendar;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-@Service
-@Component(metatype = false)
+
+@Component(name = "Service Jobs", service = ScriptService.class)
 public class GroovyScriptServiceImpl implements ScriptService {
 
     private final Logger LOG = LoggerFactory.getLogger(GroovyScriptServiceImpl.class);
@@ -52,7 +51,7 @@ public class GroovyScriptServiceImpl implements ScriptService {
             final String result = evaluateScript(groovyScript, context);
             scriptResponse.setResult(result);
 
-            if(LOG.isTraceEnabled()) {
+            if (LOG.isTraceEnabled()) {
                 LOG.trace("eval() script result: " + result);
             }
         } catch (final Exception e) {

@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
  * @since 11/2016
  */
 public class EmptyScriptResponse implements ScriptResponse {
+
     @Override
     public String getResult() {
         return StringUtils.EMPTY;

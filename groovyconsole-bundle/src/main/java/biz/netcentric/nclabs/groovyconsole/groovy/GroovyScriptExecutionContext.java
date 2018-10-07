@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Execution context passed to script execution runs, carrying relevant information for the excution of a script within the groovy shell.
+ *
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */

@@ -7,28 +7,28 @@ import biz.netcentric.nclabs.groovyconsole.empty.EmptyScriptResponse;
 import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScriptExecutionContext;
 import biz.netcentric.nclabs.groovyconsole.groovy.impl.DynamicGroovyScript;
 import biz.netcentric.nclabs.groovyconsole.groovy.impl.PersistedGroovyScript;
-import biz.netcentric.nclabs.groovyconsole.groovy.impl.ScriptConsoleConfiguration;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.configuration.ScriptConsoleConfiguration;
 import biz.netcentric.nclabs.groovyconsole.servlets.AbstractJsonHandlerServlet;
 import biz.netcentric.nclabs.groovyconsole.servlets.DefaultParameter;
 import biz.netcentric.nclabs.groovyconsole.servlets.WithAccessCheck;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.apache.commons.lang.StringUtils;
-import org.apache.felix.scr.annotations.Reference;
-import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jcr.RepositoryException;
+import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,10 +41,16 @@ import java.util.Set;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-@SlingServlet(paths = { "/bin/nclabs/groovyconsole/execute" }, methods = { "POST", "GET" }, extensions = { "json" }, metatype = false)
+@Component(
+        service = { Servlet.class },
+        property = {
+                "sling.servlet.paths=/bin/nclabs/groovyconsole/execute",
+                "sling.servlet.methods=POST",
+                "sling.servlet.methods=GET",
+                "sling.servlet.extensions=json"
+        }
+)
 public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implements WithAccessCheck {
-
-    private static final String CONTENT_TYPE_APPLICATION_JSON = "application/json";
 
     private static final String UNAUTHORIZED_ERROR_MESSAGE = "This user is not authorized to execute the script.";
 
@@ -79,13 +85,12 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
         final Map<String, String[]> map = request.getParameterMap();
         if (map.containsKey(DefaultParameter.SCRIPT_LOCATION.get())) {
             return this.processStoredScript(request, response);
-        } else if(map.containsKey(DefaultParameter.SCRIPT.get())){
+        } else if (map.containsKey(DefaultParameter.SCRIPT.get())) {
             return this.processScriptSubmission(request, response);
         }
 
         return new EmptyScriptResponse();
     }
-
 
     private void checkForPermissions(SlingHttpServletRequest request, SlingHttpServletResponse response)
             throws RepositoryException, IOException {
@@ -98,7 +103,7 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
     private ScriptResponse processScriptSubmission(final SlingHttpServletRequest request, final SlingHttpServletResponse response) {
         final String source = request.getParameter(DefaultParameter.SCRIPT.get());
 
-        if(StringUtils.isNotEmpty(source)){
+        if (StringUtils.isNotEmpty(source)) {
             final ScriptExecutionContext context = new GroovyScriptExecutionContext(request);
 
             final DynamicGroovyScript groovyScript = new DynamicGroovyScript(source, ".groovy");
