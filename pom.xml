@@ -6,13 +6,13 @@
     <!-- P A R E N T P R O J E C T D E S C R I P T I O N -->
     <!-- ====================================================================== -->
 
-    <groupId>net.thartm.cq</groupId>
-    <artifactId>aem-script-console</artifactId>
+    <groupId>biz.netcentric.nclabs</groupId>
+    <artifactId>groovyconsole</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>AEM Script console - Reactor Project</name>
-    <description>Scripting console project for administrative purposes using the AEM 6 touch UI.</description>
+    <name>Netcentric - Groovyconsole for AEM - Reactor Project</name>
+    <description>Groovyconsole project for administrative purposes in AEM 6</description>
 
     <!-- ====================================================================== -->
     <!-- P R O P E R T I E S -->
@@ -28,16 +28,113 @@
         <pluginManagement>
             <plugins>
 
+                <!-- Apache Felix SCR Plugin -->
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-scr-plugin</artifactId>
                     <version>1.20.0</version>
+                    <executions>
+                        <execution>
+                            <id>generate-scr-scrdescriptor</id>
+                            <goals>
+                                <goal>scr</goal>
+                            </goals>
+                            <configuration>
+                                <!-- Private service properties for all services. -->
+                                <properties>
+                                    <service.vendor>Adobe</service.vendor>
+                                </properties>
+                            </configuration>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-simple</artifactId>
+                            <version>1.5.11</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
+
 
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>2.5.3</version>
+                    <version>3.3.0</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <!-- dump SCR component definitions to the output directory, see https://issues.apache.org/jira/browse/FELIX-3324 -->
+                        <exportScr>true</exportScr>
+                        <instructions>
+                            <Bundle-SymbolicName>biz.netcentric.aem.bulktransfer</Bundle-SymbolicName>
+
+                            <!-- enable processing of default OSGI component annotations (since OSGi 5) -->
+                            <_dsannotations>*</_dsannotations>
+                            <!--  support inheritance on components  -->
+                            <_dsannotations-inherit>true</_dsannotations-inherit>
+                            <!-- enable processing of default OSGI metatype annotations (since OSGi 6) -->
+                            <_metatypeannotations>*</_metatypeannotations>
+                            <!-- support processing of Felix SCR annotations through the felix.scr.bnd plugin, look at
+                            https://github.com/apache/felix/blob/trunk/tools/org.apache.felix.scr.bnd/src/main/java/org/apache/felix/scrplugin/bnd/SCRDescriptorBndPlugin.java#L60
+                                for supported options -->
+                            <_plugin>
+                                org.apache.felix.scrplugin.bnd.SCRDescriptorBndPlugin;destdir=${project.build.outputDirectory};log=error
+                            </_plugin>
+                            <!-- enable generating the manifest header for Sling Models,
+                            https://sling.apache.org/documentation/bundles/models.html#registration-of-sling-models-classes-via-bnd-plugin -->
+                            <_plugin>
+                                org.apache.sling.bnd.models.ModelsScannerPlugin;generatePackagesHeader=true
+                            </_plugin>
+                        </instructions>
+                    </configuration>
+                    <dependencies>
+                        <!-- https://github.com/apache/felix/tree/trunk/tools/org.apache.felix.scr.bnd, processes deprecated SCR annotations
+                            with the BND process -->
+                        <dependency>
+                            <groupId>org.apache.felix</groupId>
+                            <artifactId>org.apache.felix.scr.bnd</artifactId>
+                            <!-- don't use the newest version, since https://issues.apache.org/jira/browse/FELIX-5304 causes known
+                                regressions for at least WorkflowProcesses (compare with https://projects.netcentric.biz/browse/CQ-255) -->
+                            <version>1.5.0</version>
+                        </dependency>
+
+                        <!-- enable generating the manifest header for Sling Models,
+                        https://sling.apache.org/documentation/bundles/models.html#registration-of-sling-models-classes-via-bnd-plugin -->
+                        <dependency>
+                            <groupId>org.apache.sling</groupId>
+                            <artifactId>org.apache.sling.bnd.models</artifactId>
+                            <version>1.0.0</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+
+                        <!-- override the default goals for the maven-bundle-plugin to prevent any OBR related operations from happening
+                        http://svn.apache.org/repos/asf/felix/releases/maven-bundle-plugin-2.4.0/doc/site/index.html -->
+                        <execution>
+                            <id>default-install</id>
+                            <goals>
+                                <goal>install</goal>
+                            </goals>
+                            <phase>none</phase>
+                        </execution>
+                        <execution>
+                            <id>default-deploy</id>
+                            <goals>
+                                <goal>deploy</goal>
+                            </goals>
+                            <phase>none</phase>
+                        </execution>
+                        <execution>
+                            <id>default-clean</id>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                            <phase>none</phase>
+                        </execution>
+                    </executions>
                 </plugin>
 
                 <plugin>
@@ -91,7 +188,7 @@
                 <plugin>
                     <groupId>com.day.jcr.vault</groupId>
                     <artifactId>content-package-maven-plugin</artifactId>
-                    <version>0.0.13</version>
+                    <version>0.5.24</version>
                 </plugin>
 
             </plugins>
@@ -100,119 +197,131 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.cmpn</artifactId>
+                <version>6.0.0</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.core</artifactId>
+                <version>6.0.0</version>
+                <scope>provided</scope>
+            </dependency>
+
             <dependency>
                 <groupId>com.adobe.aem</groupId>
-                <artifactId>aem-api</artifactId>
-                <version>6.0.0.1</version>
+                <artifactId>uber-jar</artifactId>
+                <version>6.4.0</version>
+                <classifier>apis</classifier>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>org.osgi</groupId>
-                <artifactId>org.osgi.core</artifactId>
-                <version>4.2.0</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.osgi</groupId>
-                <artifactId>org.osgi.compendium</artifactId>
-                <version>4.2.0</version>
-                <scope>provided</scope>
-            </dependency>
+
             <dependency>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.scr.annotations</artifactId>
                 <version>1.9.10</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>biz.aQute</groupId>
                 <artifactId>bndlib</artifactId>
                 <version>1.43.0</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>1.5.10</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>2.5</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>javax.jcr</groupId>
                 <artifactId>jcr</artifactId>
                 <version>2.0</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>org.apache.sling.api</artifactId>
                 <version>2.2.0</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>org.apache.sling.jcr.api</artifactId>
                 <version>2.1.0</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>org.apache.sling.commons.osgi</artifactId>
                 <version>2.2.0</version>
                 <scope>provided</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>org.apache.sling.models.api</artifactId>
+                <version>1.2.2</version>
+                <scope>provided</scope>
+            </dependency>
+
             <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>2.5</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>2.4</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.2</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>com.adobe.granite</groupId>
                 <artifactId>com.adobe.granite.jmx</artifactId>
                 <version>0.2.6</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.jackrabbit</groupId>
                 <artifactId>jackrabbit-api</artifactId>
                 <version>2.3.0</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>com.day.cq</groupId>
-                <artifactId>cq-security</artifactId>
-                <version>5.6.2</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.day.cq</groupId>
-                <artifactId>cq-commons</artifactId>
-                <version>5.8.2</version>
-                <scope>provided</scope>
-            </dependency>
 
             <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>15.0</version>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -258,16 +367,17 @@
                 <version>1.3</version>
                 <scope>test</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>org.apache.sling.testing.sling-mock</artifactId>
-                <version>1.4.1.R1695088</version>
+                <version>1.6.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.apache.sling</groupId>
-                <artifactId>org.apache.sling.testing.</artifactId>
-                <version>1.4.1.R1695088</version>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>1.10.19</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -318,8 +428,8 @@
     </profiles>
 
     <modules>
-        <module>aem-script-console-bundle</module>
-        <module>aem-script-console-content</module>
+        <module>groovyconsole-bundle</module>
+        <module>groovyconsole-content</module>
     </modules>
 
 </project>

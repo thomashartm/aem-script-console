@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/apps/nclabs/groovyconsole">
+        <exclude pattern="/apps/nclabs/groovyconsole/install"/>
+    </filter>
+    <filter root="/etc/nclabs/groovyconsole"/>
+    <filter root="/apps/cq/core/content/nav/tools/scripts"/>
+</workspaceFilter>
