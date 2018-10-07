@@ -2,14 +2,21 @@
 
 ![Editor View](https://travis-ci.org/thomashartm/aem-script-console.svg?branch=master "Travis CI")
 
+
+## Groovy Script Editor
+
 With the AEM script console technical and non technical users can easily execute custom groovy scripts in the context of AEM e.g. to fix or migrate content. 
 
 ![Editor View](https://github.com/thomashartm/aem-script-console/blob/screenshots/pictures/editor.jpeg "AEM Script Console Overview")
 
+## Script Execution for non technical users
+
 The console supports the execution of stored or submitted groovy scripts. 
-Therefore the console has an editor view to define the script and a script runner UI that allows to start a stored script without having to deal with an editng interface.
 
 ![Editor View](https://github.com/thomashartm/aem-script-console/blob/screenshots/pictures/overview.jpeg "AEM Script Console Editor")
+
+Therefore the console has an editor view to define the script and 
+a script runner UI that allows to start a stored script without having to deal with an editing interface.
 
 ![Editor View](https://github.com/thomashartm/aem-script-console/blob/screenshots/pictures/script-ui.jpeg "AEM Script Console Editor")
 
