@@ -5,10 +5,9 @@ import biz.netcentric.nclabs.groovyconsole.groovy.extension.closure.BindableClos
 import biz.netcentric.nclabs.groovyconsole.groovy.extension.closure.ClosureBinding;
 import biz.netcentric.nclabs.groovyconsole.groovy.extension.closure.ClosureExecutionRuntimeException;
 import com.google.common.collect.Lists;
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
+import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +20,7 @@ import java.util.Map;
  * @author jochen.koschorke
  * @since 11/2016
  */
-@Service
-@Component(metatype = false)
+@Component(service = ClosureBinding.class)
 public class GetOrCreateResourceClosure implements ClosureBinding {
 
     private final Logger LOG = LoggerFactory.getLogger(GetOrCreateResourceClosure.class);

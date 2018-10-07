@@ -5,9 +5,8 @@ import biz.netcentric.nclabs.groovyconsole.groovy.extension.closure.BindableClos
 import biz.netcentric.nclabs.groovyconsole.groovy.extension.closure.ClosureBinding;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.event.jobs.JobManager;
+import org.osgi.service.component.annotations.Component;
 
 import java.util.Collection;
 
@@ -15,8 +14,7 @@ import java.util.Collection;
  * @author thomas.hartmann@netcentric.biz
  * @since 12/2016
  */
-@Service
-@Component(metatype = false)
+@Component(service = ClosureBinding.class)
 public class JobsClosureBinding implements ClosureBinding {
 
     @Override

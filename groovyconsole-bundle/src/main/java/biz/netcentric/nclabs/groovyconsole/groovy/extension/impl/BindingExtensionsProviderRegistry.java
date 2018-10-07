@@ -10,11 +10,11 @@ import com.day.cq.search.QueryBuilder;
 import com.day.cq.wcm.api.PageManagerFactory;
 import com.google.common.collect.Maps;
 import groovy.lang.Binding;
-import org.apache.felix.scr.annotations.*;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.event.jobs.JobManager;
 import org.osgi.framework.BundleContext;
+import org.osgi.service.component.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,16 +27,15 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author thomas.hartmann@netcentric.biz
  * @since 11/2015
  */
-@Service(value = BindingExtensionsProviderService.class)
-@Component(immediate = true, metatype = false)
+@Component(service = BindingExtensionsProviderService.class)
 public class BindingExtensionsProviderRegistry implements BindingExtensionsProviderService {
 
     private final Logger LOG = LoggerFactory.getLogger(BindingExtensionsProviderRegistry.class);
 
-    @Reference(cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE, referenceInterface = BindingExtension.class, policy = ReferencePolicy.DYNAMIC, bind = "bindBindingExtension", unbind = "unbindBindingExtension")
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC, service = BindingExtension.class, bind = "bindBindingExtension", unbind = "unbindBindingExtension")
     private final List<BindingExtension> bindingExtensions = new CopyOnWriteArrayList<>();
 
-    @Reference(cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE, referenceInterface = ClosureBinding.class, policy = ReferencePolicy.DYNAMIC, bind = "bindClosureBinding", unbind = "unbindClosureBinding")
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC, service = ClosureBinding.class, bind = "bindClosureBinding", unbind = "unbindClosureBinding")
     private final List<ClosureBinding> closureBindings = new CopyOnWriteArrayList<>();
 
     @Reference
