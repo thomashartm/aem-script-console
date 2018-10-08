@@ -6,7 +6,7 @@
             <script>
                 const scriptPath = "${model.scriptPath @ context='scriptString'}";
                 if (scriptPath) {
-                    localStorage.setItem('scriptpath', JSON.stringify(scriptPath));
+                    Lockr.set('scriptPath', JSON.stringify(scriptPath));
                 }
             </script>
 

@@ -5,7 +5,7 @@
         cq:defaultView="html"
         jcr:mixinTypes="[sling:VanityPath]"
         jcr:primaryType="nt:unstructured"
-        jcr:title="NCLabs - Groovyconsole for AEM"
+        jcr:title="Groovyconsole for AEM: Your Scripts"
         sling:resourceType="granite/ui/components/shell/collectionpage"
         consoleId="nclabs-groovyconsole-overview"
         currentView="${state[&quot;shell.collectionpage.layoutId&quot;].string}"

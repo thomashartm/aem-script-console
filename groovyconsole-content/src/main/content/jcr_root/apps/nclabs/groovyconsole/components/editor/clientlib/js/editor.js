@@ -122,6 +122,16 @@
 
             focusEndOfEditorDocument();
         });
+
+        $('.save-script').click(function () {
+
+            const scriptPath = Lockr.get('scriptPath');
+            if(scriptPath){
+                console.log(scriptPath);
+            }else{
+                console.log("No path defined");
+            }
+        });
     };
 
     let showError = function (header, message) {
@@ -162,11 +172,11 @@
         editor.focus();
         let session = editor.getSession();
         let count = session.getLength();
-        console.log(count);
         editor.gotoLine(0, session.getLine(count - 1).length);
     };
 
     let printToMeta = function (message) {
+        window.console.log(message);
         /*window.console.log(message);
         $(".info-meta").show();
         $(".info-meta").fadeIn('slow');

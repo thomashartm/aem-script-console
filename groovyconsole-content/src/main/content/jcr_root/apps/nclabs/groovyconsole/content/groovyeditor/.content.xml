@@ -5,7 +5,7 @@
     <jcr:content
             jcr:mixinTypes="[sling:VanityPath]"
             jcr:primaryType="nt:unstructured"
-            jcr:title="Groovyconsole Editor"
+            jcr:title="Groovyconsole for AEM: Editor"
             sling:resourceType="granite/ui/components/shell/page">
         <head jcr:primaryType="nt:unstructured">
             <clientlibs
@@ -50,6 +50,15 @@
                         text="Clear"
                         variant="primary">
                 </clear>
+                <saveScript
+                        granite:class="save-script"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                        class="saveScript.group.action"
+                        icon="checkCircle"
+                        target=".foundation-collection"
+                        text="Save"
+                        variant="primary"/>
             </primary>
         </actions>
         <content

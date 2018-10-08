@@ -4,7 +4,7 @@
     <jcr:content
         jcr:mixinTypes="[sling:VanityPath]"
         jcr:primaryType="nt:unstructured"
-        jcr:title="Groovyconsole Overview"
+        jcr:title="Groovyconsole for AEM: Script Shell"
         sling:resourceType="granite/ui/components/shell/page">
         <head jcr:primaryType="nt:unstructured">
             <clientlibs
