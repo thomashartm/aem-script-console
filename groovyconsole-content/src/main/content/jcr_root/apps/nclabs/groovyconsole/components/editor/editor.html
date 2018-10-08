@@ -1,16 +1,26 @@
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
      data-sly-call="${clientlib.all @ categories=['nclabs.groovyconsole.editor']}"/>
-<div id="resizable">
-    <!--/* ACE based editor panel */-->
-    <div id="editor">
+<sly data-sly-use.model="biz.netcentric.nclabs.groovyconsole.model.Editor">
+    <div id="resizable">
 
-    </div>
-    <script>
-        var editor = ace.edit("editor");
-        editor.session.setMode("ace/mode/groovy");
-    </script>
+            <script>
+                const scriptPath = "${model.scriptPath @ context='scriptString'}";
+                if (scriptPath) {
+                    localStorage.setItem('scriptpath', JSON.stringify(scriptPath));
+                }
+            </script>
 
-    <div id="infoarea">
-        <!--/* editor.js should add alert panel depending on the result */-->
+        <!--/* ACE based editor panel */-->
+        <div id="editor">
+
+        </div>
+        <script>
+            var editor = ace.edit("editor");
+            editor.session.setMode("ace/mode/groovy");
+        </script>
+
+        <div id="infoarea">
+            <!--/* editor.js should add alert panel depending on the result */-->
+        </div>
     </div>
-</div>
+</sly>

@@ -7,6 +7,7 @@ package biz.netcentric.nclabs.groovyconsole.model;
  * @since 07/2016
  */
 public enum Icon {
+
     FOLDER("folder"), FILE("file");
 
     private String name;
