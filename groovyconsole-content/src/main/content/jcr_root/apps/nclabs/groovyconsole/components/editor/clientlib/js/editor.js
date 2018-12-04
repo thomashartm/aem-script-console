@@ -72,17 +72,17 @@
             if (script.length) {
 
                 editor.setReadOnly(true);
-                let posting = $.post('/bin/nclabs/groovyconsole/execute.json', {
+                let postGroovyScript = $.post('/bin/nclabs/groovyconsole/execute.json', {
                     script: script
                 });
 
                 saveScriptToLocalStore(script);
 
-                posting.done(function (xhrMessage) {
+                postGroovyScript.done(function (xhrMessage) {
                     console.log(xhrMessage);
                     clearInfoPanel();
 
-                    if (xhrMessage.failed){
+                    if (xhrMessage.failed) {
                         showError("Script failed", xhrMessage.error);
                     }
 
@@ -97,7 +97,7 @@
                     printToMeta(xhrMessage.executionTime + " ms");
                 });
 
-                posting.fail(function (xhrMessage) {
+                postGroovyScript.fail(function (xhrMessage) {
                     if (xhrMessage.failed && xhrMessage.status == 403) {
                         //missing permissions
                         showError("Missing permissions")
@@ -106,7 +106,7 @@
                     }
                 });
 
-                posting.always(function () {
+                postGroovyScript.always(function () {
                     editor.setReadOnly(false);
                 });
             }
@@ -124,14 +124,38 @@
         });
 
         $('.save-script').click(function () {
-
             const scriptPath = Lockr.get('scriptPath');
-            if(scriptPath){
-                console.log(scriptPath);
-            }else{
+            if (!scriptPath) {
                 console.log("No path defined");
             }
+            console.log("Saving: + " + scriptPath);
+
+            let script = editor.getSession().getValue();
+            if (script) {
+                console.log("No script available");
+            }
+
+            editor.setReadOnly(true);
+            let saveGroovyScript = $.post('/bin/nclabs/groovyconsole/save.json', {
+                script: script,
+                path: scriptPath
+            });
+
+            saveGroovyScript.done(function (xhrMessage) {
+                console.log(xhrMessage);
+            });
+
+
+            saveGroovyScript.fail(function (xhrMessage) {
+                console.log(xhrMessage);
+            });
+
+            saveGroovyScript.always(function () {
+                editor.setReadOnly(false);
+            });
+
         });
+
     };
 
     let showError = function (header, message) {

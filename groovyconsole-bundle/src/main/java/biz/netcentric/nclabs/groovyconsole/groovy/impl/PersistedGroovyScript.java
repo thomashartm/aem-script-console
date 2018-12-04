@@ -31,6 +31,8 @@ public class PersistedGroovyScript implements GroovyScript {
 
     private static final String FILE_EXT = "groovy";
 
+    private static final String DEFAULT_SCRIPT_CONTAINER_NAME = "script";
+
     private static final String DEFAULT_SCRIPT_NODE = "/script.groovy";
 
     private final Resource scriptResource;

@@ -19,9 +19,9 @@
     <!-- ====================================================================== -->
     <properties>
         <crx.host>localhost</crx.host>
-        <crx.port>6200</crx.port>
+        <crx.port>4502</crx.port>
         <jdk.version>1.8</jdk.version>
-        <jackson.version>2.0.2</jackson.version>
+        <jackson.version>[2.8.11.1,)</jackson.version>
     </properties>
 
     <build>
