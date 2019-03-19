@@ -1,10 +1,10 @@
-package biz.netcentric.nclabs.groovyconsole.groovy.extension.impl;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.impl;
 
 import biz.netcentric.nclabs.groovyconsole.ScriptExecutionContext;
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.BindingCommons;
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.BindingExtensionsProviderService;
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.binding.BindingExtension;
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.closure.ClosureBinding;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.BindingCommons;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.BindingExtensionsProviderService;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.binding.BindingExtension;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.closure.ClosureBinding;
 import com.day.cq.replication.Replicator;
 import com.day.cq.search.QueryBuilder;
 import com.day.cq.wcm.api.PageManagerFactory;

@@ -1,11 +1,16 @@
 (function ($, $document, gAuthor) {
 
+    const LAST_SCRIPT = "lastScript"
+    const SAVED_SCRIPT = "savedScript"
     let EDITOR_ID = "#editor";
-    let consoleToAreaWidthRatio = 0.9,
-        consoleToAreaHeightRatio = 0.9;
+    let consoleToAreaWidthRatio = 0.8,
+        consoleToAreaHeightRatio = 0.8;
 
-    let saveModal;
+    const ui = $(window).adaptTo("foundation-ui");
 
+    /**
+     * Editor initialization, styling and sizing
+     */
     let sizeEditor = function () {
         let windowHeight = $(window).innerHeight();
         let defaultHeight = windowHeight * consoleToAreaHeightRatio;
@@ -27,7 +32,7 @@
     };
 
     let showEditor = function () {
-        let lastScript = Lockr.get('lastScript');
+        let lastScript = Lockr.get(LAST_SCRIPT);
         if (lastScript) {
             editor.setValue(lastScript, -1);
         }
@@ -35,16 +40,26 @@
         $('#infoarea').show();
     };
 
-    let clearInfoPanel = function () {
-        let infoArea = $("#infoarea");
-        infoArea.empty();
-    };
-
     let clearEditor = function () {
-        Lockr.rm('lastScript');
+        Lockr.rm(LAST_SCRIPT);
         editor.setValue("");
     };
 
+    let saveScriptToLocalStore = function (script) {
+        Lockr.set(LAST_SCRIPT, script);
+        printToMeta("Script saved to localStorage let [lastScript]");
+    };
+
+    let focusEndOfEditorDocument = function () {
+        editor.focus();
+        let session = editor.getSession();
+        let count = session.getLength();
+        editor.gotoLine(0, session.getLine(count - 1).length);
+    };
+
+    /**
+     * Toolbar action click event handling
+     */
     let initializeEditorToolbar = function () {
 
         $('.create-new').click(function () {
@@ -53,7 +68,7 @@
             }
 
             // clear message and local storage for this editor session
-            Lockr.rm('lastScript');
+            Lockr.rm(LAST_SCRIPT);
 
             clearInfoPanel();
             editor.getSession().setValue('def resource = resourceResolver.getResource("/content"); \nprintln resource.path');
@@ -114,6 +129,7 @@
             focusEndOfEditorDocument();
         });
 
+
         $('.clear-editor').click(function () {
             clearInfoPanel();
             clearEditor();
@@ -124,40 +140,51 @@
         });
 
         $('.save-script').click(function () {
-            const scriptPath = Lockr.get('scriptPath');
+            let scriptPath = Lockr.get('scriptPath')
             if (!scriptPath) {
-                console.log("No path defined");
+                console.log("No path defined")
+                scriptPath = ""
             }
-            console.log("Saving: + " + scriptPath);
+            console.log("Saving: + " + scriptPath)
+
+            let scriptName = Lockr.get('scriptName')
+            if (!scriptName) {
+                console.log("No path defined")
+                scriptName = ""
+            }
+            console.log("Saving: + " + scriptName)
 
             let script = editor.getSession().getValue();
             if (script) {
-                console.log("No script available");
+                console.log("No script available")
             }
 
-            editor.setReadOnly(true);
+            editor.setReadOnly(true)
             let saveGroovyScript = $.post('/bin/nclabs/groovyconsole/save.json', {
                 script: script,
                 path: scriptPath
-            });
+            })
 
             saveGroovyScript.done(function (xhrMessage) {
                 console.log(xhrMessage);
-            });
+            })
 
 
             saveGroovyScript.fail(function (xhrMessage) {
                 console.log(xhrMessage);
-            });
+            })
 
             saveGroovyScript.always(function () {
                 editor.setReadOnly(false);
-            });
+            })
 
         });
 
     };
 
+    /**
+     * Result rendering and handling
+     */
     let showError = function (header, message) {
         displayInInfoPanel("error", header, message);
     };
@@ -187,16 +214,9 @@
         infoArea.append(infoBox);
     };
 
-    let saveScriptToLocalStore = function (script) {
-        Lockr.set('lastScript', script);
-        printToMeta("Script saved to localStorage let [lastScript]");
-    };
-
-    let focusEndOfEditorDocument = function () {
-        editor.focus();
-        let session = editor.getSession();
-        let count = session.getLength();
-        editor.gotoLine(0, session.getLine(count - 1).length);
+    let clearInfoPanel = function () {
+        let infoArea = $("#infoarea");
+        infoArea.empty();
     };
 
     let printToMeta = function (message) {
@@ -211,6 +231,30 @@
         }, 3500);*/
     };
 
+    /**
+     * Shows / hides the "Save As Script window" modal
+     * @param show
+     */
+    let toggleSaveAsScriptModal = function (show, callbackListener) {
+        var saveAsScriptModal = document.getElementById("groovyconsole-save-script-dialog");
+        if (saveAsScriptModal) {
+            if (show) {
+                // execute the listener only once per show event
+                $(saveAsScriptModal).one('coral-overlay:open', function (event) {
+                    if (callbackListener) {
+                        callbackListener();
+                    }
+                });
+                saveAsScriptModal.show();
+            } else {
+                saveAsScriptModal.hide();
+            }
+        }
+    }
+
+    /**
+     * Initialization, loading and unloading
+     */
     $(document).ready(function () {
         console.log("Loading editor... ");
         styleEditor();
@@ -230,5 +274,100 @@
         saveScriptToLocalStore(script);
     });
 
+    $(window).adaptTo("foundation-registry").register("foundation.collection.action.action", {
+        name: "groovyconsole.action.saveasscript",
+        handler: function (name, el, config, collection, selections) {
+            printToMeta("modal loaded")
+        }
+    })
+
+    // open the save modal
+    $(document).on("click", ".save-as-script", function (e) {
+        toggleSaveAsScriptModal(true, function () {
+            printToMeta("Save as script modal loaded")
+
+            const scriptData = Lockr.get('currentSavedScript', {})
+            printToMeta(scriptData)
+            $("input[name=savePath]").val(scriptData.path)
+            $("input[name=scriptName]").val(scriptData.name)
+        })
+    });
+
+    // cancel the save modal
+    $(document).on("click", "#groovyconsole-cancel-script-action-btn", function (e) {
+
+    })
+
+    // submit and close the save modal
+    $(document).on("click", "#groovyconsole-save-script-action-btn", function (e) {
+        // make sure the parent container under conf is configured for collection and property inheritance
+
+        const scriptType = "groovy"
+
+        const savePath = $.trim($("input[name=savePath]").val())
+        if ((!savePath) || (savePath.length == 0)) {
+            showError("Error", "Unable to save script. Save path argument is empty.")
+            return
+        }
+
+        const scriptName = $.trim($("input[name=scriptName]").val())
+        if ((!scriptName) || (scriptName.length == 0)) {
+            showError("Error", "Unable to save script. Name argument is empty.")
+            return
+        }
+
+        var script = editor.getSession().getValue()
+        if ((!script) || (script.length == 0)) {
+            showError("Error", "Unable to save script. Script argument is empty.")
+            return
+        }
+
+        editor.setReadOnly(true);
+        const scriptLocation = savePath + "/" + scriptName + "." + scriptType
+
+        const data = {
+            "_charset_": "UTF-8",
+            "script": script,
+            "scriptType": "groovy",
+            "name": scriptName,
+            "path": savePath,
+            "fullLocation": scriptLocation
+        }
+
+        let request = $.ajax({
+            type: "POST",
+            url: "/bin/nclabs/groovyconsole/save.json",
+            data: data
+        })
+
+        // Callback handler that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+            // Log a message to the console
+            console.log("Hooray, it worked!")
+            printToMeta("Successfully saved script " + scriptLocation)
+            Lockr.set(SAVED_SCRIPT, data)
+        })
+
+        // Callback handler that will be called on failure
+        request.fail(function (xhr, textStatus, errorThrown){
+            // Log the error to the console
+            console.error(
+                "The following error occurred: "+
+                textStatus, errorThrown
+            )
+
+            console.log(xhr)
+            printToMeta("Error during page creation")
+        })
+
+        // Callback handler that will be called regardless
+        // if the request failed or succeeded
+        request.always(function () {
+            // Reenable the inputs
+            editor.setReadOnly(false)
+        })
+
+        event.preventDefault()
+    })
 })
 (Granite.$, $(document), Granite.author);

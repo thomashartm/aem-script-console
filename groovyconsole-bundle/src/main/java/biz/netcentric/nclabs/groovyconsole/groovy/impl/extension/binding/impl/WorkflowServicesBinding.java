@@ -1,7 +1,7 @@
-package biz.netcentric.nclabs.groovyconsole.groovy.extension.binding.impl;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.binding.impl;
 
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.BindingCommons;
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.binding.BindingExtension;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.BindingCommons;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.binding.BindingExtension;
 import com.google.common.collect.Maps;
 import org.osgi.service.component.annotations.Component;
 

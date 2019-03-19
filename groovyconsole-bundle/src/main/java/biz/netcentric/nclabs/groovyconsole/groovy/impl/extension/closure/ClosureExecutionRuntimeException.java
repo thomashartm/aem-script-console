@@ -1,4 +1,4 @@
-package biz.netcentric.nclabs.groovyconsole.groovy.extension.closure;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.closure;
 
 /**
  * Runtime wrapper exception ot treat checked exceptions within closures.

@@ -4,11 +4,10 @@ import biz.netcentric.nclabs.groovyconsole.ScriptExecutionContext;
 import biz.netcentric.nclabs.groovyconsole.ScriptResponse;
 import biz.netcentric.nclabs.groovyconsole.ScriptService;
 import biz.netcentric.nclabs.groovyconsole.empty.EmptyScriptResponse;
-import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScriptExecutionContext;
+import biz.netcentric.nclabs.groovyconsole.groovy.ExecutionContext;
 import biz.netcentric.nclabs.groovyconsole.groovy.impl.DynamicGroovyScript;
 import biz.netcentric.nclabs.groovyconsole.groovy.impl.PersistedGroovyScript;
 import biz.netcentric.nclabs.groovyconsole.groovy.impl.configuration.ScriptConsoleConfiguration;
-import biz.netcentric.nclabs.groovyconsole.servlets.AbstractJsonHandlerServlet;
 import biz.netcentric.nclabs.groovyconsole.servlets.DefaultParameter;
 import biz.netcentric.nclabs.groovyconsole.servlets.WithAccessCheck;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,13 +49,13 @@ import java.util.Set;
                 "sling.servlet.extensions=json"
         }
 )
-public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implements WithAccessCheck {
+public class ScriptConsoleServlet extends AbstractJsonHandlerServlet implements WithAccessCheck {
 
     private static final String UNAUTHORIZED_ERROR_MESSAGE = "This user is not authorized to execute the script.";
 
     private static final String SUBSERVICE = "groovy-script-subservice";
 
-    private static final Logger LOG = LoggerFactory.getLogger(GroovyScriptRunnerServlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ScriptConsoleServlet.class);
 
     @Reference
     private ResourceResolverFactory resourceResolverFactory;
@@ -104,7 +103,7 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
         final String source = request.getParameter(DefaultParameter.SCRIPT.get());
 
         if (StringUtils.isNotEmpty(source)) {
-            final ScriptExecutionContext context = new GroovyScriptExecutionContext(request);
+            final ScriptExecutionContext context = new ExecutionContext(request);
 
             final DynamicGroovyScript groovyScript = new DynamicGroovyScript(source, ".groovy");
             return scriptService.runScript(groovyScript, context);
@@ -123,12 +122,12 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
 
                 final PersistedGroovyScript groovyScript = new PersistedGroovyScript(resource);
 
-                ScriptExecutionContext context = new GroovyScriptExecutionContext(request);
-                if (StringUtils.isNotEmpty(groovyScript.getUserName())) {
+                ScriptExecutionContext context = new ExecutionContext(request);
+                if (StringUtils.isNotEmpty(groovyScript.getExecutionUser())) {
                     if (LOG.isDebugEnabled()) {
-                        LOG.debug("Using service user parameter [{}] to execute script", groovyScript.getUserName());
+                        LOG.debug("Using service user parameter [{}] to execute script", groovyScript.getExecutionUser());
                     }
-                    serviceResolver = getResourceResolverForCustomUser(groovyScript.getUserName());
+                    serviceResolver = getResourceResolverForCustomUser(groovyScript.getExecutionUser());
                     context = getScriptContextForCustomUser(request, serviceResolver);
                 }
 
@@ -160,7 +159,7 @@ public class GroovyScriptRunnerServlet extends AbstractJsonHandlerServlet implem
             throw new LoginException("Unable to use non existing service user to execute groovy script");
         }
 
-        return new GroovyScriptExecutionContext(request, resourceResolver);
+        return new ExecutionContext(request, resourceResolver);
     }
 
     @Override

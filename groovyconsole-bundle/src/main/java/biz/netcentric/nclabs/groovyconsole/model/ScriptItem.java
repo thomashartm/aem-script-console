@@ -30,7 +30,7 @@ import java.util.stream.StreamSupport;
  * @since 10/2018
  */
 @Model(adaptables = SlingHttpServletRequest.class)
-public class ScriptItem implements GroovyScriptContainer {
+public class ScriptItem implements ScriptContainer {
 
     private static final String NO_SCRIPT_FOUND = "No script found";
 

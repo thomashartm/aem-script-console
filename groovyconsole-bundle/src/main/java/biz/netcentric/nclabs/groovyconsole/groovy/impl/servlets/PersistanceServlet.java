@@ -1,11 +1,11 @@
 package biz.netcentric.nclabs.groovyconsole.groovy.impl.servlets;
 
 import biz.netcentric.nclabs.groovyconsole.ScriptService;
-import biz.netcentric.nclabs.groovyconsole.groovy.impl.PersistedGroovyScript;
-import biz.netcentric.nclabs.groovyconsole.servlets.AbstractJsonHandlerServlet;
+import biz.netcentric.nclabs.groovyconsole.empty.EmptyScriptResponse;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.DynamicGroovyScript;
 import biz.netcentric.nclabs.groovyconsole.servlets.WithAccessCheck;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang.StringUtils;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
@@ -34,7 +34,9 @@ import java.util.Collections;
                 "sling.servlet.extensions=json"
         }
 )
-public class GroovyScriptPersistanceServlet extends AbstractJsonHandlerServlet implements WithAccessCheck {
+public class PersistanceServlet extends AbstractJsonHandlerServlet implements WithAccessCheck {
+
+    private static final String DEFAULT_SCRIPT_LOCATION = "/etc/nclabs/groovyconsole/scripts";
 
     private static final String UNAUTHORIZED_ERROR_MESSAGE = "This user is not authorized to work with the script.";
 
@@ -51,16 +53,31 @@ public class GroovyScriptPersistanceServlet extends AbstractJsonHandlerServlet i
             ObjectMapper mapper) throws IOException, RepositoryException {
         this.checkForPermissions(request, response);
 
-        final String path = request.getParameter("path");
+        final String parent = request.getParameter("path");
+
+        final String source = request.getParameter("script");
+
+        final String name = request.getParameter("name");
+
+        final String fullStorageLocation = request.getParameter("fullLocation");
 
         final ResourceResolver resourceResolver = request.getResourceResolver();
-        final Resource scriptContainer = resourceResolver.getResource(path);
-
-        final PersistedGroovyScript persistedGroovyScript = new PersistedGroovyScript(scriptContainer);
-        if(persistedGroovyScript != null){
-            // Save it
-            persistedGroovyScript.save(resourceResolver, path, StringUtils.EMPTY);
+        Resource scriptContainer = resourceResolver.getResource(parent);
+        if (scriptContainer == null) {
+            scriptContainer = resourceResolver.getResource(DEFAULT_SCRIPT_LOCATION);
         }
+
+        final DynamicGroovyScript groovyScript = new DynamicGroovyScript(source, ".groovy");
+        groovyScript.save(scriptContainer, name);
+
+        final ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        final String json = ow.writeValueAsString(new EmptyScriptResponse());
+
+        response.getWriter().append(json);
+    }
+
+    private void save(final Resource parent, final String source, final String name) {
+
     }
 
     private void checkForPermissions(SlingHttpServletRequest request, SlingHttpServletResponse response)

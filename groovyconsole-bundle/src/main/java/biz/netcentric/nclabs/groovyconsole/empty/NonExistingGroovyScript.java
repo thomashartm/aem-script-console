@@ -2,8 +2,6 @@ package biz.netcentric.nclabs.groovyconsole.empty;
 
 import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScript;
 import org.apache.commons.lang.StringUtils;
-import org.apache.sling.api.resource.PersistenceException;
-import org.apache.sling.api.resource.ResourceResolver;
 
 /**
  * @author thomas.hartmann@netcentric.biz
@@ -13,11 +11,6 @@ public class NonExistingGroovyScript implements GroovyScript {
 
     @Override
     public String getSourceCode() {
-        return StringUtils.EMPTY;
-    }
-
-    @Override
-    public String save(final ResourceResolver resolver, final String location, final String name) throws PersistenceException {
         return StringUtils.EMPTY;
     }
 
@@ -33,6 +26,21 @@ public class NonExistingGroovyScript implements GroovyScript {
 
     @Override
     public String getPath() {
+        return StringUtils.EMPTY;
+    }
+
+    @Override
+    public String getExecutionUser() {
+        return StringUtils.EMPTY;
+    }
+
+    @Override
+    public String getTitle() {
+        return StringUtils.EMPTY;
+    }
+
+    @Override
+    public String getDescription() {
         return StringUtils.EMPTY;
     }
 }

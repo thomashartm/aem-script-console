@@ -1,4 +1,4 @@
-package biz.netcentric.nclabs.groovyconsole.groovy.extension;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl.extension;
 
 import biz.netcentric.nclabs.groovyconsole.ScriptExecutionContext;
 import groovy.lang.Binding;

@@ -1,4 +1,4 @@
-package biz.netcentric.nclabs.groovyconsole.groovy.extension.customizer;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.customizer;
 
 import org.codehaus.groovy.control.customizers.ImportCustomizer;
 

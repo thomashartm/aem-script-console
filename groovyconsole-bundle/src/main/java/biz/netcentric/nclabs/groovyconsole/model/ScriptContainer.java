@@ -14,7 +14,7 @@ import java.util.Optional;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2018
  */
-public interface GroovyScriptContainer {
+public interface ScriptContainer {
 
     /**
      * Get's the script container's resource if it exists

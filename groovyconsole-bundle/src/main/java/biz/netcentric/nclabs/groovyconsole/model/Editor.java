@@ -1,5 +1,6 @@
 package biz.netcentric.nclabs.groovyconsole.model;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
@@ -7,7 +8,7 @@ import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 
 /**
- * Editor metainormation
+ * Editor metainformation
  *
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2018
@@ -22,6 +23,20 @@ public class Editor {
     private SlingHttpServletRequest request;
 
     private String scriptPath;
+
+    private String defaultName;
+
+    /**
+     * Provides a default name for the script.
+     *
+     * @return
+     */
+    public String getDefaultName() {
+        if(StringUtils.isBlank(this.defaultName)){
+            return RandomStringUtils.randomAlphabetic(10);
+        }
+        return defaultName;
+    }
 
     /**
      * Script path for an existing script

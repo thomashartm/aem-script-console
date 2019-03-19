@@ -50,14 +50,24 @@
                         text="Clear"
                         variant="primary">
                 </clear>
-                <saveScript
+                <!--<saveScript
                         granite:class="save-script"
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/coral/foundation/collection/action"
                         class="saveScript.group.action"
                         icon="checkCircle"
                         target=".foundation-collection"
-                        text="Save"
+                        text="Save: %%%"
+                        variant="primary"/>-->
+                <saveAsScript
+                        granite:class="save-as-script"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                        class="saveAsScript.group.action"
+                        action="groovyconsole.action.saveasscript"
+                        icon="checkCircle"
+                        target=".foundation-collection"
+                        text="Save as .."
                         variant="primary"/>
             </primary>
         </actions>
@@ -71,6 +81,53 @@
                         granite:id="groovyconsole-editor"
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="nclabs/groovyconsole/components/editor"/>
+                <saveScriptDialog
+                        granite:id="groovyconsole-save-script-dialog"
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Save Script ..."
+                        sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                        closable="{Boolean}true"
+                        variant="default">
+                    <items jcr:primaryType="nt:unstructured">
+                        <container
+                                granite:id="groovyconsole-save-script-dialog-container"
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form"
+                                style="aligned">
+                            <items jcr:primaryType="nt:unstructured">
+                                <savePath
+                                        granite:id="groovyconsole-save-script-path"
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathbrowser"
+                                        fieldLabel="Save Location"
+                                        rootPath="/etc/nclabs/groovyconsole/scripts"
+                                        name="savePath"/>
+                                <scriptName
+                                        granite:id="groovyconsole-save-script-name"
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldLabel="Script Name"
+                                        name="scriptName"/>
+                            </items>
+                        </container>
+                    </items>
+                    <footer jcr:primaryType="nt:unstructured">
+                        <save
+                                granite:id="groovyconsole-save-script-action-btn"
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/button"
+                                text="Save"
+                                variant="primary"/>
+                        <cancel
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/button"
+                                text="Cancel">
+                            <parentConfig
+                                    jcr:primaryType="nt:unstructured"
+                                    close="{Boolean}true"/>
+                        </cancel>
+                    </footer>
+                </saveScriptDialog>
             </items>
         </content>
     </jcr:content>

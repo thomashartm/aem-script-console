@@ -1,6 +1,6 @@
-package biz.netcentric.nclabs.groovyconsole.groovy.extension.closure;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.closure;
 
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.BindingCommons;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.BindingCommons;
 
 import java.util.Collection;
 

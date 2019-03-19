@@ -2,8 +2,6 @@ package biz.netcentric.nclabs.groovyconsole.groovy.impl;
 
 import biz.netcentric.nclabs.groovyconsole.groovy.GroovyScript;
 import org.apache.commons.lang.StringUtils;
-import org.apache.sling.api.resource.PersistenceException;
-import org.apache.sling.api.resource.ResourceResolver;
 
 /**
  * Dynamically submitted groovy script which is currently not started by submitting the path but the actual source code.
@@ -22,6 +20,12 @@ public class DynamicGroovyScript implements GroovyScript {
 
     private String path;
 
+    private String title;
+
+    private String description;
+
+    private String user;
+
     public DynamicGroovyScript(final String sourceCode, final String fileExtension) {
         this.sourceCode = sourceCode;
         this.fileExtension = fileExtension;
@@ -34,11 +38,6 @@ public class DynamicGroovyScript implements GroovyScript {
     @Override
     public String getSourceCode() {
         return this.sourceCode;
-    }
-
-    @Override
-    public String save(ResourceResolver resolver, String location, String name) throws PersistenceException {
-        throw new NoSuchMethodError("Not implemented yet");
     }
 
     @Override
@@ -56,8 +55,46 @@ public class DynamicGroovyScript implements GroovyScript {
         return this.path;
     }
 
+    @Override
+    public String getExecutionUser() {
+        return user;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
     /**
      *
+     * @param title
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     *
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     *
+     * @param user
+     */
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    /**
      * @param sourceCode
      */
     public void setSourceCode(String sourceCode) {
@@ -65,7 +102,6 @@ public class DynamicGroovyScript implements GroovyScript {
     }
 
     /**
-     *
      * @param fileExtension
      */
     public void setFileExtension(String fileExtension) {
@@ -73,7 +109,6 @@ public class DynamicGroovyScript implements GroovyScript {
     }
 
     /**
-     *
      * @param name
      */
     public void setName(String name) {
@@ -81,7 +116,6 @@ public class DynamicGroovyScript implements GroovyScript {
     }
 
     /**
-     *
      * @param path
      */
     public void setPath(String path) {

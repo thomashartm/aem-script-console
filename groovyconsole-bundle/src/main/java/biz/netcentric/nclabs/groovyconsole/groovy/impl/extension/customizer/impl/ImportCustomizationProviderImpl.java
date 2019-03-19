@@ -1,6 +1,6 @@
-package biz.netcentric.nclabs.groovyconsole.groovy.extension.customizer.impl;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.customizer.impl;
 
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.customizer.ImportCustomizationProvider;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.customizer.ImportCustomizationProvider;
 import org.codehaus.groovy.control.customizers.ImportCustomizer;
 import org.osgi.service.component.annotations.Component;
 

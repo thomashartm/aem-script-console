@@ -1,6 +1,6 @@
-package biz.netcentric.nclabs.groovyconsole.groovy.extension.binding;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.binding;
 
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.BindingCommons;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.BindingCommons;
 
 import java.util.Arrays;
 import java.util.Map;

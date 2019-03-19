@@ -6,14 +6,19 @@ import com.day.cq.commons.jcr.JcrConstants;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.CharEncoding;
 import org.apache.commons.lang.StringUtils;
-import org.apache.sling.api.resource.*;
+import org.apache.sling.api.resource.NonExistingResource;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ValueMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Optional;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.stream.StreamSupport;
 
 /**
@@ -47,6 +52,12 @@ public class PersistedGroovyScript implements GroovyScript {
 
     private String userName;
 
+    private String description;
+
+    private String title;
+
+    private String user;
+
     /**
      * A groovy script that can be read or persisted.
      *
@@ -55,9 +66,9 @@ public class PersistedGroovyScript implements GroovyScript {
      */
     public PersistedGroovyScript(final Resource resource) throws IOException {
         final boolean isScriptResource = StringUtils.endsWith(resource.getName(), FILE_EXT);
-
         this.scriptResource = isScriptResource ? resource : retrieveFileResourceChild(resource);
         Assert.notNull(this.scriptResource);
+
         this.containerResource = isScriptResource ? resource.getParent() : resource;
         Assert.notNull(this.containerResource);
 
@@ -110,29 +121,6 @@ public class PersistedGroovyScript implements GroovyScript {
         return this.scriptSource;
     }
 
-    @Override
-    public String save(final ResourceResolver resolver, final String location, final String name) throws PersistenceException {
-        Assert.notNull(resolver);
-
-        final Resource resource = resolver.getResource(location);
-        Assert.notNull(resource, String.format("Resource for path [%s] does not exist.", location));
-
-        this.name = name;
-
-        final String nodeName = String.format(NAME_PATTERN, name, FILE_EXT);
-        final Map<String, Object> properties = createPropertyMap(nodeName);
-
-        final Resource newResource = resolver.create(resource, nodeName, properties);
-        return newResource.getPath();
-    }
-
-    private Map<String, Object> createPropertyMap(final String nodeName) {
-        final Map<String, Object> properties = new HashMap<>();
-        properties.put("type", FILE_EXT);
-        properties.put("name", nodeName);
-        properties.put("script", this.scriptSource);
-        return properties;
-    }
 
     @Override
     public String getFileExtension() {
@@ -149,13 +137,43 @@ public class PersistedGroovyScript implements GroovyScript {
         return this.path;
     }
 
+    @Override
+    public String getExecutionUser() {
+        return user;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
     /**
-     * Get's the user name
      *
-     * @return
+     * @param title
      */
-    public String getUserName() {
-        return this.userName;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     *
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     *
+     * @param user
+     */
+    public void setUser(String user) {
+        this.user = user;
     }
 
     /**

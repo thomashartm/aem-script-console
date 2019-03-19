@@ -13,17 +13,17 @@ import java.util.Map;
  * @author thomas.hartmann@netcentric.biz
  * @since 10/2015
  */
-public class GroovyScriptExecutionContext implements ScriptExecutionContext {
+public class ExecutionContext implements ScriptExecutionContext {
 
     private final SlingHttpServletRequest request;
 
     private ResourceResolver resolver;
 
-    public GroovyScriptExecutionContext(final SlingHttpServletRequest request) {
+    public ExecutionContext(final SlingHttpServletRequest request) {
         this.request = request;
     }
 
-    public GroovyScriptExecutionContext(final SlingHttpServletRequest request, final ResourceResolver resolver) {
+    public ExecutionContext(final SlingHttpServletRequest request, final ResourceResolver resolver) {
         this.request = request;
         this.resolver = resolver;
     }

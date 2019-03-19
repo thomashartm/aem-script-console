@@ -1,4 +1,4 @@
-package biz.netcentric.nclabs.groovyconsole.servlets;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang.CharEncoding;

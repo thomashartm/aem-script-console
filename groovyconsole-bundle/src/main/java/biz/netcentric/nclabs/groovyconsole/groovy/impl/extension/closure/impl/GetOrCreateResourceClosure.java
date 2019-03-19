@@ -1,9 +1,9 @@
-package biz.netcentric.nclabs.groovyconsole.groovy.extension.closure.impl;
+package biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.closure.impl;
 
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.BindingCommons;
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.closure.BindableClosure;
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.closure.ClosureBinding;
-import biz.netcentric.nclabs.groovyconsole.groovy.extension.closure.ClosureExecutionRuntimeException;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.BindingCommons;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.closure.BindableClosure;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.closure.ClosureBinding;
+import biz.netcentric.nclabs.groovyconsole.groovy.impl.extension.closure.ClosureExecutionRuntimeException;
 import com.google.common.collect.Lists;
 import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
