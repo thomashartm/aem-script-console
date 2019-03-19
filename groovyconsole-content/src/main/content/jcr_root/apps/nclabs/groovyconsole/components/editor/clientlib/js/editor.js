@@ -239,13 +239,13 @@
         var saveAsScriptModal = document.getElementById("groovyconsole-save-script-dialog");
         if (saveAsScriptModal) {
             if (show) {
+                saveAsScriptModal.show();
                 // execute the listener only once per show event
                 $(saveAsScriptModal).one('coral-overlay:open', function (event) {
                     if (callbackListener) {
                         callbackListener();
                     }
                 });
-                saveAsScriptModal.show();
             } else {
                 saveAsScriptModal.hide();
             }
@@ -261,6 +261,7 @@
         sizeEditor();
         showEditor();
         initializeEditorToolbar();
+        initScriptNameLabel();
         printToMeta("Editor has been successfully loaded... ");
     });
 
@@ -286,17 +287,22 @@
         toggleSaveAsScriptModal(true, function () {
             printToMeta("Save as script modal loaded")
 
-            const scriptData = Lockr.get('currentSavedScript', {})
+            const scriptData = Lockr.get(SAVED_SCRIPT, {})
             printToMeta(scriptData)
             $("input[name=savePath]").val(scriptData.path)
             $("input[name=scriptName]").val(scriptData.name)
         })
     });
 
-    // cancel the save modal
-    $(document).on("click", "#groovyconsole-cancel-script-action-btn", function (e) {
-
-    })
+    const initScriptNameLabel = function(){
+        const label = document.getElementById("groovyconsole-editor-title");
+        const lastSavedScript = Lockr.get(SAVED_SCRIPT, {})
+        if(lastSavedScript.name){
+            label.innerText = lastSavedScript.name
+        }else{
+            label.innerText = "Unknown"
+        }
+    }
 
     // submit and close the save modal
     $(document).on("click", "#groovyconsole-save-script-action-btn", function (e) {
@@ -346,6 +352,8 @@
             console.log("Hooray, it worked!")
             printToMeta("Successfully saved script " + scriptLocation)
             Lockr.set(SAVED_SCRIPT, data)
+
+            initScriptNameLabel();
         })
 
         // Callback handler that will be called on failure
@@ -363,6 +371,8 @@
         // Callback handler that will be called regardless
         // if the request failed or succeeded
         request.always(function () {
+            // hide the save dialog
+            toggleSaveAsScriptModal(false, {})
             // Reenable the inputs
             editor.setReadOnly(false)
         })
