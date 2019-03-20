@@ -3,6 +3,11 @@
     const LAST_SCRIPT = "lastScript"
     const SAVED_SCRIPT = "savedScript"
     let EDITOR_ID = "#editor";
+
+    const DRAGBAR = '#editor_dragbar'
+    const EDITOR_WRAPPER = '#resize'
+    const EDITOR = '#editor'
+
     let consoleToAreaWidthRatio = 0.8,
         consoleToAreaHeightRatio = 0.8;
 
@@ -260,6 +265,60 @@
         }
     }
 
+    const initResizing = function(){
+        let dragging = false;
+        let wpoffset = 0;
+
+        $(DRAGBAR).mousedown(function (e) {
+            e.preventDefault();
+            window.dragging = true;
+
+            let groovyEditor = $(EDITOR);
+            let top_offset = groovyEditor.offset().top - wpoffset;
+
+            // Set editor opacity to 0 to make transparent so our wrapper div shows
+            groovyEditor.css('opacity', 0);
+
+            // handle mouse movement
+            $(document).mousemove(function (e) {
+
+                let actualY = e.pageY - wpoffset;
+                // editor height
+                let eheight = actualY - top_offset;
+
+                // Set wrapper height
+                $(EDITOR_WRAPPER).css('height', eheight);
+
+                // Set dragbar opacity while dragging (set to 0 to not show)
+                $(DRAGBAR).css('opacity', 0.15);
+            });
+
+        });
+
+        $(document).mouseup(function (e) {
+
+            if (window.dragging) {
+                let groovyEditor = $(EDITOR);
+
+                let actualY = e.pageY - wpoffset;
+                let top_offset = groovyEditor.offset().top - wpoffset;
+                let eheight = actualY - top_offset;
+
+                $(document).unbind('mousemove');
+
+                // Set dragbar opacity back to 1
+                $(DRAGBAR).css('opacity', 1);
+
+                // Set height on actual editor element, and opacity back to 1
+                groovyEditor.css('height', eheight).css('opacity', 1);
+
+                // Trigger ace editor resize()
+                editor.resize();
+                window.dragging = false;
+            }
+        });
+    }
+
     /**
      * Initialization, loading and unloading
      */
@@ -272,8 +331,10 @@
         initScriptNameLabel();
         printToMeta("Editor has been successfully loaded... ");
 
-        var editor = ace.edit("editor");
+        let editor = ace.edit("editor");
         editor.session.setMode("ace/mode/groovy");
+
+        initResizing()
     });
 
     window.addEventListener("beforeunload", function (event) {
