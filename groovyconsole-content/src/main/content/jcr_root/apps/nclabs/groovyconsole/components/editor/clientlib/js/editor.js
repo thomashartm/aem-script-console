@@ -75,6 +75,24 @@
             printToMeta("New document created.");
         });
 
+
+        const presentResult = function (scriptName, response){
+            let failed = response.failed || response.error != null
+            let message = ''
+            message += '<span class="groovyconsole-displayresponse groovyconsole-displayresponse-result"><b>Result:</b> ' + response.result + "</span><br/>"
+            message += '<span class="groovyconsole-displayresponse groovyconsole-displayresponse-time"><b>Execution Time: </b>' + response.executionTime + "</span><br/>"
+            if(failed){
+                message += '<span class="groovyconsole-displayresponse groovyconsole-displayresponse-error"><b>Failed Execution:</b> <br/> ' + response.error + "</span><br/>"
+            }
+            message += '<span class="groovyconsole-displayresponse groovyconsole-displayresponse-output"><b>Output:</b> <br/> ' + response.output + "</span><br/>"
+
+            if(failed){
+                showError("Script Execution: " + scriptName, message)
+            }else{
+                showOutput("Script Execution: " + scriptName, message)
+            }
+        }
+
         $('.execute-script').click(function () {
             console.log("Triggered script execution... ");
             if ($(this).hasClass('disabled')) {
@@ -97,17 +115,7 @@
                     console.log(xhrMessage);
                     clearInfoPanel();
 
-                    if (xhrMessage.failed) {
-                        showError("Script failed", xhrMessage.error);
-                    }
-
-                    if (xhrMessage.result && xhrMessage.result !== "null" && xhrMessage.result !== "") {
-                        showResult("Script Result", xhrMessage.result);
-                    }
-
-                    if (xhrMessage.output && xhrMessage.output !== "null" && xhrMessage.output !== "") {
-                        showOutput("Output", xhrMessage.output);
-                    }
+                    presentResult(getScriptName(), xhrMessage)
 
                     printToMeta(xhrMessage.executionTime + " ms");
                 });
@@ -263,6 +271,9 @@
         initializeEditorToolbar();
         initScriptNameLabel();
         printToMeta("Editor has been successfully loaded... ");
+
+        var editor = ace.edit("editor");
+        editor.session.setMode("ace/mode/groovy");
     });
 
     window.addEventListener("beforeunload", function (event) {
@@ -296,11 +307,15 @@
 
     const initScriptNameLabel = function(){
         const label = document.getElementById("groovyconsole-editor-title");
+        label.innerText = getScriptName()
+    }
+
+    const getScriptName = function(){
         const lastSavedScript = Lockr.get(SAVED_SCRIPT, {})
-        if(lastSavedScript.name){
-            label.innerText = lastSavedScript.name
+        if(lastSavedScript.name) {
+            return lastSavedScript.name
         }else{
-            label.innerText = "Unknown"
+            return "Unknown"
         }
     }
 
